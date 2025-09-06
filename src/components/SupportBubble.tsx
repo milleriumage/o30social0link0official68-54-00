@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageSquare, HelpCircle } from 'lucide-react';
+import { MessageSquare, HelpCircle, Mail } from 'lucide-react';
 import { SendMessageDialog } from '@/components/SendMessageDialog';
 import { SupportDialog } from '@/components/SupportDialog';
+import { MessagePreviewDialog } from '@/components/MessagePreviewDialog';
 import { AdminCreditsDialog } from '@/components/AdminCreditsDialog';
 
 export default function SupportBubble() {
   const [showMessageDialog, setShowMessageDialog] = useState(false);
   const [showSupportDialog, setShowSupportDialog] = useState(false);
+  const [showPreviewDialog, setShowPreviewDialog] = useState(false);
   const [showAdminDialog, setShowAdminDialog] = useState(false);
 
   return (
@@ -20,6 +22,16 @@ export default function SupportBubble() {
         title="Instant Credit Request"
       >
         <HelpCircle size={24} />
+      </Button>
+
+      {/* Message with Preview Button */}
+      <Button
+        onClick={() => setShowPreviewDialog(true)}
+        className="rounded-full h-14 w-14 shadow-lg bg-green-600 hover:bg-green-700 text-white mb-2"
+        size="icon"
+        title="Message with Preview"
+      >
+        <Mail size={24} />
       </Button>
 
       {/* General Support Button */}
@@ -48,6 +60,12 @@ export default function SupportBubble() {
       <SupportDialog 
         isOpen={showSupportDialog} 
         setIsOpen={setShowSupportDialog} 
+      />
+
+      {/* Preview Dialog */}
+      <MessagePreviewDialog 
+        isOpen={showPreviewDialog} 
+        setIsOpen={setShowPreviewDialog} 
       />
     </div>
   );
