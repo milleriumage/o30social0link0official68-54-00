@@ -171,11 +171,11 @@ const PixPaymentDialog: React.FC<PixPaymentDialogProps> = ({
               💳 Gerador de PIX
               <Button
                 onClick={() => setShowMessageDialog(true)}
-                className="rounded-full h-12 w-12 shadow-lg bg-blue-600 hover:bg-blue-700 text-white"
+                className="rounded-full h-6 w-6 shadow-sm bg-blue-600 hover:bg-blue-700 text-white"
                 size="icon"
                 title="Gerador LicePix"
               >
-                <HelpCircle size={20} />
+                <HelpCircle size={12} />
               </Button>
               <Button 
                 onClick={() => setShowLivePixDialog(true)}
