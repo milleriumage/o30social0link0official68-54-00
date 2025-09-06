@@ -421,43 +421,43 @@ export default function IPage() {
               {/* Device Mockup - Conditional rendering based on deviceType */}
               {deviceType === 'phone' ?
             // Smartphone mockup
-            <div className="w-80 h-[600px] bg-black rounded-[2.5rem] p-2 shadow-2xl">
+            <div className="w-80 h-[600px] bg-black rounded-[2.5rem] p-2 shadow-2xl relative">
+                  {/* Scroll Control Buttons - Left side of device */}
+                  <div className="absolute left-[-80px] top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-30">
+                    <Button
+                      onClick={() => {
+                        const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
+                        if (iframe?.contentWindow) {
+                          iframe.contentWindow.scrollBy(0, -100);
+                        }
+                      }}
+                      size="sm"
+                      variant="ghost"
+                      className="h-12 w-12 p-0 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 backdrop-blur-sm border border-white/30 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+                      title="Scroll para cima"
+                    >
+                      <ChevronUp className="w-5 h-5 text-white" />
+                    </Button>
+                    
+                    <Button
+                      onClick={() => {
+                        const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
+                        if (iframe?.contentWindow) {
+                          iframe.contentWindow.scrollBy(0, 100);
+                        }
+                      }}
+                      size="sm"
+                      variant="ghost"
+                      className="h-12 w-12 p-0 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 backdrop-blur-sm border border-white/30 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+                      title="Scroll para baixo"
+                    >
+                      <ChevronDown className="w-5 h-5 text-white" />
+                    </Button>
+                  </div>
+
                   <div className="w-full h-full bg-gray-900 rounded-[2rem] overflow-hidden relative">
                     {/* Notch do smartphone */}
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-xl z-10"></div>
-                    
-                    {/* Scroll Control Buttons - Left side */}
-                    <div className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 flex flex-col gap-2 z-20">
-                      <Button
-                        onClick={() => {
-                          const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
-                          if (iframe?.contentWindow) {
-                            iframe.contentWindow.scrollBy(0, -100);
-                          }
-                        }}
-                        size="sm"
-                        variant="ghost"
-                        className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
-                        title="Scroll para cima"
-                      >
-                        <ChevronUp className="w-4 h-4 text-blue-600" />
-                      </Button>
-                      
-                      <Button
-                        onClick={() => {
-                          const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
-                          if (iframe?.contentWindow) {
-                            iframe.contentWindow.scrollBy(0, 100);
-                          }
-                        }}
-                        size="sm"
-                        variant="ghost"
-                        className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-blue-500/20 to-cyan-500/20 hover:from-blue-500/30 hover:to-cyan-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
-                        title="Scroll para baixo"
-                      >
-                        <ChevronDown className="w-4 h-4 text-blue-600" />
-                      </Button>
-                    </div>
                     
                     {/* Preview dentro do smartphone */}
                     <div className="pt-6 px-1 pb-1 h-full pointer-events-none">
