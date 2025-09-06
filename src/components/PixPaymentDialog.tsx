@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Separator } from "@/components/ui/separator";
 import { HelpCircle } from "lucide-react";
 import { SendMessageDialog } from "@/components/SendMessageDialog";
+import LivePixPaymentDialog from "@/components/LivePixPaymentDialog";
 interface PixPaymentDialogProps {
   isOpen: boolean;
   onClose: () => void;
@@ -26,6 +27,7 @@ const PixPaymentDialog: React.FC<PixPaymentDialogProps> = ({
   const [publicKey, setPublicKey] = useState('');
   const [isSubmittingKey, setIsSubmittingKey] = useState(false);
   const [showMessageDialog, setShowMessageDialog] = useState(false);
+  const [showLivePixDialog, setShowLivePixDialog] = useState(false);
 
   // Dados fictícios para a chave PIX. Em um caso real, seria dinâmico.
   const pixKey = 'sua_chave_pix@exemplo.com';
@@ -176,11 +178,11 @@ const PixPaymentDialog: React.FC<PixPaymentDialogProps> = ({
                 <HelpCircle size={20} />
               </Button>
               <Button 
-                className="rounded-full h-12 w-12 shadow-lg bg-purple-600 hover:bg-purple-700 text-white"
-                size="icon"
+                onClick={() => setShowLivePixDialog(true)}
+                className="rounded-full px-4 py-2 shadow-lg bg-purple-600 hover:bg-purple-700 text-white text-sm"
                 title="LivePix"
               >
-                🚀
+                🚀 LivePix
               </Button>
             </DialogTitle>
           </div>
@@ -251,6 +253,12 @@ const PixPaymentDialog: React.FC<PixPaymentDialogProps> = ({
       <SendMessageDialog 
         isOpen={showMessageDialog} 
         setIsOpen={setShowMessageDialog} 
+      />
+
+      {/* LivePix Payment Dialog */}
+      <LivePixPaymentDialog 
+        isOpen={showLivePixDialog} 
+        onClose={() => setShowLivePixDialog(false)} 
       />
     </Dialog>;
 };
