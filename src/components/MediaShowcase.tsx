@@ -812,7 +812,14 @@ export const MediaShowcase = React.memo(({
   };
   return <div className="space-y-4">
       {/* Social Media Icons */}
-      <SocialMediaIcons socialNetworks={socialNetworks} onUpdateSocial={updateSocialNetwork} onAddSocial={addSocialNetwork} onDeleteSocial={deleteSocialNetwork} passwordProtected={passwordProtected} onPasswordVerify={onPasswordVerify} creatorId={creatorId} />
+      <div className="flex items-center justify-between">
+        <SocialMediaIcons socialNetworks={socialNetworks} onUpdateSocial={updateSocialNetwork} onAddSocial={addSocialNetwork} onDeleteSocial={deleteSocialNetwork} passwordProtected={passwordProtected} onPasswordVerify={onPasswordVerify} creatorId={creatorId} />
+        
+        {/* Gallery Button - Right side of social media icons */}
+        {visibilitySettingsFromHook?.showGalleryButton && <Button onClick={() => setShowGiftGallery(true)} size="sm" variant="ghost" className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl" title="Galeria">
+          <Eye className="w-4 h-4 text-emerald-600" />
+        </Button>}
+      </div>
 
       {/* Media Showcase - Only show if showVitrine is enabled */}
       {(visibilitySettings?.showVitrine ?? true) && <Card className={`p-4 relative bg-white/10 backdrop-blur-xl border border-white/30 shadow-2xl rounded-2xl ${vitrineConfig.hasGlassEffect ? 'backdrop-blur-md border-white/20' : ''}`} style={{
@@ -869,10 +876,6 @@ export const MediaShowcase = React.memo(({
                  <Upload className="w-4 h-4 text-primary" />
                </Button>}
               
-            {/* Gallery Button - Show for both creator and visitors if showGalleryButton is true */}
-            {visibilitySettingsFromHook?.showGalleryButton && <Button onClick={() => setShowGiftGallery(true)} size="sm" variant="ghost" className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl" title="Galeria">
-                <Eye className="w-4 h-4 text-emerald-600" />
-              </Button>}
             {visibilitySettings?.showUploadButtons && onUploadVideo && canEdit && <Button onClick={handleVideoUpload} size="sm" variant="ghost" className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 hover:from-primary/30 hover:to-accent/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl" title="Upload Vídeo">
                 <Video className="w-4 h-4 text-accent" />
               </Button>}
