@@ -63,7 +63,7 @@ export default function IPage() {
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [creatorPages, setCreatorPages] = useState<any[]>([]);
   const [selectedPage, setSelectedPage] = useState<any>(null);
-  const [deviceType, setDeviceType] = useState<'phone' | 'tablet' | 'laptop'>('phone');
+  const [deviceType, setDeviceType] = useState<'phone' | 'tablet' | 'laptop'>('laptop');
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [accessTimeout, setAccessTimeout] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -466,9 +466,42 @@ export default function IPage() {
                         </div>}
                     </div>
                   </div>
-                </div> : deviceType === 'tablet' ?
+                 </div> : deviceType === 'tablet' ?
             // Tablet mockup
-            <div className="w-[480px] h-[640px] bg-black rounded-[2rem] p-2 shadow-2xl">
+            <div className="w-[480px] h-[640px] bg-black rounded-[2rem] p-2 shadow-2xl relative">
+                  {/* Scroll Control Buttons - Left side of device */}
+                  <div className="absolute left-[-80px] top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-30">
+                    <Button
+                      onClick={() => {
+                        const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
+                        if (iframe?.contentWindow) {
+                          iframe.contentWindow.scrollBy(0, -100);
+                        }
+                      }}
+                      size="sm"
+                      variant="ghost"
+                      className="h-12 w-12 p-0 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 backdrop-blur-sm border border-white/30 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+                      title="Scroll para cima"
+                    >
+                      <ChevronUp className="w-5 h-5 text-white" />
+                    </Button>
+                    
+                    <Button
+                      onClick={() => {
+                        const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
+                        if (iframe?.contentWindow) {
+                          iframe.contentWindow.scrollBy(0, 100);
+                        }
+                      }}
+                      size="sm"
+                      variant="ghost"
+                      className="h-12 w-12 p-0 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 backdrop-blur-sm border border-white/30 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+                      title="Scroll para baixo"
+                    >
+                      <ChevronDown className="w-5 h-5 text-white" />
+                    </Button>
+                  </div>
+
                   <div className="w-full h-full bg-gray-900 rounded-[1.5rem] overflow-hidden relative">
                     {/* Preview dentro do tablet */}
                     <div className="p-2 h-full pointer-events-none">
@@ -480,6 +513,39 @@ export default function IPage() {
                 </div> :
             // Laptop mockup
             <div className="relative">
+                  {/* Scroll Control Buttons - Left side of device */}
+                  <div className="absolute left-[-80px] top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-30">
+                    <Button
+                      onClick={() => {
+                        const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
+                        if (iframe?.contentWindow) {
+                          iframe.contentWindow.scrollBy(0, -100);
+                        }
+                      }}
+                      size="sm"
+                      variant="ghost"
+                      className="h-12 w-12 p-0 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 backdrop-blur-sm border border-white/30 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+                      title="Scroll para cima"
+                    >
+                      <ChevronUp className="w-5 h-5 text-white" />
+                    </Button>
+                    
+                    <Button
+                      onClick={() => {
+                        const iframe = document.querySelector('iframe[title*="Preview"]') as HTMLIFrameElement;
+                        if (iframe?.contentWindow) {
+                          iframe.contentWindow.scrollBy(0, 100);
+                        }
+                      }}
+                      size="sm"
+                      variant="ghost"
+                      className="h-12 w-12 p-0 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 hover:from-blue-500/50 hover:to-cyan-500/50 backdrop-blur-sm border border-white/30 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl"
+                      title="Scroll para baixo"
+                    >
+                      <ChevronDown className="w-5 h-5 text-white" />
+                    </Button>
+                  </div>
+
                   {/* Laptop screen */}
                   <div className="w-[640px] h-[400px] bg-black rounded-t-2xl p-2 shadow-2xl">
                     <div className="w-full h-full bg-gray-900 rounded-t-xl overflow-hidden relative">
