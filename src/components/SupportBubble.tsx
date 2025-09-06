@@ -131,16 +131,6 @@ export default function SupportBubble() {
         </Card>
       )}
 
-      {/* Botão Admin Credits */}
-      <Button
-        onClick={() => setShowAdminDialog(true)}
-        className="rounded-full h-14 w-14 shadow-lg bg-emerald-600 hover:bg-emerald-700 text-white mb-2"
-        size="icon"
-        title="Administração de Créditos"
-      >
-        <Plus size={24} />
-      </Button>
-
       {/* Botão de email acima do suporte */}
       <Button
         onClick={() => setShowMessageDialog(true)}
