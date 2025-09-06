@@ -16,6 +16,7 @@ import { useAccessVerification } from '@/hooks/useAccessVerification';
 import { useGoogleAuth } from '@/hooks/useGoogleAuth';
 import { useLanguage } from '@/hooks/useLanguage';
 import { StripePublicKeyDialog } from '@/components/StripePublicKeyDialog';
+import SupportBubble from '@/components/SupportBubble';
 // Usando imagem placeholder temporária
 const profileImage = '/lovable-uploads/4bb15841-814d-4462-aa20-1488516e0562.png';
 
@@ -659,5 +660,8 @@ export default function IPage() {
         open={showStripeKeyDialog}
         onOpenChange={setShowStripeKeyDialog}
       />
+      
+      {/* Support Bubble */}
+      <SupportBubble />
     </div>;
 }
