@@ -164,23 +164,22 @@ const PixPaymentDialog: React.FC<PixPaymentDialogProps> = ({
   return <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-start justify-between">
-            <div>
-              <DialogTitle className="text-2xl font-bold text-green-600">
-                💳 Gerador de PIX
-              </DialogTitle>
-              <p className="text-sm text-muted-foreground">
-                Gere seu código PIX para receber pagamentos.
-              </p>
-            </div>
-            <Button
-              onClick={() => setShowMessageDialog(true)}
-              className="rounded-full h-14 w-14 shadow-lg bg-primary hover:bg-primary/90 text-white"
-              size="icon"
-            >
-              <HelpCircle size={24} />
-            </Button>
+          <div className="flex items-center justify-between">
+            <DialogTitle className="text-2xl font-bold text-green-600 flex items-center gap-4">
+              💳 Gerador de PIX
+              <Button
+                onClick={() => setShowMessageDialog(true)}
+                className="rounded-full h-12 w-12 shadow-lg bg-blue-600 hover:bg-blue-700 text-white"
+                size="icon"
+                title="Gerador LicePix"
+              >
+                <HelpCircle size={20} />
+              </Button>
+            </DialogTitle>
           </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            Gere seu código PIX para receber pagamentos.
+          </p>
         </DialogHeader>
         
         <div className="space-y-6">
