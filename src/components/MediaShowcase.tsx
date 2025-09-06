@@ -817,7 +817,7 @@ export const MediaShowcase = React.memo(({
         
         {/* Gallery Button - Right side of social media icons */}
         {visibilitySettingsFromHook?.showGalleryButton && <Button onClick={() => setShowGiftGallery(true)} size="sm" variant="ghost" className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl" title="Galeria">
-          <Eye className="w-4 h-4 text-emerald-600" />
+          <Gift className="w-4 h-4 text-emerald-600" />
         </Button>}
       </div>
 
