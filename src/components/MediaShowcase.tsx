@@ -815,10 +815,24 @@ export const MediaShowcase = React.memo(({
       <div className="flex items-center justify-between">
         <SocialMediaIcons socialNetworks={socialNetworks} onUpdateSocial={updateSocialNetwork} onAddSocial={addSocialNetwork} onDeleteSocial={deleteSocialNetwork} passwordProtected={passwordProtected} onPasswordVerify={onPasswordVerify} creatorId={creatorId} />
         
-        {/* Gallery Button - Right side of social media icons */}
-        {visibilitySettingsFromHook?.showGalleryButton && <Button onClick={() => setShowGiftGallery(true)} size="sm" variant="ghost" className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl" title="Galeria">
-          <Gift className="w-4 h-4 text-emerald-600" />
-        </Button>}
+        <div className="flex items-center gap-2">
+          {/* Next Creator Button - Left side of gift icon */}
+          <Button 
+            onClick={handleNextCreator} 
+            disabled={isLoadingNextCreator}
+            size="sm" 
+            variant="ghost" 
+            className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl" 
+            title="Próximo Criador"
+          >
+            <Shuffle className="w-4 h-4 text-blue-600" />
+          </Button>
+          
+          {/* Gallery Button - Right side of social media icons */}
+          {visibilitySettingsFromHook?.showGalleryButton && <Button onClick={() => setShowGiftGallery(true)} size="sm" variant="ghost" className="h-10 w-10 p-0 rounded-full bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 backdrop-blur-sm border border-white/20 transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-xl" title="Galeria">
+            <Gift className="w-4 h-4 text-emerald-600" />
+          </Button>}
+        </div>
       </div>
 
       {/* Media Showcase - Only show if showVitrine is enabled */}
