@@ -165,7 +165,7 @@ const PixPaymentDialog: React.FC<PixPaymentDialogProps> = ({
       <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center justify-between">
-            <DialogTitle className="text-2xl font-bold text-green-600 flex items-center gap-4">
+            <DialogTitle className="text-2xl font-bold text-green-600 flex items-center gap-2">
               💳 Gerador de PIX
               <Button
                 onClick={() => setShowMessageDialog(true)}
@@ -174,6 +174,13 @@ const PixPaymentDialog: React.FC<PixPaymentDialogProps> = ({
                 title="Gerador LicePix"
               >
                 <HelpCircle size={20} />
+              </Button>
+              <Button 
+                className="rounded-full h-12 w-12 shadow-lg bg-purple-600 hover:bg-purple-700 text-white"
+                size="icon"
+                title="LivePix"
+              >
+                🚀
               </Button>
             </DialogTitle>
           </div>

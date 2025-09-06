@@ -716,10 +716,6 @@ const Index = () => {
                 <Button onClick={() => setShowPixDialog(true)} className="bg-green-600 hover:bg-green-700 rounded-full px-6 py-2 flex items-center gap-2">
                   💳 {t('main.usePix')}
                 </Button>
-
-                <Button onClick={() => setShowLivePixDialog(true)} className="bg-blue-600 hover:bg-blue-700 rounded-full px-6 py-2 flex items-center gap-2">
-                  🚀 LivePix
-                </Button>
               </div>
 
               
