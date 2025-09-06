@@ -1,29 +1,17 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { MessageSquare, HelpCircle, Mail } from 'lucide-react';
-import { SendMessageDialog } from '@/components/SendMessageDialog';
+import { MessageSquare, Mail } from 'lucide-react';
 import { SupportDialog } from '@/components/SupportDialog';
 import { MessagePreviewDialog } from '@/components/MessagePreviewDialog';
 import { AdminCreditsDialog } from '@/components/AdminCreditsDialog';
 
 export default function SupportBubble() {
-  const [showMessageDialog, setShowMessageDialog] = useState(false);
   const [showSupportDialog, setShowSupportDialog] = useState(false);
   const [showPreviewDialog, setShowPreviewDialog] = useState(false);
   const [showAdminDialog, setShowAdminDialog] = useState(false);
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {/* RIC - Credit Request Button */}
-      <Button
-        onClick={() => setShowMessageDialog(true)}
-        className="rounded-full h-14 w-14 shadow-lg bg-blue-600 hover:bg-blue-700 text-white mb-2"
-        size="icon"
-        title="Instant Credit Request"
-      >
-        <HelpCircle size={24} />
-      </Button>
-
       {/* Message with Preview Button */}
       <Button
         onClick={() => setShowPreviewDialog(true)}
@@ -48,12 +36,6 @@ export default function SupportBubble() {
       <AdminCreditsDialog
         isOpen={showAdminDialog}
         onClose={() => setShowAdminDialog(false)}
-      />
-
-      {/* RIC Dialog */}
-      <SendMessageDialog 
-        isOpen={showMessageDialog} 
-        setIsOpen={setShowMessageDialog} 
       />
 
       {/* Support Dialog */}
