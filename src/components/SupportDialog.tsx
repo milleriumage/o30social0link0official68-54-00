@@ -22,14 +22,14 @@ export const SupportDialog = ({
 
   const handleSendMessage = async () => {
     if (!email || !subject || !message) {
-      toast.error('Por favor, preencha todos os campos');
+      toast.error('Please fill in all fields');
       return;
     }
 
-    // Validação básica de email
+    // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      toast.error('Por favor, insira um email válido');
+      toast.error('Please enter a valid email');
       return;
     }
 
@@ -38,12 +38,12 @@ export const SupportDialog = ({
       const { error } = await supabase.functions.invoke('send-message', {
         body: {
           email: 'linkteamcreators@gmail.com',
-          subject: `[Suporte] ${subject}`,
+          subject: `[Support] ${subject}`,
           message: `
-            Email do usuário: ${email}
-            Assunto: ${subject}
+            User email: ${email}
+            Subject: ${subject}
             
-            Mensagem:
+            Message:
             ${message}
           `
         }
@@ -53,14 +53,14 @@ export const SupportDialog = ({
         throw error;
       }
 
-      toast.success('Mensagem enviada com sucesso!');
+      toast.success('Message sent successfully!');
       setEmail('');
       setSubject('');
       setMessage('');
       setIsOpen(false);
     } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
-      toast.error('Erro ao enviar mensagem. Tente novamente.');
+      console.error('Error sending message:', error);
+      toast.error('Error sending message. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -71,10 +71,10 @@ export const SupportDialog = ({
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-primary">
-            💬 Suporte Geral
+            💬 General Support
           </DialogTitle>
           <p className="text-sm text-muted-foreground">
-            Entre em contato conosco para dúvidas ou problemas
+            Contact us for questions or issues with your account
           </p>
         </DialogHeader>
         
@@ -84,27 +84,27 @@ export const SupportDialog = ({
             <Input
               id="support-email"
               type="email"
-              placeholder="seu@email.com"
+              placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           
           <div>
-            <Label htmlFor="support-subject">Assunto</Label>
+            <Label htmlFor="support-subject">Subject</Label>
             <Input
               id="support-subject"
-              placeholder="Como podemos ajudar?"
+              placeholder="How can we help you?"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
             />
           </div>
           
           <div>
-            <Label htmlFor="support-message">Mensagem</Label>
+            <Label htmlFor="support-message">Message</Label>
             <Textarea
               id="support-message"
-              placeholder="Descreva sua dúvida ou problema..."
+              placeholder="Describe your question or problem..."
               rows={4}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -117,7 +117,7 @@ export const SupportDialog = ({
             className="w-full"
           >
             <Send size={16} className="mr-2" />
-            {isLoading ? 'Enviando...' : 'Enviar Mensagem'}
+            {isLoading ? 'Sending...' : 'Ask for Help'}
           </Button>
         </div>
       </DialogContent>

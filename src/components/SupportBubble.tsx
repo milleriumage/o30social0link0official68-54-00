@@ -12,22 +12,22 @@ export default function SupportBubble() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {/* Botão RIC - Requisição Instantânea de Crédito */}
+      {/* RIC - Credit Request Button */}
       <Button
         onClick={() => setShowMessageDialog(true)}
         className="rounded-full h-14 w-14 shadow-lg bg-blue-600 hover:bg-blue-700 text-white mb-2"
         size="icon"
-        title="Requisição Instantânea de Crédito"
+        title="Instant Credit Request"
       >
         <HelpCircle size={24} />
       </Button>
 
-      {/* Botão Suporte Geral */}
+      {/* General Support Button */}
       <Button
         onClick={() => setShowSupportDialog(true)}
         className="rounded-full h-14 w-14 shadow-lg bg-primary hover:bg-primary/90 text-white"
         size="icon"
-        title="Suporte Geral"
+        title="General Support"
       >
         <MessageSquare size={24} />
       </Button>
