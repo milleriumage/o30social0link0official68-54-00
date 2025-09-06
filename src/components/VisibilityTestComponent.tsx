@@ -194,17 +194,6 @@ export const VisibilityTestComponent = () => {
                 <span className="font-medium">Mywishlist</span>
               </Button>
 
-              <Button 
-                size="sm" 
-                variant="outline" 
-                className="flex items-center gap-2 bg-gradient-to-r from-orange-500/5 to-pink-500/5 hover:from-orange-500/10 hover:to-pink-500/10 border-orange-500/20 hover:border-orange-500/40 text-orange-600 hover:text-orange-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 rounded-xl px-4 py-2 group" 
-                onClick={() => toast.info("🔍 Finder me activated!")}
-              >
-                <span className="font-medium">Finder me</span>
-                <div className="transform group-hover:translate-x-1 transition-transform duration-300 animate-pulse">
-                  →
-                </div>
-              </Button>
 
               <Button 
                 size="sm" 
