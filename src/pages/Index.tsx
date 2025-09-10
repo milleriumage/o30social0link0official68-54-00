@@ -68,6 +68,203 @@ interface ViewportSize {
   description: string;
 }
 const Index = () => {
+  // Se não há usuário, mostrar landing page
+  const { user, isLoading: authLoading } = useGoogleAuth();
+  
+  if (!user && !authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div className="text-center">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                Social Link
+                <span className="block text-2xl md:text-3xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mt-2">
+                  A nova vitrine digital com chat integrado
+                </span>
+              </h1>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                Transforme o tradicional "link na bio" em uma vitrine interativa. 
+                Exiba conteúdos, receba pagamentos e converse com seus fãs em tempo real.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <GoogleAuthButton onLoginSuccess={() => window.location.reload()} />
+                <Button variant="outline" className="px-8 py-3 text-lg border-white/20 text-white hover:bg-white/10">
+                  Ver Demonstração
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-20 bg-slate-800/50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                🔑 Principais diferenciais
+              </h2>
+              <p className="text-xl text-gray-300">
+                Muito mais que um simples "link na bio"
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Feature 1 */}
+              <Card className="bg-slate-800/80 border-slate-700 p-6">
+                <div className="text-4xl mb-4">💬</div>
+                <h3 className="text-xl font-bold text-white mb-3">Chat integrado</h3>
+                <p className="text-gray-300">
+                  Seus fãs não só clicam — eles conversam com você. Essa interação direta gera confiança e engajamento imediato.
+                </p>
+              </Card>
+
+              {/* Feature 2 */}
+              <Card className="bg-slate-800/80 border-slate-700 p-6">
+                <div className="text-4xl mb-4">💳</div>
+                <h3 className="text-xl font-bold text-white mb-3">Links de pagamento</h3>
+                <p className="text-gray-300">
+                  Adicione botões de compra e receba pagamentos de forma simples e rápida.
+                </p>
+              </Card>
+
+              {/* Feature 3 */}
+              <Card className="bg-slate-800/80 border-slate-700 p-6">
+                <div className="text-4xl mb-4">🚀</div>
+                <h3 className="text-xl font-bold text-white mb-3">Vitrine personalizada</h3>
+                <p className="text-gray-300">
+                  Crie uma página exclusiva, com cores, textos, preços, animações e até música de fundo.
+                </p>
+              </Card>
+
+              {/* Feature 4 */}
+              <Card className="bg-slate-800/80 border-slate-700 p-6">
+                <div className="text-4xl mb-4">📊</div>
+                <h3 className="text-xl font-bold text-white mb-3">Estatísticas em tempo real</h3>
+                <p className="text-gray-300">
+                  Veja curtidas, compartilhamentos e visualizações para entender o que mais atrai sua audiência.
+                </p>
+              </Card>
+
+              {/* Feature 5 */}
+              <Card className="bg-slate-800/80 border-slate-700 p-6">
+                <div className="text-4xl mb-4">🔒</div>
+                <h3 className="text-xl font-bold text-white mb-3">Controle total</h3>
+                <p className="text-gray-300">
+                  Use cronômetros, senhas, bloqueios automáticos e personalização avançada para proteger seu conteúdo.
+                </p>
+              </Card>
+
+              {/* Feature 6 */}
+              <Card className="bg-slate-800/80 border-slate-700 p-6">
+                <div className="text-4xl mb-4">⚡</div>
+                <h3 className="text-xl font-bold text-white mb-3">Interface rápida</h3>
+                <p className="text-gray-300">
+                  Experiência fluida e responsiva que funciona perfeitamente em todos os dispositivos.
+                </p>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonial Section */}
+        <section className="py-20 bg-gradient-to-r from-purple-900/50 to-blue-900/50">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+              👩‍💻 Exemplo real
+            </h2>
+            <Card className="bg-slate-800/80 border-slate-700 p-8">
+              <p className="text-lg text-gray-300 mb-6">
+                Ketlen, uma jovem criadora, montou sua vitrine no Social Link. Em poucos dias, ela já fazia 50 vendas por dia, faturando perto de $1.000 por mês.
+              </p>
+              <blockquote className="text-xl font-semibold text-white border-l-4 border-blue-500 pl-6 italic">
+                "No Linktree as pessoas só clicavam e iam embora. No Social Link, elas conversam comigo — e é isso que fez minhas vendas explodirem."
+              </blockquote>
+              <p className="text-blue-400 mt-4 font-medium">— Ketlen, Criadora de Conteúdo</p>
+            </Card>
+          </div>
+        </section>
+
+        {/* Why Choose Section */}
+        <section className="py-20 bg-slate-800/50">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+              🌟 Por que escolher o Social Link?
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🔗</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Sua Vitrine</h3>
+                <p className="text-gray-300">Uma página única e personalizada</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">💬</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Seu Chat</h3>
+                <p className="text-gray-300">Conexão real com sua audiência</p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-2xl">🛒</span>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Sua Loja</h3>
+                <p className="text-gray-300">Venda diretamente para seus fãs</p>
+              </div>
+            </div>
+            <p className="text-xl text-gray-300 mb-8">
+              Porque ele vai além de ser só um "link na bio". <br />
+              Ele é sua vitrine, seu chat e sua loja virtual — tudo em um só lugar.
+            </p>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-20 bg-gradient-to-br from-blue-900 to-purple-900">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              👉 Comece agora
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Crie sua conta grátis e descubra como transformar sua audiência em clientes fiéis
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <GoogleAuthButton onLoginSuccess={() => window.location.reload()} />
+              <Button variant="outline" className="px-8 py-3 text-lg border-white/20 text-white hover:bg-white/10">
+                Saiba Mais
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-slate-900 py-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 className="text-2xl font-bold text-white mb-4">Social Link</h3>
+            <p className="text-gray-400 mb-6">
+              A evolução do link na bio
+            </p>
+            <div className="flex justify-center space-x-6">
+              <Button variant="ghost" className="text-gray-400 hover:text-white">
+                Termos de Uso
+              </Button>
+              <Button variant="ghost" className="text-gray-400 hover:text-white">
+                Privacidade
+              </Button>
+              <Button variant="ghost" className="text-gray-400 hover:text-white">
+                Suporte
+              </Button>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
   // Hook de isolamento de dados DEVE ser chamado primeiro
   const {
     currentUserId,
@@ -90,10 +287,6 @@ const Index = () => {
     subtractCredits,
     isLoggedIn
   } = useUserCredits();
-  const {
-    user,
-    isLoading: authLoading
-  } = useGoogleAuth();
   
   // Deve vir após a declaração do user
   const {
