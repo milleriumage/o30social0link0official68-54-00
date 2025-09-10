@@ -68,31 +68,231 @@ interface ViewportSize {
   description: string;
 }
 const Index = () => {
+  // Seletor de idioma local para landing page
+  const [landingLanguage, setLandingLanguage] = useState<'pt' | 'en'>(() => {
+    const saved = localStorage.getItem('landing-language');
+    return (saved as 'pt' | 'en') || 'en';
+  });
+
+  // Função para alternar idioma
+  const handleLanguageChange = (language: 'pt' | 'en') => {
+    setLandingLanguage(language);
+    localStorage.setItem('landing-language', language);
+  };
+
+  // Função para traduções da landing page
+  const tLanding = (key: string): string => {
+    const landingTranslations: any = {
+      'title': {
+        pt: 'Social Link',
+        en: 'Social Link'
+      },
+      'subtitle': {
+        pt: 'A nova vitrine digital com chat integrado',
+        en: 'The new digital showcase with integrated chat'
+      },
+      'description': {
+        pt: 'Transforme o tradicional "link na bio" em uma vitrine interativa. Exiba conteúdos, receba pagamentos e converse com seus fãs em tempo real.',
+        en: 'Transform the traditional "link in bio" into an interactive showcase. Display content, receive payments and chat with your fans in real time.'
+      },
+      'demo': {
+        pt: 'Ver Demonstração',
+        en: 'View Demo'
+      },
+      'createAccount': {
+        pt: 'Criar Conta Grátis',
+        en: 'Create Free Account'
+      },
+      'features.title': {
+        pt: '🔑 Principais diferenciais',
+        en: '🔑 Key differentials'
+      },
+      'features.subtitle': {
+        pt: 'Muito mais que um simples "link na bio"',
+        en: 'Much more than a simple "link in bio"'
+      },
+      'feature.chat.title': {
+        pt: 'Chat integrado',
+        en: 'Integrated chat'
+      },
+      'feature.chat.description': {
+        pt: 'Seus fãs não só clicam — eles conversam com você. Essa interação direta gera confiança e engajamento imediato.',
+        en: 'Your fans don\'t just click — they talk to you. This direct interaction generates trust and immediate engagement.'
+      },
+      'feature.payment.title': {
+        pt: 'Links de pagamento',
+        en: 'Payment links'
+      },
+      'feature.payment.description': {
+        pt: 'Adicione botões de compra e receba pagamentos de forma simples e rápida.',
+        en: 'Add purchase buttons and receive payments simply and quickly.'
+      },
+      'feature.showcase.title': {
+        pt: 'Vitrine personalizada',
+        en: 'Personalized showcase'
+      },
+      'feature.showcase.description': {
+        pt: 'Crie uma página exclusiva, com cores, textos, preços, animações e até música de fundo.',
+        en: 'Create an exclusive page with colors, texts, prices, animations and even background music.'
+      },
+      'feature.stats.title': {
+        pt: 'Estatísticas em tempo real',
+        en: 'Real-time statistics'
+      },
+      'feature.stats.description': {
+        pt: 'Veja curtidas, compartilhamentos e visualizações para entender o que mais atrai sua audiência.',
+        en: 'See likes, shares and views to understand what attracts your audience the most.'
+      },
+      'feature.control.title': {
+        pt: 'Controle total',
+        en: 'Total control'
+      },
+      'feature.control.description': {
+        pt: 'Use cronômetros, senhas, bloqueios automáticos e personalização avançada para proteger seu conteúdo.',
+        en: 'Use timers, passwords, automatic locks and advanced customization to protect your content.'
+      },
+      'feature.interface.title': {
+        pt: 'Interface rápida',
+        en: 'Fast interface'
+      },
+      'feature.interface.description': {
+        pt: 'Experiência fluida e responsiva que funciona perfeitamente em todos os dispositivos.',
+        en: 'Fluid and responsive experience that works perfectly on all devices.'
+      },
+      'testimonial.title': {
+        pt: '👩‍💻 Exemplo real',
+        en: '👩‍💻 Real example'
+      },
+      'testimonial.text': {
+        pt: 'Ketlen, uma jovem criadora, montou sua vitrine no Social Link. Em poucos dias, ela já fazia 50 vendas por dia, faturando perto de $1.000 por mês.',
+        en: 'Ketlen, a young creator, set up her showcase on Social Link. In just a few days, she was already making 50 sales per day, earning close to $1,000 per month.'
+      },
+      'testimonial.quote': {
+        pt: 'No Linktree as pessoas só clicavam e iam embora. No Social Link, elas conversam comigo — e é isso que fez minhas vendas explodirem.',
+        en: 'On Linktree people just clicked and left. On Social Link, they talk to me — and that\'s what made my sales explode.'
+      },
+      'testimonial.author': {
+        pt: '— Ketlen, Criadora de Conteúdo',
+        en: '— Ketlen, Content Creator'
+      },
+      'why.title': {
+        pt: '🌟 Por que escolher o Social Link?',
+        en: '🌟 Why choose Social Link?'
+      },
+      'why.showcase': {
+        pt: 'Sua Vitrine',
+        en: 'Your Showcase'
+      },
+      'why.showcaseDesc': {
+        pt: 'Uma página única e personalizada',
+        en: 'A unique and personalized page'
+      },
+      'why.chat': {
+        pt: 'Seu Chat',
+        en: 'Your Chat'
+      },
+      'why.chatDesc': {
+        pt: 'Conexão real com sua audiência',
+        en: 'Real connection with your audience'
+      },
+      'why.store': {
+        pt: 'Sua Loja',
+        en: 'Your Store'
+      },
+      'why.storeDesc': {
+        pt: 'Venda diretamente para seus fãs',
+        en: 'Sell directly to your fans'
+      },
+      'why.description': {
+        pt: 'Porque ele vai além de ser só um "link na bio". Ele é sua vitrine, seu chat e sua loja virtual — tudo em um só lugar.',
+        en: 'Because it goes beyond being just a "link in bio". It\'s your showcase, your chat and your online store — all in one place.'
+      },
+      'cta.title': {
+        pt: '👉 Comece agora',
+        en: '👉 Start now'
+      },
+      'cta.description': {
+        pt: 'Crie sua conta grátis e descubra como transformar sua audiência em clientes fiéis',
+        en: 'Create your free account and discover how to turn your audience into loyal customers'
+      },
+      'cta.learnMore': {
+        pt: 'Saiba Mais',
+        en: 'Learn More'
+      },
+      'footer.title': {
+        pt: 'Social Link',
+        en: 'Social Link'
+      },
+      'footer.subtitle': {
+        pt: 'A evolução do link na bio',
+        en: 'The evolution of link in bio'
+      },
+      'footer.terms': {
+        pt: 'Termos de Uso',
+        en: 'Terms of Use'
+      },
+      'footer.privacy': {
+        pt: 'Privacidade',
+        en: 'Privacy'
+      },
+      'footer.support': {
+        pt: 'Suporte',
+        en: 'Support'
+      },
+      'signingIn': {
+        pt: 'Entrando...',
+        en: 'Signing in...'
+      }
+    };
+
+    const translation = landingTranslations[key];
+    return translation ? translation[landingLanguage] : key;
+  };
+
   // Se não há usuário, mostrar landing page
   const { user, isLoading: authLoading } = useGoogleAuth();
   
   if (!user && !authLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        {/* Language Selector */}
+        <div className="fixed top-4 right-4 z-50 flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full p-2 border border-white/20">
+          <Button
+            variant={landingLanguage === 'en' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => handleLanguageChange('en')}
+            className={`text-xs px-3 py-1 rounded-full ${landingLanguage === 'en' ? 'bg-white text-black' : 'text-white hover:bg-white/20'}`}
+          >
+            EN
+          </Button>
+          <Button
+            variant={landingLanguage === 'pt' ? 'default' : 'ghost'}
+            size="sm"
+            onClick={() => handleLanguageChange('pt')}
+            className={`text-xs px-3 py-1 rounded-full ${landingLanguage === 'pt' ? 'bg-white text-black' : 'text-white hover:bg-white/20'}`}
+          >
+            PT
+          </Button>
+        </div>
+
         {/* Hero Section */}
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
             <div className="text-center">
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Social Link
+                {tLanding('title')}
                 <span className="block text-2xl md:text-3xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mt-2">
-                  A nova vitrine digital com chat integrado
+                  {tLanding('subtitle')}
                 </span>
               </h1>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-                Transforme o tradicional "link na bio" em uma vitrine interativa. 
-                Exiba conteúdos, receba pagamentos e converse com seus fãs em tempo real.
+                {tLanding('description')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <GoogleAuthButton onLoginSuccess={() => window.location.reload()} />
                 <Button variant="outline" className="px-8 py-3 text-lg border-white/20 text-white hover:bg-white/10">
-                  Ver Demonstração
+                  {tLanding('demo')}
                 </Button>
               </div>
             </div>
