@@ -464,6 +464,127 @@ const translations: Translations = {
     nl: 'Sluit je aan bij duizenden makers die hun profielen al hebben getransformeerd',
     sv: 'Gå med tusentals skapare som redan har förvandlat sina profiler',
     no: 'Bli med tusenvis av skapere som allerede har transformert profilene sine'
+  },
+  'ipage.whyChooseTitle': {
+    pt: '🌟 Por que escolher o Social Link?',
+    en: '🌟 Why choose Social Link?',
+    es: '🌟 ¿Por qué elegir Social Link?',
+    it: '🌟 Perché scegliere Social Link?',
+    fr: '🌟 Pourquoi choisir Social Link?',
+    de: '🌟 Warum Social Link wählen?',
+    nl: '🌟 Waarom Social Link kiezen?',
+    sv: '🌟 Varför välja Social Link?',
+    no: '🌟 Hvorfor velge Social Link?'
+  },
+  'ipage.showcase1': {
+    pt: 'Sua Vitrine',
+    en: 'Your Showcase',
+    es: 'Tu Vitrina',
+    it: 'La Tua Vetrina',
+    fr: 'Votre Vitrine',
+    de: 'Ihr Schaufenster',
+    nl: 'Jouw Etalage',
+    sv: 'Ditt Skyltfönster',
+    no: 'Ditt Utstillingsvindu'
+  },
+  'ipage.showcase1Desc': {
+    pt: 'Uma página única e personalizada',
+    en: 'A unique and personalized page',
+    es: 'Una página única y personalizada',
+    it: 'Una pagina unica e personalizzata',
+    fr: 'Une page unique et personnalisée',
+    de: 'Eine einzigartige und personalisierte Seite',
+    nl: 'Een unieke en gepersonaliseerde pagina',
+    sv: 'En unik och personlig sida',
+    no: 'En unik og personlig side'
+  },
+  'ipage.showcase2': {
+    pt: 'Seu Chat',
+    en: 'Your Chat',
+    es: 'Tu Chat',
+    it: 'La Tua Chat',
+    fr: 'Votre Chat',
+    de: 'Ihr Chat',
+    nl: 'Jouw Chat',
+    sv: 'Din Chat',
+    no: 'Din Chat'
+  },
+  'ipage.showcase2Desc': {
+    pt: 'Conexão real com sua audiência',
+    en: 'Real connection with your audience',
+    es: 'Conexión real con tu audiencia',
+    it: 'Connessione reale con il tuo pubblico',
+    fr: 'Connexion réelle avec votre audience',
+    de: 'Echte Verbindung zu Ihrem Publikum',
+    nl: 'Echte verbinding met je publiek',
+    sv: 'Verklig kontakt med din publik',
+    no: 'Ekte forbindelse med publikummet ditt'
+  },
+  'ipage.showcase3': {
+    pt: 'Suas Vendas',
+    en: 'Your Sales',
+    es: 'Tus Ventas',
+    it: 'Le Tue Vendite',
+    fr: 'Vos Ventes',
+    de: 'Ihre Verkäufe',
+    nl: 'Jouw Verkopen',
+    sv: 'Din Försäljning',
+    no: 'Ditt Salg'
+  },
+  'ipage.showcase3Desc': {
+    pt: 'Monetização facilitada e eficiente',
+    en: 'Easy and efficient monetization',
+    es: 'Monetización fácil y eficiente',
+    it: 'Monetizzazione facile ed efficiente',
+    fr: 'Monétisation facile et efficace',
+    de: 'Einfache und effiziente Monetarisierung',
+    nl: 'Eenvoudige en efficiënte monetisatie',
+    sv: 'Enkel och effektiv intäktsgenerering',
+    no: 'Enkel og effektiv inntektsgenerering'
+  },
+  'ipage.exampleTitle': {
+    pt: '👩‍💻 Exemplo real',
+    en: '👩‍💻 Real example',
+    es: '👩‍💻 Ejemplo real',
+    it: '👩‍💻 Esempio reale',
+    fr: '👩‍💻 Exemple réel',
+    de: '👩‍💻 Echtes Beispiel',
+    nl: '👩‍💻 Echt voorbeeld',
+    sv: '👩‍💻 Verkligt exempel',
+    no: '👩‍💻 Ekte eksempel'
+  },
+  'ipage.exampleText': {
+    pt: 'Ketlen, uma jovem criadora, montou sua vitrine no Social Link. Em poucos dias, ela já fazia 50 vendas por dia, faturando perto de $1.000 por mês.',
+    en: 'Ketlen, a young creator, set up her showcase on Social Link. In just a few days, she was already making 50 sales per day, earning close to $1,000 per month.',
+    es: 'Ketlen, una joven creadora, montó su vitrina en Social Link. En pocos días, ya hacía 50 ventas por día, facturando cerca de $1,000 por mes.',
+    it: 'Ketlen, una giovane creatrice, ha allestito la sua vetrina su Social Link. In pochi giorni, faceva già 50 vendite al giorno, fatturando quasi $1,000 al mese.',
+    fr: 'Ketlen, une jeune créatrice, a monté sa vitrine sur Social Link. En quelques jours, elle faisait déjà 50 ventes par jour, facturant près de $1,000 par mois.',
+    de: 'Ketlen, eine junge Kreative, hat ihr Schaufenster auf Social Link eingerichtet. In nur wenigen Tagen machte sie bereits 50 Verkäufe pro Tag und verdiente fast $1,000 pro Monat.',
+    nl: 'Ketlen, een jonge maker, zette haar etalage op Social Link op. In slechts een paar dagen maakte ze al 50 verkopen per dag, met een omzet van bijna $1,000 per maand.',
+    sv: 'Ketlen, en ung skapare, satte upp sitt skyltfönster på Social Link. På bara några dagar gjorde hon redan 50 försäljningar per dag och tjänade nära $1,000 per månad.',
+    no: 'Ketlen, en ung skaper, satte opp sitt utstillingsvindu på Social Link. På bare noen få dager gjorde hun allerede 50 salg per dag og tjente nesten $1,000 per måned.'
+  },
+  'ipage.testimonialQuote': {
+    pt: '"No Linktree as pessoas só clicavam e iam embora. No Social Link, elas conversam comigo — e é isso que fez minhas vendas explodirem."',
+    en: '"On Linktree people just clicked and left. On Social Link, they talk to me — and that\'s what made my sales explode."',
+    es: '"En Linktree la gente solo hacía clic y se iba. En Social Link, hablan conmigo — y eso es lo que hizo explotar mis ventas."',
+    it: '"Su Linktree le persone cliccavano e se ne andavano. Su Social Link, parlano con me — ed è questo che ha fatto esplodere le mie vendite."',
+    fr: '"Sur Linktree les gens cliquaient juste et partaient. Sur Social Link, ils me parlent — et c\'est ce qui a fait exploser mes ventes."',
+    de: '"Bei Linktree klickten die Leute nur und gingen weg. Bei Social Link sprechen sie mit mir — und das hat meine Verkäufe explodieren lassen."',
+    nl: '"Op Linktree klikten mensen alleen en gingen weg. Op Social Link praten ze met me — en dat is wat mijn verkopen deed exploderen."',
+    sv: '"På Linktree klickade folk bara och gick. På Social Link pratar de med mig — och det är vad som fick min försäljning att explodera."',
+    no: '"På Linktree klikket folk bare og dro. På Social Link snakker de med meg — og det er det som fikk salget mitt til å eksplodere."'
+  },
+  'ipage.testimonialAuthor': {
+    pt: '— Ketlen, Criadora de Conteúdo',
+    en: '— Ketlen, Content Creator',
+    es: '— Ketlen, Creadora de Contenido',
+    it: '— Ketlen, Creatrice di Contenuti',
+    fr: '— Ketlen, Créatrice de Contenu',
+    de: '— Ketlen, Content-Erstellerin',
+    nl: '— Ketlen, Content Creator',
+    sv: '— Ketlen, Innehållsskapare',
+    no: '— Ketlen, Innholdsskaper'
   }
 };
 

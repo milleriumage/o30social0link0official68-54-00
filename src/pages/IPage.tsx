@@ -330,13 +330,12 @@ export default function IPage() {
       : 'bg-gradient-to-br from-red-50 via-white to-red-50'
   }`}>
       {/* Language Selector and Theme Toggle */}
-      <div className="fixed top-4 w-full z-50 flex items-center justify-between px-4">
-        <div className="flex-1"></div>
-        <LanguageSelector 
-          currentLanguage={language} 
-          onLanguageChange={setLanguage}
-        />
-        <div className="ml-4">
+      <div className="fixed top-4 w-full z-50 px-4">
+        <div className="flex items-center justify-center gap-8">
+          <LanguageSelector 
+            currentLanguage={language} 
+            onLanguageChange={setLanguage}
+          />
           <ThemeToggle 
             isDarkTheme={isDarkTheme}
             onThemeChange={setIsDarkTheme}
@@ -774,50 +773,88 @@ export default function IPage() {
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-20 bg-gradient-to-r from-purple-900/50 to-blue-900/50">
+      <section className={`py-20 ${
+        isDarkTheme 
+          ? 'bg-gradient-to-r from-purple-900/50 to-blue-900/50' 
+          : 'bg-gradient-to-r from-red-100/80 to-red-200/60'
+      }`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
-            👩‍💻 Exemplo real
+          <h2 className={`text-3xl md:text-4xl font-bold mb-8 ${
+            isDarkTheme ? 'text-white' : 'text-red-600'
+          }`}>
+            {t('ipage.exampleTitle')}
           </h2>
-          <Card className="bg-white/10 backdrop-blur-md border-white/20 p-8">
-            <p className="text-lg text-gray-300 mb-6">
-              Ketlen, uma jovem criadora, montou sua vitrine no Social Link. Em poucos dias, ela já fazia 50 vendas por dia, faturando perto de $1.000 por mês.
+          <Card className={`backdrop-blur-md p-8 ${
+            isDarkTheme ? 'bg-white/10 border-white/20' : 'bg-white border-red-200'
+          }`}>
+            <p className={`text-lg mb-6 ${isDarkTheme ? 'text-gray-300' : 'text-red-500'}`}>
+              {t('ipage.exampleText')}
             </p>
-            <blockquote className="text-xl font-semibold text-white border-l-4 border-blue-500 pl-6 italic">
-              "No Linktree as pessoas só clicavam e iam embora. No Social Link, elas conversam comigo — e é isso que fez minhas vendas explodirem."
+            <blockquote className={`text-xl font-semibold border-l-4 ${
+              isDarkTheme ? 'text-white border-blue-500' : 'text-red-600 border-red-500'
+            } pl-6 italic`}>
+              {t('ipage.testimonialQuote')}
             </blockquote>
-            <p className="text-blue-400 mt-4 font-medium">— Ketlen, Criadora de Conteúdo</p>
+            <p className={`mt-4 font-medium ${
+              isDarkTheme ? 'text-blue-400' : 'text-red-500'
+            }`}>{t('ipage.testimonialAuthor')}</p>
           </Card>
         </div>
       </section>
 
       {/* Why Choose Section */}
-      <section className="py-20 bg-slate-800/50">
+      <section className={`py-20 ${isDarkTheme ? 'bg-slate-800/50' : 'bg-red-50/50'}`}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
-            🌟 Por que escolher o Social Link?
+          <h2 className={`text-3xl md:text-4xl font-bold mb-8 ${
+            isDarkTheme ? 'text-white' : 'text-red-600'
+          }`}>
+            {t('ipage.whyChooseTitle')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
+                isDarkTheme 
+                  ? 'bg-gradient-to-br from-blue-500 to-purple-600' 
+                  : 'bg-gradient-to-br from-red-500 to-red-600'
+              }`}>
                 <span className="text-2xl">🔗</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Sua Vitrine</h3>
-              <p className="text-gray-300">Uma página única e personalizada</p>
+              <h3 className={`text-xl font-bold mb-2 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>{t('ipage.showcase1')}</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
+                {t('ipage.showcase1Desc')}
+              </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
+                isDarkTheme 
+                  ? 'bg-gradient-to-br from-purple-500 to-pink-600' 
+                  : 'bg-gradient-to-br from-red-500 to-red-600'
+              }`}>
                 <span className="text-2xl">💬</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Seu Chat</h3>
-              <p className="text-gray-300">Conexão real com sua audiência</p>
+              <h3 className={`text-xl font-bold mb-2 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>{t('ipage.showcase2')}</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
+                {t('ipage.showcase2Desc')}
+              </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
+                isDarkTheme 
+                  ? 'bg-gradient-to-br from-pink-500 to-red-600' 
+                  : 'bg-gradient-to-br from-red-500 to-red-600'
+              }`}>
                 <span className="text-2xl">🛒</span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Sua Loja</h3>
-              <p className="text-gray-300">Venda diretamente para seus fãs</p>
+              <h3 className={`text-xl font-bold mb-2 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>{t('ipage.showcase3')}</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
+                {t('ipage.showcase3Desc')}
+              </p>
             </div>
           </div>
           <p className="text-xl text-gray-300 mb-8">
