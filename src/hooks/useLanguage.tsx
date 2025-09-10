@@ -309,6 +309,161 @@ const translations: Translations = {
     nl: 'taart krijgen 🍰',
     sv: 'få tårta 🍰',
     no: 'få kake 🍰'
+  },
+  // IPage specific translations
+  'ipage.landingTitle': {
+    pt: 'Social Link',
+    en: 'Social Link',
+    es: 'Social Link',
+    it: 'Social Link',
+    fr: 'Social Link',
+    de: 'Social Link',
+    nl: 'Social Link',
+    sv: 'Social Link',
+    no: 'Social Link'
+  },
+  'ipage.landingSubtitle': {
+    pt: 'A nova vitrine digital com chat integrado',
+    en: 'The new digital showcase with integrated chat',
+    es: 'La nueva vitrina digital con chat integrado',
+    it: 'La nuova vetrina digitale con chat integrata',
+    fr: 'La nouvelle vitrine numérique avec chat intégré',
+    de: 'Das neue digitale Schaufenster mit integriertem Chat',
+    nl: 'De nieuwe digitale etalage met geïntegreerde chat',
+    sv: 'Det nya digitala skyltfönstret med integrerad chat',
+    no: 'Det nye digitale utstillingsvinduet med integrert chat'
+  },
+  'ipage.featuresTitle': {
+    pt: '🔑 Principais diferenciais',
+    en: '🔑 Key differentials',
+    es: '🔑 Principales diferenciales',
+    it: '🔑 Principali differenze',
+    fr: '🔑 Principales différences',
+    de: '🔑 Hauptunterschiede',
+    nl: '🔑 Belangrijkste verschillen',
+    sv: '🔑 Viktiga skillnader',
+    no: '🔑 Viktige forskjeller'
+  },
+  'ipage.feature1Title': {
+    pt: 'Chat integrado',
+    en: 'Integrated chat',
+    es: 'Chat integrado',
+    it: 'Chat integrata',
+    fr: 'Chat intégré',
+    de: 'Integrierter Chat',
+    nl: 'Geïntegreerde chat',
+    sv: 'Integrerad chat',
+    no: 'Integrert chat'
+  },
+  'ipage.feature1Description': {
+    pt: 'Seus fãs não só clicam — eles conversam com você.',
+    en: 'Your fans don\'t just click — they talk to you.',
+    es: 'Tus fans no solo hacen clic — conversan contigo.',
+    it: 'I tuoi fan non si limitano a cliccare — parlano con te.',
+    fr: 'Vos fans ne font pas que cliquer — ils vous parlent.',
+    de: 'Ihre Fans klicken nicht nur — sie sprechen mit Ihnen.',
+    nl: 'Je fans klikken niet alleen — ze praten met je.',
+    sv: 'Dina fans klickar inte bara — de pratar med dig.',
+    no: 'Fansene dine klikker ikke bare — de snakker med deg.'
+  },
+  'ipage.feature2Title': {
+    pt: 'Links de pagamento',
+    en: 'Payment links',
+    es: 'Enlaces de pago',
+    it: 'Link di pagamento',
+    fr: 'Liens de paiement',
+    de: 'Zahlungslinks',
+    nl: 'Betalingslinks',
+    sv: 'Betalningslänkar',
+    no: 'Betalingslenker'
+  },
+  'ipage.feature2Description': {
+    pt: 'Receba pagamentos de forma simples e rápida.',
+    en: 'Receive payments simply and quickly.',
+    es: 'Recibe pagos de forma simple y rápida.',
+    it: 'Ricevi pagamenti in modo semplice e veloce.',
+    fr: 'Recevez des paiements de manière simple et rapide.',
+    de: 'Erhalten Sie Zahlungen einfach und schnell.',
+    nl: 'Ontvang betalingen eenvoudig en snel.',
+    sv: 'Ta emot betalningar enkelt och snabbt.',
+    no: 'Motta betalinger enkelt og raskt.'
+  },
+  'ipage.feature3Title': {
+    pt: 'Vitrine interativa',
+    en: 'Interactive showcase',
+    es: 'Vitrina interactiva',
+    it: 'Vetrina interattiva',
+    fr: 'Vitrine interactive',
+    de: 'Interaktives Schaufenster',
+    nl: 'Interactieve etalage',
+    sv: 'Interaktivt skyltfönster',
+    no: 'Interaktivt utstillingsvindu'
+  },
+  'ipage.feature3Description': {
+    pt: 'Muito mais que um simples "link na bio".',
+    en: 'Much more than a simple "link in bio".',
+    es: 'Mucho más que un simple "link en bio".',
+    it: 'Molto più di un semplice "link in bio".',
+    fr: 'Bien plus qu\'un simple "lien en bio".',
+    de: 'Viel mehr als ein einfacher "Link in der Bio".',
+    nl: 'Veel meer dan een simpele "link in bio".',
+    sv: 'Mycket mer än en enkel "länk i bio".',
+    no: 'Mye mer enn en enkel "lenke i bio".'
+  },
+  'ipage.testimonialsTitle': {
+    pt: '💬 O que nossos usuários dizem',
+    en: '💬 What our users say',
+    es: '💬 Lo que dicen nuestros usuarios',
+    it: '💬 Cosa dicono i nostri utenti',
+    fr: '💬 Ce que disent nos utilisateurs',
+    de: '💬 Was unsere Nutzer sagen',
+    nl: '💬 Wat onze gebruikers zeggen',
+    sv: '💬 Vad våra användare säger',
+    no: '💬 Hva våre brukere sier'
+  },
+  'ipage.testimonial1': {
+    pt: '"Minha renda dobrou desde que comecei a usar o Social Link!"',
+    en: '"My income doubled since I started using Social Link!"',
+    es: '"¡Mis ingresos se duplicaron desde que empecé a usar Social Link!"',
+    it: '"Il mio reddito è raddoppiato da quando ho iniziato a usare Social Link!"',
+    fr: '"Mes revenus ont doublé depuis que j\'ai commencé à utiliser Social Link!"',
+    de: '"Mein Einkommen hat sich verdoppelt, seit ich Social Link verwende!"',
+    nl: '"Mijn inkomen is verdubbeld sinds ik Social Link ben gaan gebruiken!"',
+    sv: '"Min inkomst har dubblats sedan jag började använda Social Link!"',
+    no: '"Inntekten min har doblet seg siden jeg begynte å bruke Social Link!"'
+  },
+  'ipage.testimonial2': {
+    pt: '"Finalmente posso conversar diretamente com meus seguidores!"',
+    en: '"Finally I can talk directly with my followers!"',
+    es: '"¡Finalmente puedo hablar directamente con mis seguidores!"',
+    it: '"Finalmente posso parlare direttamente con i miei follower!"',
+    fr: '"Enfin je peux parler directement avec mes abonnés!"',
+    de: '"Endlich kann ich direkt mit meinen Followern sprechen!"',
+    nl: '"Eindelijk kan ik direct praten met mijn volgers!"',
+    sv: '"Äntligen kan jag prata direkt med mina följare!"',
+    no: '"Endelig kan jeg snakke direkte med mine følgere!"'
+  },
+  'ipage.ctaTitle': {
+    pt: '🚀 Comece agora mesmo!',
+    en: '🚀 Start right now!',
+    es: '🚀 ¡Comienza ahora mismo!',
+    it: '🚀 Inizia subito!',
+    fr: '🚀 Commencez maintenant!',
+    de: '🚀 Jetzt starten!',
+    nl: '🚀 Begin nu meteen!',
+    sv: '🚀 Börja nu!',
+    no: '🚀 Begynn nå!'
+  },
+  'ipage.ctaDescription': {
+    pt: 'Junte-se a milhares de criadores que já transformaram seus perfis',
+    en: 'Join thousands of creators who have already transformed their profiles',
+    es: 'Únete a miles de creadores que ya han transformado sus perfiles',
+    it: 'Unisciti a migliaia di creatori che hanno già trasformato i loro profili',
+    fr: 'Rejoignez des milliers de créateurs qui ont déjà transformé leurs profils',
+    de: 'Schließen Sie sich Tausenden von Kreativen an, die ihre Profile bereits transformiert haben',
+    nl: 'Sluit je aan bij duizenden makers die hun profielen al hebben getransformeerd',
+    sv: 'Gå med tusentals skapare som redan har förvandlat sina profiler',
+    no: 'Bli med tusenvis av skapere som allerede har transformert profilene sine'
   }
 };
 

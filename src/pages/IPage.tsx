@@ -330,7 +330,7 @@ export default function IPage() {
       : 'bg-gradient-to-br from-red-50 via-white to-red-50'
   }`}>
       {/* Language Selector and Theme Toggle */}
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-4">
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-3">
         <LanguageSelector 
           currentLanguage={language} 
           onLanguageChange={setLanguage}
@@ -687,40 +687,54 @@ export default function IPage() {
       {/* NOVA LANDING PAGE SOCIAL LINK - ADICIONADA ABAIXO */}
       
       {/* Features Section */}
-      <section className="py-20 bg-slate-800/50">
+      <section className={`py-20 ${isDarkTheme ? 'bg-slate-800/50' : 'bg-red-50/50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              🔑 Principais diferenciais
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
+              isDarkTheme ? 'text-white' : 'text-red-600'
+            }`}>
+              {t('ipage.featuresTitle')}
             </h2>
-            <p className="text-xl text-gray-300">
-              Muito mais que um simples "link na bio"
+            <p className={`text-xl ${isDarkTheme ? 'text-gray-300' : 'text-red-500'}`}>
+              {t('ipage.feature3Description')}
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
+            <Card className={`backdrop-blur-md p-6 ${
+              isDarkTheme ? 'bg-white/10 border-white/20' : 'bg-white border-red-200'
+            }`}>
               <div className="text-4xl mb-4">💬</div>
-              <h3 className="text-xl font-bold text-white mb-3">Chat integrado</h3>
-              <p className="text-gray-300">
-                Seus fãs não só clicam — eles conversam com você. Essa interação direta gera confiança e engajamento imediato.
+              <h3 className={`text-xl font-bold mb-3 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>{t('ipage.feature1Title')}</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
+                {t('ipage.feature1Description')}
               </p>
             </Card>
 
             {/* Feature 2 */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
+            <Card className={`backdrop-blur-md p-6 ${
+              isDarkTheme ? 'bg-white/10 border-white/20' : 'bg-white border-red-200'
+            }`}>
               <div className="text-4xl mb-4">💳</div>
-              <h3 className="text-xl font-bold text-white mb-3">Links de pagamento</h3>
-              <p className="text-gray-300">
-                Adicione botões de compra e receba pagamentos de forma simples e rápida.
+              <h3 className={`text-xl font-bold mb-3 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>{t('ipage.feature2Title')}</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
+                {t('ipage.feature2Description')}
               </p>
             </Card>
 
             {/* Feature 3 */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
+            <Card className={`backdrop-blur-md p-6 ${
+              isDarkTheme ? 'bg-white/10 border-white/20' : 'bg-white border-red-200'
+            }`}>
               <div className="text-4xl mb-4">🚀</div>
-              <h3 className="text-xl font-bold text-white mb-3">Vitrine personalizada</h3>
+              <h3 className={`text-xl font-bold mb-3 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>{t('ipage.feature3Title')}</h3>
               <p className="text-gray-300">
                 Crie uma página exclusiva, com cores, textos, preços, animações e até música de fundo.
               </p>
