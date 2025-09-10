@@ -15,6 +15,8 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { useAccessVerification } from '@/hooks/useAccessVerification';
 import { useGoogleAuth } from '@/hooks/useGoogleAuth';
 import { useLanguage } from '@/hooks/useLanguage';
+import { LanguageSelector } from '@/components/LanguageSelector';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { StripePublicKeyDialog } from '@/components/StripePublicKeyDialog';
 import SupportBubble from '@/components/SupportBubble';
 // Usando imagem placeholder temporária
@@ -69,7 +71,8 @@ export default function IPage() {
   const [accessTimeout, setAccessTimeout] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [showStripeKeyDialog, setShowStripeKeyDialog] = useState(false);
-  const { t } = useLanguage();
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const { language, setLanguage, t } = useLanguage();
   const defaultUserId = '171c4bb2-9fdd-4c5e-a340-c3f2c8c89e07';
   const {
     createCheckout,
@@ -321,9 +324,25 @@ export default function IPage() {
         </div>
       </div>;
   }
-  return <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-purple-800 overflow-hidden">
+  return <div className={`min-h-screen overflow-hidden ${
+    isDarkTheme 
+      ? 'bg-gradient-to-br from-blue-600 via-purple-600 to-purple-800' 
+      : 'bg-gradient-to-br from-red-50 via-white to-red-50'
+  }`}>
+      {/* Language Selector and Theme Toggle */}
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-4">
+        <LanguageSelector 
+          currentLanguage={language} 
+          onLanguageChange={setLanguage}
+        />
+        <ThemeToggle 
+          isDarkTheme={isDarkTheme}
+          onThemeChange={setIsDarkTheme}
+        />
+      </div>
+
       {/* Layout principal com duas colunas */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-12 pt-20">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 min-h-[80vh]">
           
           {/* Coluna da esquerda - Formulário de cadastro */}
@@ -337,18 +356,61 @@ export default function IPage() {
               />
             </div>
             
-            <Card className="w-full max-w-md bg-white/10 backdrop-blur-md border-white/20 shadow-2xl">
+            <Card className={`w-full max-w-md backdrop-blur-md shadow-2xl ${
+              isDarkTheme 
+                ? 'bg-white/10 border-white/20' 
+                : 'bg-white border-red-200'
+            }`}>
               <CardContent className="p-8 space-y-6">
                 <div className="text-center">
-                  <h1 className="text-3xl font-bold text-white mb-2">{t('auth.welcome')}</h1>
-                  <p className="text-white/80">{isSignUp ? t('auth.createAccountMessage') : t('auth.loginMessage')}</p>
+                  <h1 className={`text-3xl font-bold mb-2 ${
+                    isDarkTheme ? 'text-white' : 'text-red-600'
+                  }`}>{t('auth.welcome')}</h1>
+                  <p className={isDarkTheme ? 'text-white/80' : 'text-red-500'}>
+                    {isSignUp ? t('auth.createAccountMessage') : t('auth.loginMessage')}
+                  </p>
                 </div>
                 
                 <div className="space-y-4">
-                  <Input type="email" placeholder={t('auth.emailPlaceholder')} value={email} onChange={e => setEmail(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40" />
-                  <Input type="password" placeholder={t('auth.passwordPlaceholder')} value={password} onChange={e => setPassword(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40" />
-                  {isSignUp && <Input type="password" placeholder={t('auth.confirmPasswordPlaceholder')} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40" />}
-                  <Button onClick={handleAuth} disabled={isLoading} className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <Input 
+                    type="email" 
+                    placeholder={t('auth.emailPlaceholder')} 
+                    value={email} 
+                    onChange={e => setEmail(e.target.value)} 
+                    className={isDarkTheme 
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40" 
+                      : "bg-red-50 border-red-200 text-red-700 placeholder:text-red-400 focus:border-red-400"
+                    } 
+                  />
+                  <Input 
+                    type="password" 
+                    placeholder={t('auth.passwordPlaceholder')} 
+                    value={password} 
+                    onChange={e => setPassword(e.target.value)} 
+                    className={isDarkTheme 
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40" 
+                      : "bg-red-50 border-red-200 text-red-700 placeholder:text-red-400 focus:border-red-400"
+                    } 
+                  />
+                  {isSignUp && <Input 
+                    type="password" 
+                    placeholder={t('auth.confirmPasswordPlaceholder')} 
+                    value={confirmPassword} 
+                    onChange={e => setConfirmPassword(e.target.value)} 
+                    className={isDarkTheme 
+                      ? "bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-white/40" 
+                      : "bg-red-50 border-red-200 text-red-700 placeholder:text-red-400 focus:border-red-400"
+                    } 
+                  />}
+                  <Button 
+                    onClick={handleAuth} 
+                    disabled={isLoading} 
+                    className={`w-full font-semibold py-3 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${
+                      isDarkTheme 
+                        ? 'bg-purple-600 hover:bg-purple-700 text-white' 
+                        : 'bg-red-600 hover:bg-red-700 text-white'
+                    }`}
+                  >
                     {isLoading ? t('auth.processing') : isSignUp ? t('auth.createAccount') : t('auth.signIn')}
                   </Button>
 
