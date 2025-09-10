@@ -330,15 +330,18 @@ export default function IPage() {
       : 'bg-gradient-to-br from-red-50 via-white to-red-50'
   }`}>
       {/* Language Selector and Theme Toggle */}
-      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-3">
+      <div className="fixed top-4 w-full z-50 flex items-center justify-between px-4">
+        <div className="flex-1"></div>
         <LanguageSelector 
           currentLanguage={language} 
           onLanguageChange={setLanguage}
         />
-        <ThemeToggle 
-          isDarkTheme={isDarkTheme}
-          onThemeChange={setIsDarkTheme}
-        />
+        <div className="ml-4">
+          <ThemeToggle 
+            isDarkTheme={isDarkTheme}
+            onThemeChange={setIsDarkTheme}
+          />
+        </div>
       </div>
 
       {/* Layout principal com duas colunas */}
