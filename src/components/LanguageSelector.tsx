@@ -9,7 +9,7 @@ interface LanguageSelectorProps {
 
 export const LanguageSelector = ({ currentLanguage, onLanguageChange }: LanguageSelectorProps) => {
   return (
-    <div className="fixed top-4 right-4 z-50 flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full p-2 border border-white/20">
+    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full p-2 border border-white/20">
       <Globe className="w-4 h-4 text-white" />
       <Button
         variant={currentLanguage === 'en' ? 'default' : 'ghost'}

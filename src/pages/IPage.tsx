@@ -330,17 +330,15 @@ export default function IPage() {
       : 'bg-gradient-to-br from-red-50 via-white to-red-50'
   }`}>
       {/* Language Selector and Theme Toggle */}
-      <div className="fixed top-4 w-full z-50 px-4">
-        <div className="flex items-center justify-center gap-8">
-          <LanguageSelector 
-            currentLanguage={language} 
-            onLanguageChange={setLanguage}
-          />
-          <ThemeToggle 
-            isDarkTheme={isDarkTheme}
-            onThemeChange={setIsDarkTheme}
-          />
-        </div>
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-4">
+        <LanguageSelector 
+          currentLanguage={language} 
+          onLanguageChange={setLanguage}
+        />
+        <ThemeToggle 
+          isDarkTheme={isDarkTheme}
+          onThemeChange={setIsDarkTheme}
+        />
       </div>
 
       {/* Layout principal com duas colunas */}
@@ -743,28 +741,40 @@ export default function IPage() {
             </Card>
 
             {/* Feature 4 */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
+            <Card className={`backdrop-blur-md p-6 ${
+              isDarkTheme ? 'bg-white/10 border-white/20' : 'bg-white border-red-200'
+            }`}>
               <div className="text-4xl mb-4">📊</div>
-              <h3 className="text-xl font-bold text-white mb-3">Estatísticas em tempo real</h3>
-              <p className="text-gray-300">
+              <h3 className={`text-xl font-bold mb-3 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>Estatísticas em tempo real</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
                 Veja curtidas, compartilhamentos e visualizações para entender o que mais atrai sua audiência.
               </p>
             </Card>
 
             {/* Feature 5 */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
+            <Card className={`backdrop-blur-md p-6 ${
+              isDarkTheme ? 'bg-white/10 border-white/20' : 'bg-white border-red-200'
+            }`}>
               <div className="text-4xl mb-4">🔒</div>
-              <h3 className="text-xl font-bold text-white mb-3">Controle total</h3>
-              <p className="text-gray-300">
+              <h3 className={`text-xl font-bold mb-3 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>Controle total</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
                 Use cronômetros, senhas, bloqueios automáticos e personalização avançada para proteger seu conteúdo.
               </p>
             </Card>
 
             {/* Feature 6 */}
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 p-6">
+            <Card className={`backdrop-blur-md p-6 ${
+              isDarkTheme ? 'bg-white/10 border-white/20' : 'bg-white border-red-200'
+            }`}>
               <div className="text-4xl mb-4">⚡</div>
-              <h3 className="text-xl font-bold text-white mb-3">Interface rápida</h3>
-              <p className="text-gray-300">
+              <h3 className={`text-xl font-bold mb-3 ${
+                isDarkTheme ? 'text-white' : 'text-red-600'
+              }`}>Interface rápida</h3>
+              <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
                 Experiência fluida e responsiva que funciona perfeitamente em todos os dispositivos.
               </p>
             </Card>
@@ -857,21 +867,24 @@ export default function IPage() {
               </p>
             </div>
           </div>
-          <p className="text-xl text-gray-300 mb-8">
-            Porque ele vai além de ser só um "link na bio". <br />
-            Ele é sua vitrine, seu chat e sua loja virtual — tudo em um só lugar.
+          <p className={`text-xl mb-8 ${isDarkTheme ? 'text-gray-300' : 'text-red-500'}`}>
+            {t('ipage.feature3Description')}
           </p>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-900 to-purple-900">
+      <section className={`py-20 ${
+        isDarkTheme 
+          ? 'bg-gradient-to-br from-blue-900 to-purple-900' 
+          : 'bg-gradient-to-br from-red-600 to-red-700'
+      }`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            👉 Comece agora
+            {t('ipage.startNowTitle')}
           </h2>
           <p className="text-xl text-gray-300 mb-8">
-            Crie sua conta grátis e descubra como transformar sua audiência em clientes fiéis
+            {t('ipage.startNowDescription')}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -889,21 +902,21 @@ export default function IPage() {
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
               )}
-              {isGoogleLoading ? 'Entrando...' : 'Criar Conta Grátis'}
+              {isGoogleLoading ? t('auth.signingIn') : t('auth.createAccount')}
             </Button>
             <Button variant="outline" className="px-8 py-3 text-lg border-white/20 text-white hover:bg-white/10">
-              Saiba Mais
+              {t('landing.demo')}
             </Button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 py-12">
+      <footer className={`py-12 ${isDarkTheme ? 'bg-slate-900' : 'bg-red-800'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">Social Link</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">{t('ipage.footerTitle')}</h3>
           <p className="text-gray-400 mb-6">
-            A evolução do link na bio
+            {t('ipage.footerSubtitle')}
           </p>
           <div className="flex justify-center space-x-6">
             <Button variant="ghost" className="text-gray-400 hover:text-white">
@@ -921,17 +934,25 @@ export default function IPage() {
 
       {/* Rodapé Original - Mantido */}
       <div className="text-center pb-12">
-        <Button asChild className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg px-12 py-4 rounded-2xl shadow-xl transition-all duration-300 hover:scale-105 animate-pulse mb-4">
+        <Button asChild className={`font-bold text-lg px-12 py-4 rounded-2xl shadow-xl transition-all duration-300 hover:scale-105 animate-pulse mb-4 ${
+          isDarkTheme 
+            ? 'bg-purple-600 hover:bg-purple-700 text-white' 
+            : 'bg-red-600 hover:bg-red-700 text-white'
+        }`}>
           <Link to="/signup">
-            📝 Fazer Cadastro
+            {t('ipage.signUpButton')}
           </Link>
         </Button>
         <br />
-        <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="bg-purple-600 hover:bg-purple-700 text-white font-bold text-lg px-12 py-4 rounded-2xl shadow-xl transition-all duration-300 hover:scale-105 animate-pulse">
-          🚀 Teste grátis por 7 dias
+        <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className={`font-bold text-lg px-12 py-4 rounded-2xl shadow-xl transition-all duration-300 hover:scale-105 animate-pulse ${
+          isDarkTheme 
+            ? 'bg-purple-600 hover:bg-purple-700 text-white' 
+            : 'bg-red-600 hover:bg-red-700 text-white'
+        }`}>
+          {t('ipage.freeTrialButton')}
         </Button>
-        <p className="text-white/70 mt-4 text-sm">
-          Sem compromisso • Cancele a qualquer momento
+        <p className={`mt-4 text-sm ${isDarkTheme ? 'text-white/70' : 'text-white/90'}`}>
+          {t('ipage.commitmentText')}
         </p>
       </div>
 
