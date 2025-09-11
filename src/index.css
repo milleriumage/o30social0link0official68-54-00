@@ -28,26 +28,26 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 14% 96%; /* #f9fafb - Cinza claro */
-    --foreground: 220 39% 11%; /* #1f2937 - Preto grafite */
+    --background: 0 0% 100%; /* #ffffff - Branco puro */
+    --foreground: 220 39% 8%; /* #0f172a - Preto mais escuro para melhor contraste */
 
-    --card: 220 14% 96%; /* #f9fafb - Cinza claro */
-    --card-foreground: 220 39% 11%; /* #1f2937 - Preto grafite */
+    --card: 0 0% 100%; /* #ffffff - Branco puro */
+    --card-foreground: 220 39% 8%; /* #0f172a - Preto mais escuro */
 
-    --popover: 220 14% 96%; /* #f9fafb - Cinza claro */
-    --popover-foreground: 220 39% 11%; /* #1f2937 - Preto grafite */
+    --popover: 0 0% 100%; /* #ffffff - Branco puro */
+    --popover-foreground: 220 39% 8%; /* #0f172a - Preto mais escuro */
 
-    --primary: 351 100% 65%; /* #ff4d6d - Rosa forte */
-    --primary-foreground: 220 14% 96%; /* #f9fafb - Cinza claro para contraste */
+    --primary: 351 100% 50%; /* #ff1a4d - Rosa mais escura para melhor contraste */
+    --primary-foreground: 0 0% 100%; /* #ffffff - Branco puro para contraste */
 
-    --secondary: 322 84% 95%; /* #fce7f3 - Rosé suave */
-    --secondary-foreground: 220 39% 11%; /* #1f2937 - Preto grafite */
+    --secondary: 220 15% 90%; /* #e2e8f0 - Cinza claro com mais contraste */
+    --secondary-foreground: 220 39% 8%; /* #0f172a - Preto mais escuro */
 
-    --muted: 322 84% 95%; /* #fce7f3 - Rosé suave */
-    --muted-foreground: 220 39% 11%; /* #1f2937 - Preto grafite */
+    --muted: 220 15% 90%; /* #e2e8f0 - Cinza claro */
+    --muted-foreground: 220 39% 20%; /* #334155 - Cinza escuro para texto */
 
-    --accent: 0 84% 60%; /* #ef4444 - Vermelho vivo */
-    --accent-foreground: 220 14% 96%; /* #f9fafb - Cinza claro para contraste */
+    --accent: 0 84% 50%; /* #dc2626 - Vermelho mais escuro para melhor contraste */
+    --accent-foreground: 0 0% 100%; /* #ffffff - Branco puro para contraste */
 
     --success: 142 76% 36%; /* #16a34a - Verde suave */
     --success-foreground: 220 14% 96%; /* #f9fafb - Cinza claro para contraste */
