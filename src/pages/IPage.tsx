@@ -350,7 +350,7 @@ export default function IPage() {
             {/* Social Link Preview Image */}
             <div className="mb-8 flex justify-center">
               <img 
-                src="/lovable-uploads/661650dd-7dc7-4a01-8963-5b89882f52f0.png" 
+                src="/lovable-uploads/cb7ed264-5552-4a5c-b836-3ae5afe8058d.png" 
                 alt="Social Link - For Influencers, Creators & Sellers" 
                 className="w-full max-w-sm h-auto rounded-lg shadow-2xl"
               />
