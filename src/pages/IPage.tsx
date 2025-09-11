@@ -443,9 +443,9 @@ export default function IPage() {
                     {isGoogleLoading ? t('auth.signingIn') : `${isSignUp ? t('auth.createAccount') : t('auth.signIn')} ${t('auth.withGoogle')}`}
                   </Button>
                   <div className="space-y-2">
-                    <p className="text-center text-white/70">
+                    <p className="text-center text-foreground/70">
                       {isSignUp ? t('auth.alreadyHaveAccount') : t('auth.noAccount')}{' '}
-                      <button onClick={() => setIsSignUp(!isSignUp)} className="text-white hover:underline font-medium">
+                      <button onClick={() => setIsSignUp(!isSignUp)} className="text-primary hover:underline font-medium">
                         {isSignUp ? t('auth.signIn') : t('auth.createAccount')}
                       </button>
                     </p>
