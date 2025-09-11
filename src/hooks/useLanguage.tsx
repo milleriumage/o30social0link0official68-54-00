@@ -663,6 +663,73 @@ const translations: Translations = {
     nl: 'Geen verplichtingen • Stop wanneer je wilt',
     sv: 'Ingen förpliktelse • Avsluta när som helst',
     no: 'Ingen forpliktelse • Avbryt når som helst'
+  },
+  // Additional features
+  'ipage.feature4Title': {
+    pt: 'Estatísticas em tempo real',
+    en: 'Real-time statistics',
+    es: 'Estadísticas en tiempo real',
+    it: 'Statistiche in tempo reale',
+    fr: 'Statistiques en temps réel',
+    de: 'Echtzeit-Statistiken',
+    nl: 'Real-time statistieken',
+    sv: 'Realtidsstatistik',
+    no: 'Sanntidsstatistikk'
+  },
+  'ipage.feature4Description': {
+    pt: 'Veja curtidas, compartilhamentos e visualizações para entender o que mais atrai sua audiência.',
+    en: 'See likes, shares and views to understand what attracts your audience the most.',
+    es: 'Ve likes, compartidos y visualizaciones para entender qué atrae más a tu audiencia.',
+    it: 'Vedi like, condivisioni e visualizzazioni per capire cosa attrae di più il tuo pubblico.',
+    fr: 'Voyez les likes, partages et vues pour comprendre ce qui attire le plus votre audience.',
+    de: 'Sehen Sie Likes, Shares und Aufrufe, um zu verstehen, was Ihr Publikum am meisten anzieht.',
+    nl: 'Zie likes, shares en weergaven om te begrijpen wat je publiek het meest aanspreekt.',
+    sv: 'Se gillningar, delningar och visningar för att förstå vad som attraherar din publik mest.',
+    no: 'Se likes, delinger og visninger for å forstå hva som tiltrekker publikummet ditt mest.'
+  },
+  'ipage.feature5Title': {
+    pt: 'Controle total',
+    en: 'Total control',
+    es: 'Control total',
+    it: 'Controllo totale',
+    fr: 'Contrôle total',
+    de: 'Vollständige Kontrolle',
+    nl: 'Volledige controle',
+    sv: 'Total kontroll',
+    no: 'Total kontroll'
+  },
+  'ipage.feature5Description': {
+    pt: 'Use cronômetros, senhas, bloqueios automáticos e personalização avançada para proteger seu conteúdo.',
+    en: 'Use timers, passwords, automatic locks and advanced customization to protect your content.',
+    es: 'Usa temporizadores, contraseñas, bloqueos automáticos y personalización avanzada para proteger tu contenido.',
+    it: 'Usa timer, password, blocchi automatici e personalizzazione avanzata per proteggere i tuoi contenuti.',
+    fr: 'Utilisez des minuteurs, mots de passe, verrouillages automatiques et personnalisation avancée pour protéger votre contenu.',
+    de: 'Verwenden Sie Timer, Passwörter, automatische Sperren und erweiterte Anpassungen, um Ihre Inhalte zu schützen.',
+    nl: 'Gebruik timers, wachtwoorden, automatische vergrendelingen en geavanceerde aanpassingen om je content te beschermen.',
+    sv: 'Använd timers, lösenord, automatiska lås och avancerad anpassning för att skydda ditt innehåll.',
+    no: 'Bruk timere, passord, automatiske låser og avansert tilpasning for å beskytte innholdet ditt.'
+  },
+  'ipage.feature6Title': {
+    pt: 'Interface rápida',
+    en: 'Fast interface',
+    es: 'Interfaz rápida',
+    it: 'Interfaccia veloce',
+    fr: 'Interface rapide',
+    de: 'Schnelle Oberfläche',
+    nl: 'Snelle interface',
+    sv: 'Snabb gränssnitt',
+    no: 'Hurtig grensesnitt'
+  },
+  'ipage.feature6Description': {
+    pt: 'Experiência fluida e responsiva que funciona perfeitamente em todos os dispositivos.',
+    en: 'Fluid and responsive experience that works perfectly on all devices.',
+    es: 'Experiencia fluida y responsiva que funciona perfectamente en todos los dispositivos.',
+    it: 'Esperienza fluida e reattiva che funziona perfettamente su tutti i dispositivi.',
+    fr: 'Expérience fluide et réactive qui fonctionne parfaitement sur tous les appareils.',
+    de: 'Flüssige und responsive Erfahrung, die perfekt auf allen Geräten funktioniert.',
+    nl: 'Vloeiende en responsieve ervaring die perfect werkt op alle apparaten.',
+    sv: 'Flytande och responsiv upplevelse som fungerar perfekt på alla enheter.',
+    no: 'Flytende og responsiv opplevelse som fungerer perfekt på alle enheter.'
   }
 };
 

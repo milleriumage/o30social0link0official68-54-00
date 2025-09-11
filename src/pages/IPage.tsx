@@ -747,9 +747,9 @@ export default function IPage() {
               <div className="text-4xl mb-4">📊</div>
               <h3 className={`text-xl font-bold mb-3 ${
                 isDarkTheme ? 'text-white' : 'text-red-600'
-              }`}>Estatísticas em tempo real</h3>
+              }`}>{t('ipage.feature4Title')}</h3>
               <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
-                Veja curtidas, compartilhamentos e visualizações para entender o que mais atrai sua audiência.
+                {t('ipage.feature4Description')}
               </p>
             </Card>
 
@@ -760,9 +760,9 @@ export default function IPage() {
               <div className="text-4xl mb-4">🔒</div>
               <h3 className={`text-xl font-bold mb-3 ${
                 isDarkTheme ? 'text-white' : 'text-red-600'
-              }`}>Controle total</h3>
+              }`}>{t('ipage.feature5Title')}</h3>
               <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
-                Use cronômetros, senhas, bloqueios automáticos e personalização avançada para proteger seu conteúdo.
+                {t('ipage.feature5Description')}
               </p>
             </Card>
 
@@ -773,9 +773,9 @@ export default function IPage() {
               <div className="text-4xl mb-4">⚡</div>
               <h3 className={`text-xl font-bold mb-3 ${
                 isDarkTheme ? 'text-white' : 'text-red-600'
-              }`}>Interface rápida</h3>
+              }`}>{t('ipage.feature6Title')}</h3>
               <p className={isDarkTheme ? 'text-gray-300' : 'text-red-500'}>
-                Experiência fluida e responsiva que funciona perfeitamente em todos os dispositivos.
+                {t('ipage.feature6Description')}
               </p>
             </Card>
           </div>
