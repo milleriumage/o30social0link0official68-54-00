@@ -5,11 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Settings, Upload, Video, Globe, Save, FolderOpen, Eye, Palette, Trash2 } from "lucide-react";
+import { Settings, Upload, Video, Globe, Save, FolderOpen, Eye, Palette, Trash2, User } from "lucide-react";
 import { toast } from "sonner";
 import { useChatControls } from "@/hooks/useChatControls";
 import { VisibilitySettingsDialog } from "@/components/VisibilitySettingsDialog";
 import { ReferralDialog } from "@/components/ReferralDialog";
+import { CreatorSubscriptionsManager } from "@/components/CreatorSubscriptionsManager";
 import { useChatConfiguration } from "@/hooks/useChatConfiguration";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useRealtimeMessages } from "@/hooks/useRealtimeMessages";
@@ -123,7 +124,8 @@ export const SettingsDialog = ({
     onLoadState();
     toast.success("📂 State loaded!");
   };
-  return <Dialog open={isOpen} onOpenChange={setIsOpen}>
+  return <div className="space-y-0">
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger>
         <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled}>
           <Settings className="w-4 h-4 mr-2" />
@@ -131,13 +133,11 @@ export const SettingsDialog = ({
         </Button>
       </DialogTrigger>
       
-      {/* Botão Referral abaixo */}
-      <ReferralDialog disabled={disabled} />
-      
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-background/95 backdrop-blur-md border-border/50 shadow-xl">
         <DialogHeader>
           <DialogTitle>⚙️ Settings</DialogTitle>
         </DialogHeader>
+      
         
         <div className="grid grid-cols-2 gap-6">
           {/* Left Column - Settings */}
@@ -399,5 +399,18 @@ export const SettingsDialog = ({
         {/* Visibility Settings Dialog */}
         <VisibilitySettingsDialog open={showVisibilityDialog} onOpenChange={setShowVisibilityDialog} />
       </DialogContent>
-    </Dialog>;
+    </Dialog>
+    
+    {/* Botão Referral */}
+    <ReferralDialog disabled={disabled} />
+    
+    {/* Botão Assinaturas do Criador */}
+    <CreatorSubscriptionsManager />
+    
+    {/* Botão Painel do Usuário */}
+    <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled}>
+      <User className="w-4 h-4 mr-2" />
+      <span>Painel do Usuário</span>
+    </Button>
+  </div>;
 };
