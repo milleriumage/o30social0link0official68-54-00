@@ -32,6 +32,10 @@ import { GiftViewDialog } from "./GiftViewDialog";
 import { useWishlist } from "@/hooks/useWishlist";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useFollowers } from "@/hooks/useFollowers";
+import { FollowersCounter } from "./FollowersCounter";
+import { FollowButton } from "./FollowButton";
+import { PremiumPlansManager } from "./PremiumPlansManager";
 interface MediaItem {
   id: string;
   type: 'image' | 'video';
@@ -175,6 +179,8 @@ export const MediaShowcase = React.memo(({
   } = useWishlist();
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { isFollowing, followersCount, toggleFollow } = useFollowers(creatorId);
+  const [showPremiumDialog, setShowPremiumDialog] = useState(false);
   const {
     timers,
     addTimer,
@@ -815,6 +821,26 @@ export const MediaShowcase = React.memo(({
       <div className="flex items-center justify-between">
         <SocialMediaIcons socialNetworks={socialNetworks} onUpdateSocial={updateSocialNetwork} onAddSocial={addSocialNetwork} onDeleteSocial={deleteSocialNetwork} passwordProtected={passwordProtected} onPasswordVerify={onPasswordVerify} creatorId={creatorId} />
         
+        {/* Center - Followers & Follow/Subscribe Section */}
+        <div className="flex-1 flex flex-col items-center justify-center gap-2 mx-4">
+          <FollowersCounter creatorId={creatorId} />
+          <div className="flex items-center gap-2">
+            <FollowButton 
+              isFollowing={isFollowing} 
+              onToggleFollow={toggleFollow}
+              isLoading={isFollowing === undefined}
+            />
+            <Button
+              onClick={() => setShowPremiumDialog(true)}
+              size="sm"
+              variant="default"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium"
+            >
+              Assinar Conteúdo
+            </Button>
+          </div>
+        </div>
+        
         <div className="flex items-center gap-2">
           {/* Next Creator Button - Left side of gift icon */}
           <Button 
@@ -1399,5 +1425,22 @@ export const MediaShowcase = React.memo(({
 
       {/* Gallery Dialog */}
       <GiftViewDialog open={showGiftGallery} onOpenChange={setShowGiftGallery} items={wishlistItems} />
+
+      {/* Premium Plans Dialog */}
+      <Dialog open={showPremiumDialog} onOpenChange={setShowPremiumDialog}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>✨ Assinar Conteúdo Premium</DialogTitle>
+          </DialogHeader>
+          <div className="p-4 text-center">
+            <p className="text-muted-foreground mb-4">
+              Funcionalidade de assinatura será implementada em breve!
+            </p>
+            <Button onClick={() => setShowPremiumDialog(false)}>
+              Fechar
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>;
 });
