@@ -43,8 +43,29 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Calcular comissão de 5%
-    const commissionAmount = plan_price * 0.05;
+    // Verificar se é plano VIP (apenas VIP gera comissão)
+    if (plan_name.toLowerCase() !== 'vip') {
+      console.log('Plan is not VIP, no commission will be processed');
+      return new Response(
+        JSON.stringify({ success: true, message: 'Only VIP plans generate commission' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Verificar limite de comissão do criador ($5 máximo)
+    const currentCommission = referrals?.reduce((sum, r) => sum + (Number(r.commission_earned) || 0), 0) || 0;
+    if (currentCommission >= 5) {
+      console.log('Creator has reached commission limit of $5');
+      return new Response(
+        JSON.stringify({ success: true, message: 'Creator has reached commission limit' }),
+        { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Calcular comissão de 2% com limite máximo de $5
+    const baseCommission = plan_price * 0.02;
+    const remainingLimit = 5 - currentCommission;
+    const commissionAmount = Math.min(baseCommission, remainingLimit);
     const releaseDate = new Date();
     releaseDate.setDate(releaseDate.getDate() + 30); // 30 dias a partir de agora
 
@@ -70,7 +91,7 @@ const handler = async (req: Request): Promise<Response> => {
         user_id: referral.creator_id,
         type: 'commission_earned',
         title: '💰 Comissão Ganha!',
-        message: `Você ganhou $${commissionAmount.toFixed(2)} de comissão! Um usuário indicado por você se tornou VIP (${plan_name}). O pagamento será liberado em 30 dias.`,
+        message: `Você ganhou $${commissionAmount.toFixed(2)} de comissão! Um usuário indicado por você se tornou VIP (${plan_name}). O pagamento será liberado em 30 dias. Limite: $${(currentCommission + commissionAmount).toFixed(2)}/5.`,
         credits_amount: Math.floor(commissionAmount * 100) // Converter para créditos também
       });
 

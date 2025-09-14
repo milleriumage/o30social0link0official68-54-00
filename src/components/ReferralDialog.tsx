@@ -107,11 +107,48 @@ export const ReferralDialog = ({ disabled = false }: ReferralDialogProps) => {
             <div className="text-center">
               <div className="text-3xl font-bold text-primary mb-2">{referralStats.referredUsersCount}</div>
               <p className="text-muted-foreground">
-                🎉 usuários já se cadastraram usando sua página! 
-                Incentive eles a assinarem um plano VIP e receba 5% de comissão! 🚀
+                🎉 usuários já se cadastraram! 
+                💡 Incentive-os a virar VIP e receba 2% de comissão apenas por assinaturas VIP! 🚀
               </p>
             </div>
           </div>
+
+          {/* Estatísticas VIP e Comissão */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-200/20">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-600 mb-1">{referralStats.vipUsersCount}</div>
+                <p className="text-sm text-muted-foreground">Usuários VIP</p>
+              </div>
+            </div>
+            
+            <div className="bg-green-500/10 rounded-lg p-4 border border-green-200/20">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-600 mb-1">
+                  ${referralStats.totalCommission.toFixed(2)} / $5
+                </div>
+                <p className="text-sm text-muted-foreground">Comissão Acumulada</p>
+                <div className="w-full bg-muted rounded-full h-2 mt-2">
+                  <div 
+                    className="bg-green-600 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${Math.min(100, (referralStats.totalCommission / 5) * 100)}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Aviso de limite atingido */}
+          {referralStats.isCommissionLimitReached && (
+            <div className="bg-orange-500/10 rounded-lg p-4 border border-orange-200/20">
+              <div className="flex items-center gap-2 text-orange-700 dark:text-orange-300">
+                <span className="text-lg">⚠️</span>
+                <div className="text-sm">
+                  <strong>Limite de $5 atingido.</strong> Continue enviando presentes e incentivando VIPs, mas novas comissões não serão adicionadas até liberar parte do valor.
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Link de compartilhamento */}
           <div className="space-y-3">
@@ -136,29 +173,25 @@ export const ReferralDialog = ({ disabled = false }: ReferralDialogProps) => {
             </p>
           </div>
 
-          {/* Comissões */}
-          <div className="bg-green-500/10 rounded-lg p-4 border border-green-200/20">
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-semibold flex items-center gap-2">
+          {/* Informações sobre comissão */}
+          <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-4 border border-blue-200/20">
+            <div className="text-sm text-blue-700 dark:text-blue-300">
+              <div className="font-semibold mb-2 flex items-center gap-2">
                 <DollarSign className="w-4 h-4" />
-                Comissões
-              </span>
+                💡 Como funciona a comissão:
+              </div>
+              <ul className="space-y-1 text-xs">
+                <li>• Comissão de <strong>2%</strong> se aplica apenas a usuários <strong>VIP</strong> que assinam o plano</li>
+                <li>• Planos PRO ou BASIC não geram comissão</li>
+                <li>• Limite máximo de <strong>$5</strong> de comissão acumulada por criador</li>
+                <li>• Pagamento liberado após 30 dias</li>
+              </ul>
               {referralStats.commissionPending > 0 && (
-                <div className="flex items-center gap-1 text-orange-600">
+                <div className="mt-3 flex items-center gap-1 text-orange-600">
                   <Clock className="w-4 h-4" />
-                  <span className="text-sm">Liberação em {daysRemaining} dias</span>
+                  <span className="text-sm">Pendente: ${referralStats.commissionPending.toFixed(2)} (liberação em {daysRemaining} dias)</span>
                 </div>
               )}
-            </div>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <div className="text-muted-foreground">Comissão Total</div>
-                <div className="font-bold text-green-600">R$ {referralStats.totalCommission.toFixed(2)}</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground">Pendente</div>
-                <div className="font-bold text-orange-600">R$ {referralStats.commissionPending.toFixed(2)}</div>
-              </div>
             </div>
           </div>
 
@@ -226,7 +259,7 @@ export const ReferralDialog = ({ disabled = false }: ReferralDialogProps) => {
                 <ul className="space-y-1 text-xs">
                   <li>• Um usuário ALEATÓRIO da sua base de cadastrados receberá 100 créditos</li>
                   <li>• A mensagem será de BOAS-VINDAS com incentivo para virar assinante VIP</li>
-                  <li>• Este presente é uma forma de engajamento para aumentar suas chances de receber comissões</li>
+                  <li>• Gera engajamento e aumenta chances de comissão (apenas VIP)</li>
                   <li>• O usuário poderá agradecer e será redirecionado para sua página</li>
                 </ul>
               </div>

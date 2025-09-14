@@ -5,9 +5,11 @@ import { toast } from 'sonner';
 
 interface ReferralStats {
   referredUsersCount: number;
+  vipUsersCount: number;
   totalCommission: number;
   commissionPending: number;
   commissionReleaseDate: string | null;
+  isCommissionLimitReached: boolean;
 }
 
 interface PaymentSettings {
@@ -18,9 +20,11 @@ interface PaymentSettings {
 export const useReferralSystem = () => {
   const [referralStats, setReferralStats] = useState<ReferralStats>({
     referredUsersCount: 0,
+    vipUsersCount: 0,
     totalCommission: 0,
     commissionPending: 0,
-    commissionReleaseDate: null
+    commissionReleaseDate: null,
+    isCommissionLimitReached: false
   });
   const [paymentSettings, setPaymentSettings] = useState<PaymentSettings | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,11 +42,17 @@ export const useReferralSystem = () => {
 
       if (error) throw error;
 
+      const vipUsers = referrals?.filter(r => r.is_vip_subscriber) || [];
+      const totalCommission = Math.min(5, referrals?.reduce((sum, r) => sum + (Number(r.commission_earned) || 0), 0) || 0);
+      const commissionPending = Math.min(5, referrals?.filter(r => !r.commission_paid).reduce((sum, r) => sum + (Number(r.commission_earned) || 0), 0) || 0);
+      
       const stats = {
         referredUsersCount: referrals?.length || 0,
-        totalCommission: referrals?.reduce((sum, r) => sum + (Number(r.commission_earned) || 0), 0) || 0,
-        commissionPending: referrals?.filter(r => !r.commission_paid).reduce((sum, r) => sum + (Number(r.commission_earned) || 0), 0) || 0,
-        commissionReleaseDate: referrals?.find(r => r.commission_release_date)?.commission_release_date || null
+        vipUsersCount: vipUsers.length,
+        totalCommission,
+        commissionPending,
+        commissionReleaseDate: referrals?.find(r => r.commission_release_date)?.commission_release_date || null,
+        isCommissionLimitReached: totalCommission >= 5
       };
 
       setReferralStats(stats);
