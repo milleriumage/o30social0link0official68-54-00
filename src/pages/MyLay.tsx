@@ -17,6 +17,7 @@ import { GoogleAuthButton } from "@/components/GoogleAuthButton";
 import { UserFloatingDialog } from "@/components/UserFloatingDialog";
 import { AddCreditsDialog } from "@/components/AddCreditsDialog";
 import { PremiumPlansManager } from "@/components/PremiumPlansManager";
+import { CreatorSubscriptionsManager } from "@/components/CreatorSubscriptionsManager";
 import { CreditSuccessNotification } from "@/components/CreditSuccessNotification";
 import { SubscriptionSuccessNotification } from "@/components/SubscriptionSuccessNotification";
 import { ActivePlanIndicator } from "@/components/ActivePlanIndicator";
@@ -54,6 +55,7 @@ const MyLay = () => {
   const [subscribedPlan, setSubscribedPlan] = useState('');
   const [showVisibilitySettings, setShowVisibilitySettings] = useState(false);
   const [showAuthDialog, setShowAuthDialog] = useState(false);
+  const [showCreatorSubscriptions, setShowCreatorSubscriptions] = useState(false);
 
   useEffect(() => {
     const loadCreatorData = async () => {
@@ -280,6 +282,16 @@ const MyLay = () => {
         )}
 
       </div>
+      {/* Floating Creator Management Button */}
+      {isCreator && canEdit && (
+        <Button
+          onClick={() => setShowCreatorSubscriptions(true)}
+          className="fixed bottom-4 right-4 z-50 rounded-full w-12 h-12 shadow-lg"
+          size="sm"
+        >
+          📋
+        </Button>
+      )}
       
       {/* Dialog de Autenticação */}
       <AuthDialog
@@ -290,6 +302,16 @@ const MyLay = () => {
           toast.success("🎉 Login realizado com sucesso!");
         }}
       />
+
+      {/* Creator Subscriptions Dialog */}
+      <Dialog open={showCreatorSubscriptions} onOpenChange={setShowCreatorSubscriptions}>
+        <DialogContent className="max-w-6xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>📋 Gerenciar Planos de Assinatura</DialogTitle>
+          </DialogHeader>
+          <CreatorSubscriptionsManager />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
