@@ -1123,16 +1123,6 @@ const Index = () => {
                 <span className="text-red-500 animate-blink-red font-medium">{t('main.getCredits')}</span>
               </Button>
 
-              {/* Fixed right-side access button */}
-              <Button 
-                asChild
-                className="fixed right-4 top-1/2 -translate-y-1/2 z-50 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4 py-2 shadow-lg"
-              >
-                <Link to="/">
-                  <ChevronRight className="w-4 h-4" />
-                </Link>
-              </Button>
-
             </div>
             
             {/* Botão para configurar visibilidade */}
