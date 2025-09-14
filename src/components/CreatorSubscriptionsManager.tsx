@@ -9,11 +9,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Label } from '@/components/ui/label';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { useCreatorSubscriptions, SubscriptionPlan } from '@/hooks/useCreatorSubscriptions';
-import { Plus, Crown, Package, AlertTriangle } from 'lucide-react';
+import { Plus, Crown, Package, AlertTriangle, Users } from 'lucide-react';
 
 const DEFAULT_MOTIVATIONAL_MESSAGE = "Deixe conteúdo gratuito para atrair novos seguidores!";
 
 export const CreatorSubscriptionsManager: React.FC = () => {
+  const [isMainDialogOpen, setIsMainDialogOpen] = useState(false);
   const { plans, loading, createOrUpdatePlan, activatePlan, deactivatePlan } = useCreatorSubscriptions();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [currentPlan, setCurrentPlan] = useState<Partial<SubscriptionPlan> | null>(null);
@@ -121,7 +122,22 @@ export const CreatorSubscriptionsManager: React.FC = () => {
   );
 
   return (
-    <div className="space-y-6">
+    <>
+      {/* Botão Trigger */}
+      <Dialog open={isMainDialogOpen} onOpenChange={setIsMainDialogOpen}>
+        <DialogTrigger asChild>
+          <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none">
+            <Users className="w-4 h-4 mr-2" />
+            <span>Assinaturas do Criador</span>
+          </Button>
+        </DialogTrigger>
+        
+        <DialogContent className="max-w-6xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>📋 Gerenciar Assinaturas do Criador</DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -388,6 +404,9 @@ export const CreatorSubscriptionsManager: React.FC = () => {
           )}
         </DialogContent>
       </Dialog>
-    </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 };
