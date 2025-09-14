@@ -1988,3 +1988,67 @@ export const useLanguage = () => {
   }
   return context;
 };
+
+// Followers system translations
+const followersTranslations = {
+  'followers.title': {
+    pt: 'Seguidores',
+    en: 'Followers',
+    es: 'Seguidores'
+  },
+  'followers.follow': {
+    pt: 'Seguir',
+    en: 'Follow',
+    es: 'Seguir'
+  },
+  'followers.unfollow': {
+    pt: 'Deixar de seguir',
+    en: 'Unfollow',
+    es: 'Dejar de seguir'
+  },
+  'followers.noFollowers': {
+    pt: 'Nenhum seguidor ainda',
+    en: 'No followers yet',
+    es: 'Aún no hay seguidores'
+  },
+  'followers.loadingFollowers': {
+    pt: 'Carregando seguidores...',
+    en: 'Loading followers...',
+    es: 'Cargando seguidores...'
+  },
+  'followers.viewProfile': {
+    pt: 'Ver Perfil',
+    en: 'View Profile',
+    es: 'Ver Perfil'
+  },
+  'followers.loginToFollow': {
+    pt: 'Faça login para seguir criadores',
+    en: 'Login to follow creators',
+    es: 'Inicia sesión para seguir creadores'
+  },
+  'followers.cannotFollowSelf': {
+    pt: 'Você não pode seguir a si mesmo',
+    en: 'You cannot follow yourself',
+    es: 'No puedes seguirte a ti mismo'
+  },
+  'followers.unfollowSuccess': {
+    pt: 'Você parou de seguir este criador',
+    en: 'You unfollowed this creator',
+    es: 'Dejaste de seguir a este creador'
+  },
+  'followers.followSuccess': {
+    pt: 'Agora você está seguindo este criador!',
+    en: 'Now you are following this creator!',
+    es: '¡Ahora estás siguiendo a este creador!'
+  },
+  'followers.errorToggle': {
+    pt: 'Erro ao processar ação',
+    en: 'Error processing action',
+    es: 'Error al procesar acción'
+  },
+  'followers.errorLoad': {
+    pt: 'Erro ao carregar seguidores',
+    en: 'Error loading followers',
+    es: 'Error al cargar seguidores'
+  }
+};

@@ -26,6 +26,9 @@ import { useCreatorPermissions } from "@/hooks/useCreatorPermissions";
 import { SocialMediaIcons } from "@/components/SocialMediaIcons";
 import { useCreatorSocialIcons } from "@/hooks/useCreatorSocialIcons";
 import { PagePausedMessage } from "@/components/PagePausedMessage";
+import { FollowButton } from "@/components/FollowButton";
+import { FollowersCounter } from "@/components/FollowersCounter";
+import { useFollowers } from "@/hooks/useFollowers";
 const UserView = () => {
   const {
     creatorId: rawCreatorId
@@ -72,6 +75,9 @@ const UserView = () => {
   
   // Social media icons - usar o creatorId para buscar os dados do criador da página
   const { socialNetworks, updateSocialNetwork, addSocialNetwork, deleteSocialNetwork, isLoading } = useCreatorSocialIcons(creatorId);
+  
+  // Sistema de seguidores
+  const { isFollowing, followersCount, toggleFollow } = useFollowers(creatorId);
 
   // Carregar dados do criador e suas mídias
   useEffect(() => {
@@ -353,8 +359,22 @@ const UserView = () => {
             </div>
           </div>
 
-          {/* Apenas Google Auth para usuários */}
+          {/* Controles da direita - seguidores e auth */}
           <div className="flex items-center justify-end gap-2 sm:flex-shrink-0">
+            {/* Contador de seguidores */}
+            <FollowersCounter 
+              creatorId={creatorId} 
+              showForCreator={isCreator}
+            />
+            
+            {/* Botão de seguir (apenas para visitantes) */}
+            {!isCreator && creatorId && (
+              <FollowButton
+                isFollowing={isFollowing}
+                onToggleFollow={toggleFollow}
+              />
+            )}
+            
             <GoogleAuthButton onLoginSuccess={() => setShowUserDialog(true)} />
           </div>
         </div>

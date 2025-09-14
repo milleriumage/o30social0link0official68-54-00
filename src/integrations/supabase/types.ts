@@ -143,6 +143,30 @@ export type Database = {
         }
         Relationships: []
       }
+      followers: {
+        Row: {
+          created_at: string
+          creator_id: string
+          follower_id: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          follower_id: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          follower_id?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       media_interactions: {
         Row: {
           created_at: string
@@ -1011,6 +1035,10 @@ export type Database = {
       extract_date_immutable: {
         Args: { "": string }
         Returns: string
+      }
+      get_followers_count: {
+        Args: { creator_uuid: string }
+        Returns: number
       }
       get_media_stats: {
         Args: { media_uuid: string }
