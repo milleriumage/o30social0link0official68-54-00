@@ -5,10 +5,12 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Users, UserX, Crown, User, Clock, Pause } from "lucide-react";
+import { Users, UserX, Crown, User, Clock, Pause, Settings } from "lucide-react";
 import { useBlockedUsers } from "@/hooks/useBlockedUsers";
 import { useCreatorPermissions } from "@/hooks/useCreatorPermissions";
 import { useOnlinePresence } from '@/hooks/useOnlinePresence';
+import { useQueueSystem } from '@/hooks/useQueueSystem';
+import { QueueSettingsDialog } from './QueueSettingsDialog';
 import { toast } from "sonner";
 
 interface OnlineUsersDialogProps {
@@ -27,8 +29,16 @@ export const OnlineUsersDialog: React.FC<OnlineUsersDialogProps> = ({
   const { blockUser } = useBlockedUsers();
   const { isCreator: userIsCreator } = useCreatorPermissions(creatorId);
   const { usersList } = useOnlinePresence();
+  const { 
+    queueSettings, 
+    queueUsers, 
+    updateQueueSettings, 
+    setUserBypass 
+  } = useQueueSystem(creatorId);
+  
   const [selectedUser, setSelectedUser] = useState<{id: string, name: string} | null>(null);
   const [blockDuration, setBlockDuration] = useState<string>('24');
+  const [showQueueSettings, setShowQueueSettings] = useState(false);
 
   const handleBlockUser = async (userId: string, userName: string, duration?: number) => {
     if (duration) {
@@ -47,9 +57,21 @@ export const OnlineUsersDialog: React.FC<OnlineUsersDialogProps> = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Users className="w-5 h-5" />
-            Usuários Online ({onlineCount})
+          <DialogTitle className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              Usuários Online ({onlineCount})
+            </div>
+            {userIsCreator && (
+              <Button
+                onClick={() => setShowQueueSettings(true)}
+                variant="outline"
+                size="sm"
+                className="text-primary hover:text-primary-foreground"
+              >
+                <Settings className="w-4 h-4" />
+              </Button>
+            )}
           </DialogTitle>
         </DialogHeader>
 
@@ -161,6 +183,16 @@ export const OnlineUsersDialog: React.FC<OnlineUsersDialogProps> = ({
             </Card>
           </div>
         )}
+
+        {/* Queue Settings Dialog */}
+        <QueueSettingsDialog
+          open={showQueueSettings}
+          onOpenChange={setShowQueueSettings}
+          settings={queueSettings}
+          queueUsers={queueUsers}
+          onUpdateSettings={updateQueueSettings}
+          onSetUserBypass={setUserBypass}
+        />
       </DialogContent>
     </Dialog>
   );
