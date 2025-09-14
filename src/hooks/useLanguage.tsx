@@ -1374,6 +1374,577 @@ const translations: Translations = {
     nl: 'Kies het plan gebaseerd op het aantal slots en credits dat je nodig hebt. Alle andere functies zijn hetzelfde.',
     sv: 'Välj planen baserat på antalet platser och krediter du behöver. Alla andra funktioner är desamma.',
     no: 'Velg planen basert på antall plasser og kreditter du trenger. Alle andre funksjoner er like.'
+  },
+  
+  // Add Credits Dialog
+  'addCredits.title': {
+    pt: 'Adicionar Créditos',
+    en: 'Add Credits',
+    es: 'Añadir Créditos',
+    it: 'Aggiungi Crediti',
+    fr: 'Ajouter des Crédits',
+    de: 'Credits Hinzufügen',
+    nl: 'Credits Toevoegen',
+    sv: 'Lägg Till Krediter',
+    no: 'Legg Til Kreditter'
+  },
+  'addCredits.description': {
+    pt: 'Escolha a quantidade de créditos que deseja adicionar à sua conta',
+    en: 'Choose the amount of credits you want to add to your account',
+    es: 'Elige la cantidad de créditos que quieres añadir a tu cuenta',
+    it: 'Scegli la quantità di crediti che vuoi aggiungere al tuo account',
+    fr: 'Choisissez la quantité de crédits que vous voulez ajouter à votre compte',
+    de: 'Wählen Sie die Anzahl der Credits, die Sie Ihrem Konto hinzufügen möchten',
+    nl: 'Kies het aantal credits dat je aan je account wilt toevoegen',
+    sv: 'Välj mängden krediter du vill lägga till på ditt konto',
+    no: 'Velg mengden kreditter du vil legge til på kontoen din'
+  },
+  'addCredits.customAmount': {
+    pt: 'Quantidade Personalizada',
+    en: 'Custom Amount',
+    es: 'Cantidad Personalizada',
+    it: 'Quantità Personalizzata',
+    fr: 'Montant Personnalisé',
+    de: 'Benutzerdefinierte Menge',
+    nl: 'Aangepaste Hoeveelheid',
+    sv: 'Anpassad Mängd',
+    no: 'Tilpasset Mengde'
+  },
+  'addCredits.selectAmount': {
+    pt: 'Selecionar quantidade',
+    en: 'Select amount',
+    es: 'Seleccionar cantidad',
+    it: 'Seleziona quantità',
+    fr: 'Sélectionner le montant',
+    de: 'Menge auswählen',
+    nl: 'Hoeveelheid selecteren',
+    sv: 'Välj mängd',
+    no: 'Velg mengde'
+  },
+  'addCredits.credits': {
+    pt: 'créditos',
+    en: 'credits',
+    es: 'créditos',
+    it: 'crediti',
+    fr: 'crédits',
+    de: 'Credits',
+    nl: 'credits',
+    sv: 'krediter',
+    no: 'kreditter'
+  },
+  'addCredits.total': {
+    pt: 'Total',
+    en: 'Total',
+    es: 'Total',
+    it: 'Totale',
+    fr: 'Total',
+    de: 'Gesamt',
+    nl: 'Totaal',
+    sv: 'Totalt',
+    no: 'Totalt'
+  },
+  'addCredits.willReceive': {
+    pt: 'Você receberá',
+    en: 'You will receive',
+    es: 'Recibirás',
+    it: 'Riceverai',
+    fr: 'Vous recevrez',
+    de: 'Sie erhalten',
+    nl: 'Je ontvangt',
+    sv: 'Du kommer att få',
+    no: 'Du vil motta'
+  },
+  'addCredits.processing': {
+    pt: 'Processando...',
+    en: 'Processing...',
+    es: 'Procesando...',
+    it: 'Elaborazione...',
+    fr: 'Traitement...',
+    de: 'Verarbeitung...',
+    nl: 'Verwerking...',
+    sv: 'Bearbetar...',
+    no: 'Behandler...'
+  },
+  'addCredits.continuePayment': {
+    pt: 'Continuar com Pagamento',
+    en: 'Continue with Payment',
+    es: 'Continuar con Pago',
+    it: 'Continua con il Pagamento',
+    fr: 'Continuer avec le Paiement',
+    de: 'Mit Zahlung Fortfahren',
+    nl: 'Doorgaan met Betaling',
+    sv: 'Fortsätt med Betalning',
+    no: 'Fortsett med Betaling'
+  },
+  
+  // Media Showcase
+  'mediaShowcase.getVipSlots': {
+    pt: 'Obter Slots VIP',
+    en: 'Get VIP Slots',
+    es: 'Obtener Slots VIP',
+    it: 'Ottieni Slot VIP',
+    fr: 'Obtenir des Slots VIP',
+    de: 'VIP-Slots Erhalten',
+    nl: 'VIP Slots Krijgen',
+    sv: 'Få VIP Platser',
+    no: 'Få VIP Plasser'
+  },
+  'mediaShowcase.getImageSlot': {
+    pt: 'Slot de Imagem',
+    en: 'Image Slot',
+    es: 'Slot de Imagen',
+    it: 'Slot Immagine',
+    fr: 'Slot d\'Image',
+    de: 'Bild-Slot',
+    nl: 'Afbeelding Slot',
+    sv: 'Bildplats',
+    no: 'Bildeplass'
+  },
+  'mediaShowcase.getVideoSlot': {
+    pt: 'Slot de Vídeo',
+    en: 'Video Slot',
+    es: 'Slot de Video',
+    it: 'Slot Video',
+    fr: 'Slot Vidéo',
+    de: 'Video-Slot',
+    nl: 'Video Slot',
+    sv: 'Videoplats',
+    no: 'Videoplass'
+  },
+  'mediaShowcase.uploadPhoto': {
+    pt: 'Enviar Foto',
+    en: 'Upload Photo',
+    es: 'Subir Foto',
+    it: 'Carica Foto',
+    fr: 'Télécharger Photo',
+    de: 'Foto Hochladen',
+    nl: 'Foto Uploaden',
+    sv: 'Ladda Upp Foto',
+    no: 'Last Opp Foto'
+  },
+  'mediaShowcase.autoDeleteTimer': {
+    pt: 'Timer de Exclusão Automática',
+    en: 'Auto Delete Timer',
+    es: 'Temporizador de Eliminación Automática',
+    it: 'Timer di Eliminazione Automatica',
+    fr: 'Minuteur de Suppression Automatique',
+    de: 'Automatischer Lösch-Timer',
+    nl: 'Automatische Verwijder Timer',
+    sv: 'Automatisk Raderingstimer',
+    no: 'Automatisk Slette-timer'
+  },
+  'mediaShowcase.cancelAutoDelete': {
+    pt: 'Cancelar Exclusão Automática',
+    en: 'Cancel Auto Delete',
+    es: 'Cancelar Eliminación Automática',
+    it: 'Annulla Eliminazione Automatica',
+    fr: 'Annuler la Suppression Automatique',
+    de: 'Automatisches Löschen Abbrechen',
+    nl: 'Automatisch Verwijderen Annuleren',
+    sv: 'Avbryt Automatisk Radering',
+    no: 'Avbryt Automatisk Sletting'
+  },
+  'mediaShowcase.replaceImage': {
+    pt: 'Substituir Imagem',
+    en: 'Replace Image',
+    es: 'Reemplazar Imagen',
+    it: 'Sostituisci Immagine',
+    fr: 'Remplacer l\'Image',
+    de: 'Bild Ersetzen',
+    nl: 'Afbeelding Vervangen',
+    sv: 'Ersätt Bild',
+    no: 'Erstatt Bilde'
+  },
+  'mediaShowcase.removeBlur': {
+    pt: 'Remover Desfoque',
+    en: 'Remove Blur',
+    es: 'Quitar Desenfoque',
+    it: 'Rimuovi Sfocatura',
+    fr: 'Supprimer le Flou',
+    de: 'Unschärfe Entfernen',
+    nl: 'Vervaging Verwijderen',
+    sv: 'Ta Bort Oskärpa',
+    no: 'Fjern Uskarphet'
+  },
+  'mediaShowcase.applyBlur': {
+    pt: 'Aplicar Desfoque',
+    en: 'Apply Blur',
+    es: 'Aplicar Desenfoque',
+    it: 'Applica Sfocatura',
+    fr: 'Appliquer le Flou',
+    de: 'Unschärfe Anwenden',
+    nl: 'Vervaging Toepassen',
+    sv: 'Tillämpa Oskärpa',
+    no: 'Bruk Uskarphet'
+  },
+  'mediaShowcase.disableClickUnblur': {
+    pt: 'Desabilitar Clique para Desfocar',
+    en: 'Disable Click to Unblur',
+    es: 'Deshabilitar Clic para Desenfocar',
+    it: 'Disabilita Clic per Sfocare',
+    fr: 'Désactiver Clic pour Déflouter',
+    de: 'Klick zum Entschärfen Deaktivieren',
+    nl: 'Klik om te Ontscherpen Uitschakelen',
+    sv: 'Inaktivera Klick för att Oskärpa',
+    no: 'Deaktiver Klikk for å Fjerne Uskarphet'
+  },
+  'mediaShowcase.enableClickUnblur': {
+    pt: 'Habilitar Clique para Desfocar',
+    en: 'Enable Click to Unblur',
+    es: 'Habilitar Clic para Desenfocar',
+    it: 'Abilita Clic per Sfocare',
+    fr: 'Activer Clic pour Déflouter',
+    de: 'Klick zum Entschärfen Aktivieren',
+    nl: 'Klik om te Ontscherpen Inschakelen',
+    sv: 'Aktivera Klick för att Oskärpa',
+    no: 'Aktiver Klikk for å Fjerne Uskarphet'
+  },
+  'mediaShowcase.setPrice': {
+    pt: 'Definir Preço',
+    en: 'Set Price',
+    es: 'Establecer Precio',
+    it: 'Imposta Prezzo',
+    fr: 'Définir le Prix',
+    de: 'Preis Festlegen',
+    nl: 'Prijs Instellen',
+    sv: 'Ange Pris',
+    no: 'Sett Pris'
+  },
+  'mediaShowcase.setLink': {
+    pt: 'Definir Link',
+    en: 'Set Link',
+    es: 'Establecer Enlace',
+    it: 'Imposta Link',
+    fr: 'Définir le Lien',
+    de: 'Link Festlegen',
+    nl: 'Link Instellen',
+    sv: 'Ange Länk',
+    no: 'Sett Lenke'
+  },
+  'mediaShowcase.mainScreen': {
+    pt: 'Tela Principal',
+    en: 'Main Screen',
+    es: 'Pantalla Principal',
+    it: 'Schermo Principale',
+    fr: 'Écran Principal',
+    de: 'Hauptbildschirm',
+    nl: 'Hoofdscherm',
+    sv: 'Huvudskärm',
+    no: 'Hovedskjerm'
+  },
+  'mediaShowcase.configureSlideshow': {
+    pt: 'Configurar Slideshow',
+    en: 'Configure Slideshow',
+    es: 'Configurar Presentación',
+    it: 'Configura Slideshow',
+    fr: 'Configurer le Diaporama',
+    de: 'Diashow Konfigurieren',
+    nl: 'Diavoorstelling Configureren',
+    sv: 'Konfigurera Bildspel',
+    no: 'Konfigurer Lysbildevisning'
+  },
+  'mediaShowcase.resetTimer': {
+    pt: 'Reiniciar Timer',
+    en: 'Reset Timer',
+    es: 'Reiniciar Temporizador',
+    it: 'Resetta Timer',
+    fr: 'Réinitialiser le Minuteur',
+    de: 'Timer Zurücksetzen',
+    nl: 'Timer Resetten',
+    sv: 'Återställ Timer',
+    no: 'Tilbakestill Timer'
+  },
+  'mediaShowcase.delete': {
+    pt: 'Excluir',
+    en: 'Delete',
+    es: 'Eliminar',
+    it: 'Elimina',
+    fr: 'Supprimer',
+    de: 'Löschen',
+    nl: 'Verwijderen',
+    sv: 'Radera',
+    no: 'Slett'
+  },
+  
+  // Vitrine
+  'vitrine.noMedia': {
+    pt: 'Nenhuma mídia encontrada',
+    en: 'No media found',
+    es: 'No se encontraron medios',
+    it: 'Nessun media trovato',
+    fr: 'Aucun média trouvé',
+    de: 'Keine Medien gefunden',
+    nl: 'Geen media gevonden',
+    sv: 'Ingen media hittades',
+    no: 'Ingen media funnet'
+  },
+  'vitrine.useButtons': {
+    pt: 'Use os botões para adicionar conteúdo',
+    en: 'Use the buttons to add content',
+    es: 'Usa los botones para añadir contenido',
+    it: 'Usa i pulsanti per aggiungere contenuto',
+    fr: 'Utilisez les boutons pour ajouter du contenu',
+    de: 'Verwenden Sie die Schaltflächen, um Inhalte hinzuzufügen',
+    nl: 'Gebruik de knoppen om inhoud toe te voegen',
+    sv: 'Använd knapparna för att lägga till innehåll',
+    no: 'Bruk knappene for å legge til innhold'
+  },
+  'vitrine.uploadVideo': {
+    pt: 'Enviar Vídeo',
+    en: 'Upload Video',
+    es: 'Subir Video',
+    it: 'Carica Video',
+    fr: 'Télécharger Vidéo',
+    de: 'Video Hochladen',
+    nl: 'Video Uploaden',
+    sv: 'Ladda Upp Video',
+    no: 'Last Opp Video'
+  },
+  'vitrine.addImage': {
+    pt: 'Adicionar Imagem',
+    en: 'Add Image',
+    es: 'Añadir Imagen',
+    it: 'Aggiungi Immagine',
+    fr: 'Ajouter Image',
+    de: 'Bild Hinzufügen',
+    nl: 'Afbeelding Toevoegen',
+    sv: 'Lägg Till Bild',
+    no: 'Legg Til Bilde'
+  },
+  'vitrine.actions': {
+    pt: 'Ações',
+    en: 'Actions',
+    es: 'Acciones',
+    it: 'Azioni',
+    fr: 'Actions',
+    de: 'Aktionen',
+    nl: 'Acties',
+    sv: 'Åtgärder',
+    no: 'Handlinger'
+  },
+  'vitrine.image': {
+    pt: 'Imagem',
+    en: 'Image',
+    es: 'Imagen',
+    it: 'Immagine',
+    fr: 'Image',
+    de: 'Bild',
+    nl: 'Afbeelding',
+    sv: 'Bild',
+    no: 'Bilde'
+  },
+  'vitrine.video': {
+    pt: 'Vídeo',
+    en: 'Video',
+    es: 'Video',
+    it: 'Video',
+    fr: 'Vidéo',
+    de: 'Video',
+    nl: 'Video',
+    sv: 'Video',
+    no: 'Video'
+  },
+  
+  // Notifications
+  'notifications.loading': {
+    pt: 'Carregando notificações...',
+    en: 'Loading notifications...',
+    es: 'Cargando notificaciones...',
+    it: 'Caricamento notifiche...',
+    fr: 'Chargement des notifications...',
+    de: 'Benachrichtigungen laden...',
+    nl: 'Meldingen laden...',
+    sv: 'Laddar notifieringar...',
+    no: 'Laster varsler...'
+  },
+  'notifications.empty': {
+    pt: 'Nenhuma notificação',
+    en: 'No notifications',
+    es: 'Sin notificaciones',
+    it: 'Nessuna notifica',
+    fr: 'Aucune notification',
+    de: 'Keine Benachrichtigungen',
+    nl: 'Geen meldingen',
+    sv: 'Inga notifieringar',
+    no: 'Ingen varsler'
+  },
+  'notifications.clickToRemove': {
+    pt: 'Clique para remover',
+    en: 'Click to remove',
+    es: 'Haz clic para eliminar',
+    it: 'Clicca per rimuovere',
+    fr: 'Cliquez pour supprimer',
+    de: 'Klicken zum Entfernen',
+    nl: 'Klik om te verwijderen',
+    sv: 'Klicka för att ta bort',
+    no: 'Klikk for å fjerne'
+  },
+  'notifications.credits': {
+    pt: 'Créditos',
+    en: 'Credits',
+    es: 'Créditos',
+    it: 'Crediti',
+    fr: 'Crédits',
+    de: 'Credits',
+    nl: 'Credits',
+    sv: 'Krediter',
+    no: 'Kreditter'
+  },
+  'notifications.credits_plural': {
+    pt: 'créditos',
+    en: 'credits',
+    es: 'créditos',
+    it: 'crediti',
+    fr: 'crédits',
+    de: 'Credits',
+    nl: 'credits',
+    sv: 'krediter',
+    no: 'kreditter'
+  },
+  'notifications.credit': {
+    pt: 'crédito',
+    en: 'credit',
+    es: 'crédito',
+    it: 'credito',
+    fr: 'crédit',
+    de: 'Credit',
+    nl: 'credit',
+    sv: 'kredit',
+    no: 'kreditt'
+  },
+  
+  // Palette
+  'palette.configPalettes': {
+    pt: 'Configurar Paletas',
+    en: 'Configure Palettes',
+    es: 'Configurar Paletas',
+    it: 'Configura Tavolozze',
+    fr: 'Configurer les Palettes',
+    de: 'Paletten Konfigurieren',
+    nl: 'Paletten Configureren',
+    sv: 'Konfigurera Paletter',
+    no: 'Konfigurer Paletter'
+  },
+  'palette.title': {
+    pt: 'Configuração de Paletas',
+    en: 'Palette Configuration',
+    es: 'Configuración de Paletas',
+    it: 'Configurazione Tavolozze',
+    fr: 'Configuration des Palettes',
+    de: 'Paletten-Konfiguration',
+    nl: 'Palet Configuratie',
+    sv: 'Palettkonfiguration',
+    no: 'Palettkonfigurasjon'
+  },
+  'palette.basicPalettes': {
+    pt: 'Paletas Básicas',
+    en: 'Basic Palettes',
+    es: 'Paletas Básicas',
+    it: 'Tavolozze Base',
+    fr: 'Palettes de Base',
+    de: 'Basis-Paletten',
+    nl: 'Basis Paletten',
+    sv: 'Grundpaletter',
+    no: 'Grunnpaletter'
+  },
+  'palette.homeActive': {
+    pt: 'Modo Casa (Ativo)',
+    en: 'Home Mode (Active)',
+    es: 'Modo Casa (Activo)',
+    it: 'Modalità Casa (Attiva)',
+    fr: 'Mode Maison (Actif)',
+    de: 'Heim-Modus (Aktiv)',
+    nl: 'Thuis Modus (Actief)',
+    sv: 'Hemläge (Aktiv)',
+    no: 'Hjemmemodus (Aktiv)'
+  },
+  'palette.home': {
+    pt: 'Modo Casa',
+    en: 'Home Mode',
+    es: 'Modo Casa',
+    it: 'Modalità Casa',
+    fr: 'Mode Maison',
+    de: 'Heim-Modus',
+    nl: 'Thuis Modus',
+    sv: 'Hemläge',
+    no: 'Hjemmemodus'
+  },
+  'palette.professionalActive': {
+    pt: 'Modo Profissional (Ativo)',
+    en: 'Professional Mode (Active)',
+    es: 'Modo Profesional (Activo)',
+    it: 'Modalità Professionale (Attiva)',
+    fr: 'Mode Professionnel (Actif)',
+    de: 'Profi-Modus (Aktiv)',
+    nl: 'Professionele Modus (Actief)',
+    sv: 'Professionellt Läge (Aktiv)',
+    no: 'Profesjonell Modus (Aktiv)'
+  },
+  'palette.professional': {
+    pt: 'Modo Profissional',
+    en: 'Professional Mode',
+    es: 'Modo Profesional',
+    it: 'Modalità Professionale',
+    fr: 'Mode Professionnel',
+    de: 'Profi-Modus',
+    nl: 'Professionele Modus',
+    sv: 'Professionellt Läge',
+    no: 'Profesjonell Modus'
+  },
+  'palette.ecommerceActive': {
+    pt: 'Modo E-commerce (Ativo)',
+    en: 'E-commerce Mode (Active)',
+    es: 'Modo E-commerce (Activo)',
+    it: 'Modalità E-commerce (Attiva)',
+    fr: 'Mode E-commerce (Actif)',
+    de: 'E-Commerce-Modus (Aktiv)',
+    nl: 'E-commerce Modus (Actief)',
+    sv: 'E-handelsläge (Aktiv)',
+    no: 'E-handelsmodus (Aktiv)'
+  },
+  'palette.ecommerce': {
+    pt: 'Modo E-commerce',
+    en: 'E-commerce Mode',
+    es: 'Modo E-commerce',
+    it: 'Modalità E-commerce',
+    fr: 'Mode E-commerce',
+    de: 'E-Commerce-Modus',
+    nl: 'E-commerce Modus',
+    sv: 'E-handelsläge',
+    no: 'E-handelsmodus'
+  },
+  'palette.fireActive': {
+    pt: 'Modo Fire (Ativo)',
+    en: 'Fire Mode (Active)',
+    es: 'Modo Fuego (Activo)',
+    it: 'Modalità Fuoco (Attiva)',
+    fr: 'Mode Feu (Actif)',
+    de: 'Feuer-Modus (Aktiv)',
+    nl: 'Vuur Modus (Actief)',
+    sv: 'Eldläge (Aktiv)',
+    no: 'Ildmodus (Aktiv)'
+  },
+  'palette.fire': {
+    pt: 'Modo Fire',
+    en: 'Fire Mode',
+    es: 'Modo Fuego',
+    it: 'Modalità Fuoco',
+    fr: 'Mode Feu',
+    de: 'Feuer-Modus',
+    nl: 'Vuur Modus',
+    sv: 'Eldläge',
+    no: 'Ildmodus'
+  },
+  'palette.simpleColors': {
+    pt: 'Cores Simples',
+    en: 'Simple Colors',
+    es: 'Colores Simples',
+    it: 'Colori Semplici',
+    fr: 'Couleurs Simples',
+    de: 'Einfache Farben',
+    nl: 'Eenvoudige Kleuren',
+    sv: 'Enkla Färger',
+    no: 'Enkle Farger'
   }
 };
 
