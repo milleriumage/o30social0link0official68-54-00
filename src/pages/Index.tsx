@@ -60,6 +60,8 @@ import { Monitor } from "lucide-react";
 import PixPaymentDialog from "@/components/PixPaymentDialog";
 import { PaymentMethodsDialog } from "@/components/PaymentMethodsDialog";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useGiftNotifications } from "@/hooks/useGiftNotifications";
+import { WelcomeGiftMessage } from "@/components/WelcomeGiftMessage";
 interface ViewportSize {
   name: string;
   icon: React.ReactNode;
@@ -473,6 +475,9 @@ const Index = () => {
 
   // Hook de linguagem
   const { t } = useLanguage();
+  
+  // Hook de notificações de presentes
+  const { pendingGifts, markGiftAsShown } = useGiftNotifications();
   const {
     mediaItems,
     uploadMedia,
@@ -1633,6 +1638,18 @@ const Index = () => {
       
       {/* Trial Ended Dialog */}
       <TrialEndedDialog isOpen={showTrialEndedDialog} onClose={() => setShowTrialEndedDialog(false)} />
+      
+      {/* Gift Welcome Messages */}
+      {pendingGifts.map((gift) => (
+        <WelcomeGiftMessage
+          key={gift.id}
+          giftId={gift.id}
+          creatorName={gift.creator_name}
+          credits={gift.credits_amount}
+          message={gift.message}
+          onClose={() => markGiftAsShown(gift.id)}
+        />
+      ))}
       
       {/* Componente de teste Supabase - apenas para debug */}
       {process.env.NODE_ENV === 'development' && <SupabaseTestComponent />}

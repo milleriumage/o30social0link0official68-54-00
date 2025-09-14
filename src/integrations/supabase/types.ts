@@ -80,6 +80,33 @@ export type Database = {
         }
         Relationships: []
       }
+      creator_payment_settings: {
+        Row: {
+          created_at: string
+          creator_id: string
+          id: string
+          paypal_email: string | null
+          stripe_email: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          id?: string
+          paypal_email?: string | null
+          stripe_email?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          id?: string
+          paypal_email?: string | null
+          stripe_email?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       credit_transactions: {
         Row: {
           amount: number
@@ -427,6 +454,78 @@ export type Database = {
           settings?: Json | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      referral_gifts: {
+        Row: {
+          creator_id: string
+          credits_amount: number
+          id: string
+          message: string | null
+          recipient_user_id: string
+          sent_at: string
+          thank_message: string | null
+          thanked: boolean | null
+          thanked_at: string | null
+        }
+        Insert: {
+          creator_id: string
+          credits_amount?: number
+          id?: string
+          message?: string | null
+          recipient_user_id: string
+          sent_at?: string
+          thank_message?: string | null
+          thanked?: boolean | null
+          thanked_at?: string | null
+        }
+        Update: {
+          creator_id?: string
+          credits_amount?: number
+          id?: string
+          message?: string | null
+          recipient_user_id?: string
+          sent_at?: string
+          thank_message?: string | null
+          thanked?: boolean | null
+          thanked_at?: string | null
+        }
+        Relationships: []
+      }
+      referrals: {
+        Row: {
+          commission_earned: number | null
+          commission_paid: boolean | null
+          commission_release_date: string | null
+          created_at: string
+          creator_id: string
+          id: string
+          is_vip_subscriber: boolean | null
+          referred_user_id: string
+          vip_subscription_date: string | null
+        }
+        Insert: {
+          commission_earned?: number | null
+          commission_paid?: boolean | null
+          commission_release_date?: string | null
+          created_at?: string
+          creator_id: string
+          id?: string
+          is_vip_subscriber?: boolean | null
+          referred_user_id: string
+          vip_subscription_date?: string | null
+        }
+        Update: {
+          commission_earned?: number | null
+          commission_paid?: boolean | null
+          commission_release_date?: string | null
+          created_at?: string
+          creator_id?: string
+          id?: string
+          is_vip_subscriber?: boolean | null
+          referred_user_id?: string
+          vip_subscription_date?: string | null
         }
         Relationships: []
       }

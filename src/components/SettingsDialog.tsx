@@ -9,6 +9,7 @@ import { Settings, Upload, Video, Globe, Save, FolderOpen, Eye, Palette, Trash2 
 import { toast } from "sonner";
 import { useChatControls } from "@/hooks/useChatControls";
 import { VisibilitySettingsDialog } from "@/components/VisibilitySettingsDialog";
+import { ReferralDialog } from "@/components/ReferralDialog";
 import { useChatConfiguration } from "@/hooks/useChatConfiguration";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useRealtimeMessages } from "@/hooks/useRealtimeMessages";
@@ -129,6 +130,10 @@ export const SettingsDialog = ({
           <span>Configurações</span>
         </Button>
       </DialogTrigger>
+      
+      {/* Botão Referral abaixo */}
+      <ReferralDialog disabled={disabled} />
+      
       <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto bg-background/95 backdrop-blur-md border-border/50 shadow-xl">
         <DialogHeader>
           <DialogTitle>⚙️ Settings</DialogTitle>
