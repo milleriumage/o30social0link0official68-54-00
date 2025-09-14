@@ -58,8 +58,8 @@ export const useTrialStatus = () => {
   useEffect(() => {
     checkTrialStatus();
     
-    // Check trial status every hour
-    const interval = setInterval(checkTrialStatus, 60 * 60 * 1000);
+    // Check trial status every 6 hours to reduce unnecessary checks
+    const interval = setInterval(checkTrialStatus, 6 * 60 * 60 * 1000);
     
     return () => clearInterval(interval);
   }, [isLoggedIn, subscribed]);

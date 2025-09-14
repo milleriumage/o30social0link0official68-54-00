@@ -9,8 +9,16 @@ export const useTrialTimer = (subtractCredits?: (amount: number) => void) => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const minuteCounterRef = useRef<number>(0);
 
-  // Start trial timer when hook is initialized or restarted
+  // Start trial timer only for guest users - not logged in users
   useEffect(() => {
+    // Don't start timer for logged in users - they use the 7-day trial
+    const isLoggedIn = localStorage.getItem('supabase.auth.token') || 
+                      sessionStorage.getItem('supabase.auth.token');
+    
+    if (isLoggedIn) {
+      return; // Skip timer for logged users
+    }
+    
     if (!hasStartedTimer && !isTrialExpired) {
       setHasStartedTimer(true);
       startTrialTimer();

@@ -176,7 +176,6 @@ export const useOptimizedAuth = () => {
         toast.error('❌ Erro ao fazer logout');
       } else {
         toast.success('👋 Logout realizado!');
-        setTimeout(() => window.location.href = '/', 1000);
       }
     } catch (error) {
       toast.error('❌ Erro inesperado no logout');

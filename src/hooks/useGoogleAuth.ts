@@ -198,10 +198,6 @@ export const useGoogleAuth = () => {
         toast.error('❌ Erro ao fazer logout: ' + error.message);
       } else {
         toast.success('👋 Logout realizado com sucesso!');
-        // Redirecionar para página inicial após logout
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 1000);
       }
     } catch (error) {
       console.error('Logout Error:', error);
