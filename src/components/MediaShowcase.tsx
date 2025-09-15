@@ -871,6 +871,22 @@ export const MediaShowcase = React.memo(({
       backgroundColor: vitrineConfig.backgroundColor === "transparent" ? "transparent" : vitrineConfig.backgroundColor
     }}>
         <div className="flex justify-between items-center mb-4">
+          {/* Center - Follow & Subscribe Buttons */}
+          <div className="flex-1 flex items-center justify-center gap-3">
+            <FollowButton 
+              isFollowing={isFollowing} 
+              onToggleFollow={toggleFollow}
+              isLoading={isFollowing === undefined}
+            />
+            <Button
+              onClick={() => setShowPremiumDialog(true)}
+              size="sm"
+              variant="default"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium"
+            >
+              Assinar Conteúdo
+            </Button>
+          </div>
           <div className="flex items-center gap-3">
             {canEdit && <DropdownMenu>
                 <DropdownMenuTrigger asChild>
