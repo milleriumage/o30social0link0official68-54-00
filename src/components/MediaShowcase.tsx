@@ -37,6 +37,8 @@ import { FollowersCounter } from "./FollowersCounter";
 import { FollowButton } from "./FollowButton";
 import { FollowersDialog } from "./FollowersDialog";
 import { PremiumPlansManager } from "./PremiumPlansManager";
+import { useMediaLikes } from "@/hooks/useMediaLikes";
+import { MediaLikesLoader } from "./MediaLikesLoader";
 interface MediaItem {
   id: string;
   type: 'image' | 'video';
@@ -1165,10 +1167,10 @@ export const MediaShowcase = React.memo(({
                                <Eye className="w-3 h-3" />
                                <span>{getMediaStats(item.id).views_count}</span>
                              </div>
-                             <div className="flex items-center gap-0.5">
-                               <Heart className="w-3 h-3" />
-                               <span>{getMediaStats(item.id).likes_count}</span>
-                             </div>
+                              <div className="flex items-center gap-0.5">
+                                <Heart className="w-3 h-3" />
+                                <span id={`likes-count-${item.id}`}>0</span>
+                              </div>
                              <div className="flex items-center gap-0.5">
                                <Share2 className="w-3 h-3" />
                                <span>{getMediaStats(item.id).shares_count}</span>
@@ -1471,5 +1473,8 @@ export const MediaShowcase = React.memo(({
         isLoading={isLoading}
         followersCount={followersCount}
       />
+
+      {/* Carregador de curtidas em tempo real */}
+      <MediaLikesLoader mediaItems={mediaItems} />
     </div>;
 });

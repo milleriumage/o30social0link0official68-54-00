@@ -59,10 +59,10 @@ export const FollowersDialog: React.FC<FollowersDialogProps> = ({
                 >
                   <Avatar className="w-10 h-10">
                     <AvatarImage 
-                      src={follower.follower_profile?.avatar_url} 
+                      src={follower.follower_profile?.avatar_url || undefined} 
                       alt={follower.follower_profile?.display_name || 'Usuário'} 
                     />
-                    <AvatarFallback>
+                    <AvatarFallback className="bg-primary/10 text-primary">
                       {(follower.follower_profile?.display_name || 'U').charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>

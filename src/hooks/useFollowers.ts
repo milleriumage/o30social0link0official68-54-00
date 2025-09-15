@@ -84,34 +84,22 @@ export const useFollowers = (creatorId?: string) => {
     setIsLoading(true);
     try {
       const { data, error } = await supabase
-        .from('followers')
-        .select(`
-          id,
-          follower_id,
-          created_at
-        `)
-        .eq('creator_id', creatorId)
-        .order('created_at', { ascending: false });
+        .rpc('get_followers_with_profiles', { creator_uuid: creatorId });
 
       if (error) throw error;
 
-      // Buscar perfis dos seguidores separadamente
-      const followersWithProfiles = await Promise.all(
-        (data || []).map(async (follower) => {
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('display_name, avatar_url, user_id')
-            .eq('user_id', follower.follower_id)
-            .maybeSingle();
+      const followersData = (data || []).map(follower => ({
+        id: `${creatorId}-${follower.follower_id}`, // ID único
+        follower_id: follower.follower_id,
+        created_at: follower.created_at,
+        follower_profile: {
+          display_name: follower.display_name,
+          avatar_url: follower.avatar_url,
+          user_id: follower.follower_id
+        }
+      }));
 
-          return {
-            ...follower,
-            follower_profile: profile
-          };
-        })
-      );
-
-      setFollowers(followersWithProfiles);
+      setFollowers(followersData);
     } catch (error) {
       console.error('Error loading followers:', error);
       toast.error('Erro ao carregar seguidores');

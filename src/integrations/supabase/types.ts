@@ -260,6 +260,33 @@ export type Database = {
         }
         Relationships: []
       }
+      media_likes: {
+        Row: {
+          created_at: string | null
+          guest_session_id: string | null
+          id: string
+          media_id: string
+          user_id: string | null
+          user_ip: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          guest_session_id?: string | null
+          id?: string
+          media_id: string
+          user_id?: string | null
+          user_ip?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          guest_session_id?: string | null
+          id?: string
+          media_id?: string
+          user_id?: string | null
+          user_ip?: string | null
+        }
+        Relationships: []
+      }
       media_metrics: {
         Row: {
           clicks: number | null
@@ -1135,6 +1162,10 @@ export type Database = {
         Args: { user_uuid: string }
         Returns: boolean
       }
+      check_user_liked_media: {
+        Args: { guest_session?: string; media_uuid: string; user_uuid?: string }
+        Returns: boolean
+      }
       clean_expired_blocks: {
         Args: Record<PropertyKey, never>
         Returns: undefined
@@ -1180,6 +1211,19 @@ export type Database = {
       }
       get_followers_count: {
         Args: { creator_uuid: string }
+        Returns: number
+      }
+      get_followers_with_profiles: {
+        Args: { creator_uuid: string }
+        Returns: {
+          avatar_url: string
+          created_at: string
+          display_name: string
+          follower_id: string
+        }[]
+      }
+      get_media_likes_count: {
+        Args: { media_uuid: string }
         Returns: number
       }
       get_media_stats: {
