@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
@@ -77,7 +78,7 @@ export const EnhancedChat = ({
   const { onlineUsers } = useOnlinePresence(user?.id || 'global');
   const { blockUser, isUserBlocked } = useBlockedUsers();
   const { isCreator: userIsCreator, canEdit } = useCreatorPermissions(creatorId);
-  const { guestData } = useGuestData();
+  const { guestData, updateGuestProfile } = useGuestData();
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const profileImageInputRef = useRef<HTMLInputElement>(null);
@@ -197,7 +198,6 @@ export const EnhancedChat = ({
               toast.success('✅ Avatar do criador salvo!');
             } else {
               // Usar o hook useGuestData para salvar avatar do visitante
-              const { updateGuestProfile } = useGuestData();
               updateGuestProfile({ avatarUrl: newAvatar });
               toast.success('✅ Avatar do visitante atualizado!');
             }
@@ -447,14 +447,33 @@ export const EnhancedChat = ({
       <Dialog open={showProfileImageDialog} onOpenChange={setShowProfileImageDialog}>
         <DialogContent className="sm:max-w-lg">
           <div className="flex flex-col items-center space-y-4 p-6">
-            <h3 className="text-lg font-semibold">Alterar Foto de Perfil</h3>
+            <h3 className="text-lg font-semibold">Configurações de Perfil</h3>
+            
+            {/* User Name Configuration */}
+            <div className="w-full space-y-2">
+              <Label htmlFor="userName" className="text-sm font-medium">Nome do Usuário</Label>
+              <Input
+                id="userName"
+                value={isCreator ? (config.userName || '') : (guestData.displayName || '')}
+                onChange={async (e) => {
+                  const newName = e.target.value;
+                  if (isCreator) {
+                    await saveConfig({ userName: newName });
+                  } else {
+                    updateGuestProfile({ displayName: newName });
+                  }
+                }}
+                placeholder={isCreator ? "Nome do criador" : "Seu nome"}
+                className="w-full"
+              />
+            </div>
             
             {/* Current Avatar Preview */}
             <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-border">
               <img src={
                 isCreator 
                   ? config.userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=creator`
-                  : localStorage.getItem('visitorAvatar') || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`
+                  : guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`
               } alt="Avatar atual" className="w-full h-full object-cover" />
             </div>
 
@@ -470,8 +489,8 @@ export const EnhancedChat = ({
                   await saveConfig({ userAvatar: newAvatar });
                   toast.success('✅ Avatar do criador salvo!');
                 } else {
-                  // Salvar avatar do visitante no localStorage
-                  localStorage.setItem('visitorAvatar', newAvatar);
+                  // Usar o hook useGuestData para salvar avatar do visitante
+                  updateGuestProfile({ avatarUrl: newAvatar });
                   toast.success('✅ Avatar do visitante atualizado!');
                 }
                 
