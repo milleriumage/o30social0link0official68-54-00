@@ -845,7 +845,6 @@ export const MenuDropdown = ({
   return <DropdownMenu 
     open={dropdownOpen} 
     onOpenChange={setDropdownOpen}
-    modal={false}
   >
       <DropdownMenuTrigger asChild>
         <Button size="sm" variant="outline" className="bg-background hover:bg-secondary border-border" disabled={disabled} title="Menu de opções">
@@ -859,6 +858,7 @@ export const MenuDropdown = ({
         onEscapeKeyDown={() => setDropdownOpen(false)}
         onPointerDownOutside={() => setDropdownOpen(false)}
         onInteractOutside={() => setDropdownOpen(false)}
+        onClickCapture={() => setDropdownOpen(false)}
       >
         <Button
           variant="ghost"
