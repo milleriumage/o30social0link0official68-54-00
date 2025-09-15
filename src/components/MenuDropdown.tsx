@@ -29,7 +29,6 @@ export const MenuDropdown = ({
   onTimerClick,
   disabled = false
 }: MenuDropdownProps) => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showCreatorMode, setShowCreatorMode] = useState(false);
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [showAutoLockConfig, setShowAutoLockConfig] = useState(false);
@@ -828,56 +827,23 @@ export const MenuDropdown = ({
       }
     }));
   };
-  // Fechar menu ao abrir outros dialogs
-  useEffect(() => {
-    const handleDialogOpen = () => {
-      setDropdownOpen(false);
-    };
-
-    // Escutar eventos de abertura de dialogs
-    document.addEventListener('dialog-opened', handleDialogOpen);
-    
-    return () => {
-      document.removeEventListener('dialog-opened', handleDialogOpen);
-    };
-  }, []);
-
-  return <DropdownMenu 
-    open={dropdownOpen} 
-    onOpenChange={setDropdownOpen}
-  >
+  return <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="sm" variant="outline" className="bg-background hover:bg-secondary border-border" disabled={disabled} title="Menu de opções">
           <Menu className="w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent 
-        align="end" 
-        className="w-48 bg-popover backdrop-blur-md border-border z-[100] relative"
-        onCloseAutoFocus={(e) => e.preventDefault()}
-        onEscapeKeyDown={() => setDropdownOpen(false)}
-        onPointerDownOutside={() => setDropdownOpen(false)}
-        onInteractOutside={() => setDropdownOpen(false)}
-        onClickCapture={() => setDropdownOpen(false)}
-      >
-        <Button
-          variant="ghost"
-          size="sm"
-          className="absolute top-2 right-2 h-6 w-6 p-0 hover:bg-secondary z-10"
-          onClick={() => setDropdownOpen(false)}
-        >
-          <X className="h-3 w-3" />
-        </Button>
-        <DropdownMenuItem asChild className="p-0" onSelect={() => setTimeout(() => setDropdownOpen(false), 0)}>
+      <DropdownMenuContent align="end" className="w-48 bg-popover backdrop-blur-md border-border z-[100]">
+        <DropdownMenuItem asChild className="p-0">
           <SettingsDialog onImageUpload={onImageUpload} onVideoUpload={onVideoUpload} onSaveState={onSaveState} onLoadState={onLoadState} disabled={disabled} />
         </DropdownMenuItem>
         
 
-        <DropdownMenuItem asChild className="p-0" onSelect={() => setTimeout(() => setDropdownOpen(false), 0)}>
+        <DropdownMenuItem asChild className="p-0">
           <PaymentPortalSelector disabled={disabled} />
         </DropdownMenuItem>
         
-        <DropdownMenuItem asChild className="p-0" onSelect={() => setTimeout(() => setDropdownOpen(false), 0)}>
+        <DropdownMenuItem asChild className="p-0">
           <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled} onClick={() => setShowWishlistDialog(true)}>
             <Heart className="w-4 h-4 mr-2" />
             <span>Wishlist</span>
