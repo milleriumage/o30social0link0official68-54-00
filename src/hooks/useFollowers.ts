@@ -17,8 +17,9 @@ export interface Follower {
 export const useFollowers = (creatorId?: string) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [followersCount, setFollowersCount] = useState(0);
-  const [followingCount, setFollowingCount] = useState(0); // Contador de pessoas que o criador segue
+  const [followingCount, setFollowingCount] = useState(0);
   const [followers, setFollowers] = useState<Follower[]>([]);
+  const [following, setFollowing] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { guestData } = useGuestData();
 
@@ -136,6 +137,36 @@ export const useFollowers = (creatorId?: string) => {
     }
   };
 
+  // Carregar lista de quem o criador está seguindo
+  const loadFollowing = async () => {
+    if (!creatorId) return;
+
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('followers')
+        .select(`
+          id,
+          creator_id,
+          created_at,
+          creator_profile:profiles!followers_creator_id_fkey(
+            display_name,
+            avatar_url
+          )
+        `)
+        .eq('follower_id', creatorId);
+
+      if (error) throw error;
+
+      setFollowing(data || []);
+    } catch (error) {
+      console.error('Error loading following:', error);
+      toast.error('Erro ao carregar seguindo');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Seguir/Desseguir criador
   const toggleFollow = async () => {
     if (!creatorId) return;
@@ -192,8 +223,10 @@ export const useFollowers = (creatorId?: string) => {
     followersCount,
     followingCount,
     followers,
+    following,
     isLoading,
     toggleFollow,
-    loadFollowers
+    loadFollowers,
+    loadFollowing
   };
 };

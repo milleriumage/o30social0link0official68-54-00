@@ -36,9 +36,11 @@ import { useFollowers } from "@/hooks/useFollowers";
 import { FollowersCounter } from "./FollowersCounter";
 import { FollowButton } from "./FollowButton";
 import { FollowersDialog } from "./FollowersDialog";
+import { FollowingDialog } from "./FollowingDialog";
 import { PremiumPlansManager } from "./PremiumPlansManager";
 import { useMediaLikes } from "@/hooks/useMediaLikes";
 import { MediaLikesLoader } from "./MediaLikesLoader";
+import { useTotalLikes } from "@/hooks/useTotalLikes";
 interface MediaItem {
   id: string;
   type: 'image' | 'video';
@@ -182,9 +184,11 @@ export const MediaShowcase = React.memo(({
   } = useWishlist();
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const { isFollowing, followersCount, followingCount, followers, isLoading, toggleFollow, loadFollowers } = useFollowers(creatorId);
+  const { isFollowing, followersCount, followingCount, followers, following, isLoading, toggleFollow, loadFollowers, loadFollowing } = useFollowers(creatorId);
   const [showPremiumDialog, setShowPremiumDialog] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [followingDialogOpen, setFollowingDialogOpen] = useState(false);
+  const mediaLikesTotal = useTotalLikes(mediaItems);
   const {
     timers,
     addTimer,
@@ -829,20 +833,26 @@ export const MediaShowcase = React.memo(({
         <div className="flex-1 flex items-center justify-center">
           <div className="flex items-center gap-8">
             {/* Seguindo */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center cursor-pointer" onClick={async () => {
+              setFollowingDialogOpen(true);
+              await loadFollowing();
+            }}>
               <span className="text-lg font-bold text-foreground">{followingCount}</span>
               <span className="text-sm text-muted-foreground">Seguindo</span>
             </div>
             
             {/* Seguidores */}
-            <div className="flex flex-col items-center cursor-pointer" onClick={() => setDialogOpen(true)}>
+            <div className="flex flex-col items-center cursor-pointer" onClick={async () => {
+              setDialogOpen(true);
+              await loadFollowers();
+            }}>
               <span className="text-lg font-bold text-foreground">{followersCount}</span>
               <span className="text-sm text-muted-foreground">Seguidores</span>
             </div>
             
             {/* Curtidas */}
             <div className="flex flex-col items-center">
-              <span className="text-lg font-bold text-foreground">9</span>
+              <span className="text-lg font-bold text-foreground">{mediaLikesTotal}</span>
               <span className="text-sm text-muted-foreground">Curtidas</span>
             </div>
           </div>
@@ -1472,6 +1482,14 @@ export const MediaShowcase = React.memo(({
         followers={followers}
         isLoading={isLoading}
         followersCount={followersCount}
+      />
+
+      <FollowingDialog
+        open={followingDialogOpen}
+        onOpenChange={setFollowingDialogOpen}
+        following={following}
+        isLoading={isLoading}
+        followingCount={followingCount}
       />
 
       {/* Carregador de curtidas em tempo real */}
