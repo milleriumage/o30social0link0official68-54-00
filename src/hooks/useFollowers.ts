@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { useGuestData } from './useGuestData';
 
 export interface Follower {
   id: string;
@@ -18,6 +19,7 @@ export const useFollowers = (creatorId?: string) => {
   const [followersCount, setFollowersCount] = useState(0);
   const [followers, setFollowers] = useState<Follower[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { guestData } = useGuestData();
 
   // Carregar status de seguimento e contagem
   useEffect(() => {
@@ -33,12 +35,14 @@ export const useFollowers = (creatorId?: string) => {
 
         // Verificar se usuário atual está seguindo
         const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
+        const followerId = user?.id || guestData.sessionId;
+        
+        if (followerId) {
           const { data: followData } = await supabase
             .from('followers')
             .select('id')
             .eq('creator_id', creatorId)
-            .eq('follower_id', user.id)
+            .eq('follower_id', followerId)
             .maybeSingle();
 
           setIsFollowing(!!followData);
@@ -121,11 +125,12 @@ export const useFollowers = (creatorId?: string) => {
     if (!creatorId) return;
 
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-      toast.error('Faça login para seguir criadores');
+    const followerId = user?.id || guestData.sessionId;
+    
+    if (!followerId) {
+      toast.error('Erro ao identificar usuário');
       return;
     }
-
 
     try {
       if (isFollowing) {
@@ -134,7 +139,7 @@ export const useFollowers = (creatorId?: string) => {
           .from('followers')
           .delete()
           .eq('creator_id', creatorId)
-          .eq('follower_id', user.id);
+          .eq('follower_id', followerId);
 
         if (error) throw error;
 
@@ -149,7 +154,7 @@ export const useFollowers = (creatorId?: string) => {
           .from('followers')
           .insert({
             creator_id: creatorId,
-            follower_id: user.id
+            follower_id: followerId
           });
 
         if (error) throw error;
