@@ -297,15 +297,15 @@ export const EnhancedChat = ({
                 <div className={`flex ${
                   // Se é o criador enviando mensagem, alinha à esquerda
                   // Se é visitante enviando mensagem, alinha à direita
-                  (isCreator && msg.username !== 'Visitante') || (!isCreator && msg.username === (config.userName || "Criador")) 
+                  (msg.username === (config.userName || "Criador")) 
                     ? 'justify-start' : 'justify-end'
                 } mb-4`}>
                   <div className={`flex flex-col gap-1 max-w-[70%] ${
-                    (isCreator && msg.username !== 'Visitante') || (!isCreator && msg.username === (config.userName || "Criador"))
-                      ? 'items-start' : 'items-end'
+                      (msg.username === (config.userName || "Criador"))
+                        ? 'items-start' : 'items-end'
                   }`}>
                     {/* Creator Name (only for creator messages and when enabled) */}
-                    {msg.username !== 'Visitante' && !msg.username?.startsWith('Guest') && config.showCreatorName && <div className="flex items-center gap-1 px-2">
+                    {config.showCreatorName && msg.username === (config.userName || "Criador") && <div className="flex items-center gap-1 px-2">
                         <Crown className="w-3 h-3 text-yellow-500" />
                         <span className="text-xs text-muted-foreground font-medium">
                           {config.userName || "Criador"}
@@ -317,44 +317,52 @@ export const EnhancedChat = ({
                         ? 'flex-row' : 'flex-row-reverse'
                     }`}>
                         {/* Avatar */}
-                      <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 relative group">
-                        {/* Crown icon for creator */}
-                        {msg.username !== 'Visitante' && !msg.username?.startsWith('Guest') && <Crown className="absolute -top-1 -right-1 w-4 h-4 text-yellow-500 z-10" />}
-                        <img 
-                          src={
-                            msg.username?.startsWith('Guest') || msg.username === 'Visitante'
-                              ? (guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`)
-                              : config.userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=creator`
-                          }
-                          alt={msg.username?.startsWith('Guest') || msg.username === 'Visitante' ? 'Guest' : 'Criador'} 
-                          className="w-full h-full object-cover" 
-                          onError={e => {
-                            e.currentTarget.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${msg.username?.startsWith('Guest') || msg.username === 'Visitante' ? 'visitor' : 'creator'}`;
-                          }} 
-                        />
-                        {/* Permitir visitantes e criadores editarem seus próprios avatares */}
-                        {((msg.username?.startsWith('Guest') || msg.username === 'Visitante') && isVisitor) || (msg.username !== 'Visitante' && !msg.username?.startsWith('Guest') && isCreator) ? <Button
-                            size="sm" 
-                            variant="ghost" 
-                            onClick={() => {
-                              if (isCreator && (msg.username !== 'Visitante' && !msg.username?.startsWith('Guest'))) {
-                                setShowProfileImageDialog(true);
-                              } else if (isVisitor && (msg.username?.startsWith('Guest') || msg.username === 'Visitante')) {
-                                setShowGuestProfile(true);
-                              }
-                            }}
-                            className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 bg-black/50 hover:bg-black/70 rounded-full transition-opacity flex items-center justify-center"
-                          >
-                            <Edit className="w-3 h-3 text-white" />
-                          </Button> : null}
+                      <div className="flex flex-col items-center gap-1">
+                        {/* Visitor name above avatar */}
+                        {msg.username !== (config.userName || "Criador") && (
+                          <span className="text-xs text-muted-foreground font-medium">
+                            {msg.username || guestData.displayName || 'Visitante'}
+                          </span>
+                        )}
+                        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 relative group">
+                          {/* Crown icon for creator */}
+                          {msg.username === (config.userName || "Criador") && <Crown className="absolute -top-1 -right-1 w-4 h-4 text-yellow-500 z-10" />}
+                          <img 
+                            src={
+                              msg.username !== (config.userName || "Criador")
+                                ? (guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`)
+                                : (config.userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=creator`)
+                            }
+                            alt={msg.username !== (config.userName || "Criador") ? 'Visitante' : 'Criador'} 
+                            className="w-full h-full object-cover" 
+                            onError={e => {
+                              e.currentTarget.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${msg.username !== (config.userName || "Criador") ? 'visitor' : 'creator'}`;
+                            }} 
+                          />
+                          {/* Permitir visitantes e criadores editarem seus próprios avatares */}
+                          {(msg.username === (config.userName || "Criador") ? isCreator : isVisitor) ? <Button
+                              size="sm" 
+                              variant="ghost" 
+                              onClick={() => {
+                                if (msg.username === (config.userName || "Criador") && isCreator) {
+                                  setShowProfileImageDialog(true);
+                                } else if (msg.username !== (config.userName || "Criador") && isVisitor) {
+                                  setShowGuestProfile(true);
+                                }
+                              }}
+                              className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 bg-black/50 hover:bg-black/70 rounded-full transition-opacity flex items-center justify-center"
+                            >
+                              <Edit className="w-3 h-3 text-white" />
+                            </Button> : null}
+                        </div>
                       </div>
                      
                       {/* Message Bubble */}
                       <div className={`px-4 py-2 rounded-2xl ${
-                        msg.username === 'Visitante' 
+                        msg.username !== (config.userName || "Criador") 
                           ? 'bg-blue-500 text-white border' // Visitante - azul
-                          : 'bg-gray-100 text-black' // Criador - cinza
-                      }`} style={msg.username === 'Visitante' ? {} : {
+                          : 'bg-gray-100 text-black' // Criador - base, cor aplicada abaixo
+                      }`} style={msg.username !== (config.userName || "Criador") ? {} : {
                         backgroundColor: config.chatColor
                       }}>
                         <div className="text-sm">
