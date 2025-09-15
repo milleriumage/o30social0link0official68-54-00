@@ -890,15 +890,13 @@ export const MediaShowcase = React.memo(({
       backgroundColor: vitrineConfig.backgroundColor === "transparent" ? "transparent" : vitrineConfig.backgroundColor
     }}>
         <div className="flex justify-between items-center mb-4">
-          {/* Center - Follow & Subscribe Buttons */}
+          {/* Center - Follow & Subscribe Buttons - para todos */}
           <div className="flex-1 flex items-center justify-center gap-3">
-            {!isCreator && (
-              <FollowButton 
-                isFollowing={isFollowing} 
-                onToggleFollow={toggleFollow}
-                isLoading={false}
-              />
-            )}
+            <FollowButton 
+              isFollowing={isFollowing} 
+              onToggleFollow={toggleFollow}
+              isLoading={false}
+            />
             <Button
               onClick={() => setShowPremiumDialog(true)}
               size="sm"
