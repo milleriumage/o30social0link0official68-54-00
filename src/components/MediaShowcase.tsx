@@ -33,6 +33,7 @@ import { useWishlist } from "@/hooks/useWishlist";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/hooks/useLanguage";
 import { useFollowers } from "@/hooks/useFollowers";
+import { useGuestData } from "@/hooks/useGuestData";
 import { FollowersCounter } from "./FollowersCounter";
 import { FollowButton } from "./FollowButton";
 import { FollowersDialog } from "./FollowersDialog";
@@ -41,7 +42,6 @@ import { PremiumPlansManager } from "./PremiumPlansManager";
 import { useMediaLikes } from "@/hooks/useMediaLikes";
 import { MediaLikesLoader } from "./MediaLikesLoader";
 import { MediaLikesCount } from "./MediaLikesCount";
-import { MediaLikeButton } from "./MediaLikeButton";
 import { useTotalLikes } from "@/hooks/useTotalLikes";
 interface MediaItem {
   id: string;
@@ -186,6 +186,7 @@ export const MediaShowcase = React.memo(({
   } = useWishlist();
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { guestData } = useGuestData();
   const { isFollowing, followersCount, followingCount, followers, following, isLoading, toggleFollow, loadFollowers, loadFollowing } = useFollowers(creatorId);
   const [showPremiumDialog, setShowPremiumDialog] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -1194,24 +1195,12 @@ export const MediaShowcase = React.memo(({
                            </div>}
                       </div>
 
-                      {/* Botões de interação - Top right */}
-                      <div className="absolute top-2 right-2 z-10 flex gap-1">
-                        {/* Botão de curtir - sempre visível */}
-                        <MediaLikeButton mediaId={item.id} />
-                        
-                        {/* Pin button - só mostra se showEditIcons e é criador */}
-                        {visibilitySettings?.showEditIcons && onEditMedia && canEdit && (
-                          <Button 
-                            onClick={() => handleTogglePinInVitrine(item)} 
-                            size="sm" 
-                            variant="ghost" 
-                            className="h-8 w-8 p-0 bg-black/20 hover:bg-black/40 rounded-full border border-white/20 transition-all duration-300 hover:scale-110" 
-                            title={pinnedItems.has(item.id) ? "Desfixar da Vitrine" : "Fixar na Vitrine"}
-                          >
+                      {/* Pin button - Top right, only show if showEditIcons is true AND user is creator */}
+                      {visibilitySettings?.showEditIcons && onEditMedia && canEdit && <div className="absolute top-2 right-2 z-10">
+                          <Button onClick={() => handleTogglePinInVitrine(item)} size="sm" variant="ghost" className="h-8 w-8 p-0 bg-black/20 hover:bg-black/40 rounded-full border border-white/20 transition-all duration-300 hover:scale-110" title={pinnedItems.has(item.id) ? "Desfixar da Vitrine" : "Fixar na Vitrine"}>
                             <Pin className={`w-4 h-4 ${pinnedItems.has(item.id) ? 'text-purple-400' : 'text-white'}`} />
                           </Button>
-                        )}
-                      </div>
+                        </div>}
 
                       {/* Edit button - Bottom right - only show if any edit functions are provided AND showEditIcons is true AND user is creator */}
                       {visibilitySettings?.showEditIcons && (onDeleteMedia || onEditMedia || onSetPrice || onSetLink || onSetAsMain || onReplaceMedia) && canEdit && <div className="absolute bottom-2 right-2">

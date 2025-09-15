@@ -112,21 +112,60 @@ export const useFollowers = (creatorId?: string) => {
 
     setIsLoading(true);
     try {
+      // Primeiro buscar seguidores com perfis de usuários logados
       const { data, error } = await supabase
         .rpc('get_followers_with_profiles', { creator_uuid: creatorId });
 
       if (error) throw error;
 
-      const followersData = (data || []).map(follower => ({
-        id: `${creatorId}-${follower.follower_id}`, // ID único
-        follower_id: follower.follower_id,
-        created_at: follower.created_at,
-        follower_profile: {
-          display_name: follower.display_name,
-          avatar_url: follower.avatar_url,
-          user_id: follower.follower_id
+      // Buscar também seguidores visitantes diretamente da tabela followers
+      const { data: allFollowers, error: followersError } = await supabase
+        .from('followers')
+        .select('follower_id, created_at')
+        .eq('creator_id', creatorId);
+
+      if (followersError) throw followersError;
+
+      // Combinar dados dos perfis com visitantes
+      const followersData = (allFollowers || []).map(follower => {
+        // Verificar se já existe no resultado da RPC (usuário logado)
+        const existingProfile = (data || []).find(p => p.follower_id === follower.follower_id);
+        
+        if (existingProfile) {
+          return {
+            id: `${creatorId}-${follower.follower_id}`,
+            follower_id: follower.follower_id,
+            created_at: follower.created_at,
+            follower_profile: {
+              display_name: existingProfile.display_name,
+              avatar_url: existingProfile.avatar_url,
+              user_id: follower.follower_id
+            }
+          };
+        } else {
+          // Visitante - tentar recuperar dados do localStorage se disponível
+          const guestProfileKey = `dreamlink_guest_profile_${follower.follower_id}`;
+          const guestProfile = localStorage.getItem(guestProfileKey);
+          let guestData = null;
+          
+          try {
+            guestData = guestProfile ? JSON.parse(guestProfile) : null;
+          } catch (e) {
+            console.error('Error parsing guest profile:', e);
+          }
+          
+          return {
+            id: `${creatorId}-${follower.follower_id}`,
+            follower_id: follower.follower_id,
+            created_at: follower.created_at,
+            follower_profile: {
+              display_name: guestData?.displayName || 'Visitante',
+              avatar_url: guestData?.avatarUrl || null,
+              user_id: follower.follower_id
+            }
+          };
         }
-      }));
+      });
 
       setFollowers(followersData);
     } catch (error) {
@@ -205,6 +244,18 @@ export const useFollowers = (creatorId?: string) => {
           });
 
         if (error) throw error;
+
+        // Se é um visitante, salvar dados do perfil para que o criador possa ver
+        if (!user?.id && guestData.sessionId) {
+          const guestProfileKey = `dreamlink_guest_profile_${guestData.sessionId}`;
+          const guestProfile = {
+            displayName: guestData.displayName || 'Visitante',
+            avatarUrl: guestData.avatarUrl || null,
+            sessionId: guestData.sessionId,
+            lastUpdate: Date.now()
+          };
+          localStorage.setItem(guestProfileKey, JSON.stringify(guestProfile));
+        }
 
         setIsFollowing(true);
         setFollowersCount(prev => prev + 1);
