@@ -41,6 +41,7 @@ export const useFollowers = (creatorId?: string) => {
           .select('*', { count: 'exact', head: true })
           .eq('follower_id', creatorId);
         
+        console.log('Following count for creator', creatorId, ':', followingCountData);
         setFollowingCount(followingCountData || 0);
 
         // Verificar se usuário atual está seguindo
@@ -178,25 +179,57 @@ export const useFollowers = (creatorId?: string) => {
   // Carregar lista de quem o criador está seguindo
   const loadFollowing = async () => {
     if (!creatorId) return;
-
+    
+    console.log('Loading following for creator:', creatorId);
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
+      // Buscar quem o criador está seguindo - buscar perfis de usuários logados
+      const { data: followingData, error } = await supabase
         .from('followers')
         .select(`
           id,
           creator_id,
-          created_at,
-          creator_profile:profiles!followers_creator_id_fkey(
-            display_name,
-            avatar_url
-          )
+          created_at
         `)
         .eq('follower_id', creatorId);
 
       if (error) throw error;
 
-      setFollowing(data || []);
+      // Para cada seguidor, buscar o perfil na tabela profiles
+      const followingWithProfiles = await Promise.all(
+        (followingData || []).map(async (follow) => {
+          // Buscar perfil do usuário logado
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('display_name, avatar_url')
+            .eq('user_id', follow.creator_id)
+            .single();
+
+          // Se não encontrou perfil de usuário, buscar na tabela guest_profiles
+          let guestProfile = null;
+          if (!profile) {
+            const { data: guest } = await supabase
+              .from('guest_profiles')
+              .select('display_name, avatar_url')
+              .eq('session_id', follow.creator_id)
+              .single();
+            guestProfile = guest;
+          }
+
+          return {
+            id: follow.id,
+            creator_id: follow.creator_id,
+            created_at: follow.created_at,
+            creator_profile: {
+              display_name: profile?.display_name || guestProfile?.display_name || 'Usuário',
+              avatar_url: profile?.avatar_url || guestProfile?.avatar_url || null
+            }
+          };
+        })
+      );
+
+      console.log('Following loaded:', followingWithProfiles);
+      setFollowing(followingWithProfiles);
     } catch (error) {
       console.error('Error loading following:', error);
       toast.error('Erro ao carregar seguindo');
