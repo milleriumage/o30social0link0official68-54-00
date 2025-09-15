@@ -331,21 +331,21 @@ export const EnhancedChat = ({
                             e.currentTarget.src = `https://api.dicebear.com/7.x/avataaars/svg?seed=${msg.username?.startsWith('Guest') || msg.username === 'Visitante' ? 'visitor' : 'creator'}`;
                           }} 
                         />
-                        {/* Permitir visitantes editarem avatar também ou criador bloquear usuários */}
-                        {((msg.username !== 'Visitante' && isCreator) || (msg.username === 'Visitante' && isVisitor)) && <Button 
+                        {/* Permitir visitantes e criadores editarem seus próprios avatares */}
+                        {((msg.username?.startsWith('Guest') || msg.username === 'Visitante') && isVisitor) || (msg.username !== 'Visitante' && !msg.username?.startsWith('Guest') && isCreator) ? <Button
                             size="sm" 
                             variant="ghost" 
                             onClick={() => {
-                              if (isCreator) {
+                              if (isCreator && (msg.username !== 'Visitante' && !msg.username?.startsWith('Guest'))) {
                                 setShowProfileImageDialog(true);
-                              } else {
+                              } else if (isVisitor && (msg.username?.startsWith('Guest') || msg.username === 'Visitante')) {
                                 setShowGuestProfile(true);
                               }
-                            }} 
+                            }}
                             className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 bg-black/50 hover:bg-black/70 rounded-full transition-opacity flex items-center justify-center"
                           >
                             <Edit className="w-3 h-3 text-white" />
-                          </Button>}
+                          </Button> : null}
                       </div>
                      
                       {/* Message Bubble */}

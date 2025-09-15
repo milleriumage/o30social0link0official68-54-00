@@ -148,9 +148,16 @@ export const SettingsDialog = ({
               <div className="space-y-3">
                 <div className="space-y-2">
                   <Label htmlFor="userName">{t('settings.userName')}</Label>
-                  <Input id="userName" value={config.userName} onChange={e => saveConfig({
-                  userName: e.target.value
-                })} placeholder="João" className="text-sm" />
+                  <Input 
+                    id="userName" 
+                    value={config.userName} 
+                    onChange={e => saveConfig({ userName: e.target.value })} 
+                    placeholder="João" 
+                    className="text-sm" 
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Este nome aparecerá no chat e pode ser editado clicando no avatar também
+                  </p>
                 </div>
                 
                 <div className="space-y-2">
