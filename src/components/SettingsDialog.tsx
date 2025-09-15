@@ -419,7 +419,7 @@ export const SettingsDialog = ({
     <ReferralDialog disabled={disabled} />
     
     {/* Botão Assinaturas do Criador */}
-    <CreatorSubscriptionsManager />
+    <CreatorSubscriptionsManager onDialogOpen={() => setIsOpen(false)} />
     
     {/* Botão Painel do Usuário */}
     <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled}>

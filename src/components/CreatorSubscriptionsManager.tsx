@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -13,7 +13,11 @@ import { Plus, Crown, Package, AlertTriangle, Users } from 'lucide-react';
 
 const DEFAULT_MOTIVATIONAL_MESSAGE = "Deixe conteúdo gratuito para atrair novos seguidores!";
 
-export const CreatorSubscriptionsManager: React.FC = () => {
+interface CreatorSubscriptionsManagerProps {
+  onDialogOpen?: () => void;
+}
+
+export const CreatorSubscriptionsManager: React.FC<CreatorSubscriptionsManagerProps> = ({ onDialogOpen }) => {
   const [isMainDialogOpen, setIsMainDialogOpen] = useState(false);
   const { plans, loading, createOrUpdatePlan, activatePlan, deactivatePlan } = useCreatorSubscriptions();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
@@ -124,7 +128,12 @@ export const CreatorSubscriptionsManager: React.FC = () => {
   return (
     <>
       {/* Botão Trigger */}
-      <Dialog open={isMainDialogOpen} onOpenChange={setIsMainDialogOpen}>
+      <Dialog open={isMainDialogOpen} onOpenChange={(open) => {
+        setIsMainDialogOpen(open);
+        if (open && onDialogOpen) {
+          onDialogOpen();
+        }
+      }}>
         <DialogTrigger asChild>
           <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none">
             <Users className="w-4 h-4 mr-2" />
@@ -135,6 +144,7 @@ export const CreatorSubscriptionsManager: React.FC = () => {
         <DialogContent className="max-w-6xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>📋 Gerenciar Assinaturas do Criador</DialogTitle>
+            <DialogDescription className="sr-only">Gerencie e crie planos de assinatura do criador</DialogDescription>
           </DialogHeader>
           
           <div className="space-y-6">
@@ -293,6 +303,7 @@ export const CreatorSubscriptionsManager: React.FC = () => {
             <DialogTitle>
               {currentPlan?.plan_type === 'general' ? 'Configurar Plano Geral' : 'Criar Plano Personalizado'}
             </DialogTitle>
+            <DialogDescription className="sr-only">Formulário para criar ou editar planos de assinatura</DialogDescription>
           </DialogHeader>
 
           {currentPlan && (
