@@ -182,7 +182,7 @@ export const MediaShowcase = React.memo(({
   } = useWishlist();
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const { isFollowing, followersCount, followers, isLoading, toggleFollow, loadFollowers } = useFollowers(creatorId);
+  const { isFollowing, followersCount, followingCount, followers, isLoading, toggleFollow, loadFollowers } = useFollowers(creatorId);
   const [showPremiumDialog, setShowPremiumDialog] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const {
@@ -830,7 +830,7 @@ export const MediaShowcase = React.memo(({
           <div className="flex items-center gap-8">
             {/* Seguindo */}
             <div className="flex flex-col items-center">
-              <span className="text-lg font-bold text-foreground">4.521</span>
+              <span className="text-lg font-bold text-foreground">{followingCount}</span>
               <span className="text-sm text-muted-foreground">Seguindo</span>
             </div>
             

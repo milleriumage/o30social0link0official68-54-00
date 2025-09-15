@@ -17,6 +17,7 @@ export interface Follower {
 export const useFollowers = (creatorId?: string) => {
   const [isFollowing, setIsFollowing] = useState(false);
   const [followersCount, setFollowersCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0); // Contador de pessoas que o criador segue
   const [followers, setFollowers] = useState<Follower[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const { guestData } = useGuestData();
@@ -32,6 +33,14 @@ export const useFollowers = (creatorId?: string) => {
           .rpc('get_followers_count', { creator_uuid: creatorId });
         
         setFollowersCount(countData || 0);
+
+        // Contar quantas pessoas o criador está seguindo
+        const { count: followingCountData } = await supabase
+          .from('followers')
+          .select('*', { count: 'exact', head: true })
+          .eq('follower_id', creatorId);
+        
+        setFollowingCount(followingCountData || 0);
 
         // Verificar se usuário atual está seguindo
         const { data: { user } } = await supabase.auth.getUser();
@@ -55,7 +64,7 @@ export const useFollowers = (creatorId?: string) => {
     loadFollowData();
 
     // Set up real-time subscription for followers changes
-    const channel = supabase
+    const followersChannel = supabase
       .channel('followers-changes')
       .on(
         'postgres_changes',
@@ -72,8 +81,27 @@ export const useFollowers = (creatorId?: string) => {
       )
       .subscribe();
 
+    // Set up real-time subscription for following changes (when creator follows someone)
+    const followingChannel = supabase
+      .channel('following-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'followers',
+          filter: `follower_id=eq.${creatorId}`
+        },
+        () => {
+          // Reload follow data when following changes
+          loadFollowData();
+        }
+      )
+      .subscribe();
+
     return () => {
-      supabase.removeChannel(channel);
+      supabase.removeChannel(followersChannel);
+      supabase.removeChannel(followingChannel);
     };
   }, [creatorId]);
 
@@ -162,6 +190,7 @@ export const useFollowers = (creatorId?: string) => {
   return {
     isFollowing,
     followersCount,
+    followingCount,
     followers,
     isLoading,
     toggleFollow,
