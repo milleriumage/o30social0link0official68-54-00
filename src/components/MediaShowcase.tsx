@@ -35,6 +35,7 @@ import { useLanguage } from "@/hooks/useLanguage";
 import { useFollowers } from "@/hooks/useFollowers";
 import { FollowersCounter } from "./FollowersCounter";
 import { FollowButton } from "./FollowButton";
+import { FollowersDialog } from "./FollowersDialog";
 import { PremiumPlansManager } from "./PremiumPlansManager";
 interface MediaItem {
   id: string;
@@ -179,8 +180,9 @@ export const MediaShowcase = React.memo(({
   } = useWishlist();
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const { isFollowing, followersCount, toggleFollow } = useFollowers(creatorId);
+  const { isFollowing, followersCount, followers, isLoading, toggleFollow, loadFollowers } = useFollowers(creatorId);
   const [showPremiumDialog, setShowPremiumDialog] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const {
     timers,
     addTimer,
@@ -821,24 +823,25 @@ export const MediaShowcase = React.memo(({
       <div className="flex items-center justify-between">
         <SocialMediaIcons socialNetworks={socialNetworks} onUpdateSocial={updateSocialNetwork} onAddSocial={addSocialNetwork} onDeleteSocial={deleteSocialNetwork} passwordProtected={passwordProtected} onPasswordVerify={onPasswordVerify} creatorId={creatorId} />
         
-        {/* Center - All Elements */}
+        {/* Center - Statistics */}
         <div className="flex-1 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-3">
-            <FollowersCounter creatorId={creatorId} showForCreator={true} />
-            <div className="flex items-center gap-3">
-              <FollowButton 
-                isFollowing={isFollowing} 
-                onToggleFollow={toggleFollow}
-                isLoading={isFollowing === undefined}
-              />
-              <Button
-                onClick={() => setShowPremiumDialog(true)}
-                size="sm"
-                variant="default"
-                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium"
-              >
-                Assinar Conteúdo
-              </Button>
+          <div className="flex items-center gap-8">
+            {/* Seguindo */}
+            <div className="flex flex-col items-center">
+              <span className="text-lg font-bold text-foreground">4.521</span>
+              <span className="text-sm text-muted-foreground">Seguindo</span>
+            </div>
+            
+            {/* Seguidores */}
+            <div className="flex flex-col items-center cursor-pointer" onClick={() => setDialogOpen(true)}>
+              <span className="text-lg font-bold text-foreground">{followersCount}</span>
+              <span className="text-sm text-muted-foreground">Seguidores</span>
+            </div>
+            
+            {/* Curtidas */}
+            <div className="flex flex-col items-center">
+              <span className="text-lg font-bold text-foreground">9</span>
+              <span className="text-sm text-muted-foreground">Curtidas</span>
             </div>
           </div>
         </div>
@@ -1444,5 +1447,13 @@ export const MediaShowcase = React.memo(({
           </div>
         </DialogContent>
       </Dialog>
+
+      <FollowersDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        followers={followers}
+        isLoading={isLoading}
+        followersCount={followersCount}
+      />
     </div>;
 });
