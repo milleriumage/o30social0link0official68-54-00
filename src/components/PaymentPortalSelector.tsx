@@ -16,12 +16,14 @@ interface PaymentPortalSelectorProps {
     productId: string;
     name: string;
   };
+  onDialogOpen?: () => void;
 }
 
 export const PaymentPortalSelector = ({ 
   disabled = false, 
   mode = 'portal', 
-  planData 
+  planData,
+  onDialogOpen 
 }: PaymentPortalSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState<'BR' | 'US'>('BR');
@@ -81,7 +83,12 @@ export const PaymentPortalSelector = ({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={(open) => {
+      setIsOpen(open);
+      if (open && onDialogOpen) {
+        onDialogOpen();
+      }
+    }}>
       <DialogTrigger asChild>
         <Button 
           size="sm" 

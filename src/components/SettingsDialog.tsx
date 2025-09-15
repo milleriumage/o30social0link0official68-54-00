@@ -20,13 +20,15 @@ interface SettingsDialogProps {
   onSaveState: () => void;
   onLoadState: () => void;
   disabled?: boolean;
+  onDialogOpen?: () => void;
 }
 export const SettingsDialog = ({
   onImageUpload,
   onVideoUpload,
   onSaveState,
   onLoadState,
-  disabled = false
+  disabled = false,
+  onDialogOpen
 }: SettingsDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [showVisibilityDialog, setShowVisibilityDialog] = useState(false);
@@ -125,7 +127,12 @@ export const SettingsDialog = ({
     toast.success("📂 State loaded!");
   };
   return <div className="space-y-0">
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={(open) => {
+      setIsOpen(open);
+      if (open && onDialogOpen) {
+        onDialogOpen();
+      }
+    }}>
       <DialogTrigger>
         <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled}>
           <Settings className="w-4 h-4 mr-2" />

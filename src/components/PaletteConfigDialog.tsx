@@ -37,6 +37,7 @@ interface PaletteConfigDialogProps {
   onGradientIntensityChange: (gradientKey: string, intensity: number) => void;
   onLightGradientIntensityChange: (gradientKey: string, intensity: number) => void;
   disabled?: boolean;
+  onDialogOpen?: () => void;
 }
 export const PaletteConfigDialog = ({
   homeMode,
@@ -55,7 +56,8 @@ export const PaletteConfigDialog = ({
   onLightGradientToggle,
   onGradientIntensityChange,
   onLightGradientIntensityChange,
-  disabled = false
+  disabled = false,
+  onDialogOpen
 }: PaletteConfigDialogProps) => {
   const [open, setOpen] = useState(false);
   const {
@@ -248,7 +250,12 @@ export const PaletteConfigDialog = ({
     };
     return lightGradientMap[key] || 'from-white to-slate-200';
   };
-  return <Dialog open={open} onOpenChange={setOpen}>
+  return <Dialog open={open} onOpenChange={(openState) => {
+    setOpen(openState);
+    if (openState && onDialogOpen) {
+      onDialogOpen();
+    }
+  }}>
       <DialogTrigger asChild>
         <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled}>
           <Palette className="w-4 h-4 mr-2" />

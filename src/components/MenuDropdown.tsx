@@ -33,6 +33,7 @@ export const MenuDropdown = ({
   const [showPasswordDialog, setShowPasswordDialog] = useState(false);
   const [showAutoLockConfig, setShowAutoLockConfig] = useState(false);
   const [showWishlistDialog, setShowWishlistDialog] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [professionalMode, setProfessionalMode] = useState(false);
   const [homeMode, setHomeMode] = useState(false);
   const [ecommerceMode, setEcommerceMode] = useState(false);
@@ -827,7 +828,7 @@ export const MenuDropdown = ({
       }
     }));
   };
-  return <DropdownMenu>
+  return <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
       <DropdownMenuTrigger asChild>
         <Button size="sm" variant="outline" className="bg-background hover:bg-secondary border-border" disabled={disabled} title="Menu de opções">
           <Menu className="w-4 h-4" />
@@ -835,16 +836,19 @@ export const MenuDropdown = ({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 bg-popover backdrop-blur-md border-border z-[100]">
         <DropdownMenuItem asChild className="p-0">
-          <SettingsDialog onImageUpload={onImageUpload} onVideoUpload={onVideoUpload} onSaveState={onSaveState} onLoadState={onLoadState} disabled={disabled} />
+          <SettingsDialog onImageUpload={onImageUpload} onVideoUpload={onVideoUpload} onSaveState={onSaveState} onLoadState={onLoadState} disabled={disabled} onDialogOpen={() => setDropdownOpen(false)} />
         </DropdownMenuItem>
         
 
         <DropdownMenuItem asChild className="p-0">
-          <PaymentPortalSelector disabled={disabled} />
+          <PaymentPortalSelector disabled={disabled} onDialogOpen={() => setDropdownOpen(false)} />
         </DropdownMenuItem>
         
         <DropdownMenuItem asChild className="p-0">
-          <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled} onClick={() => setShowWishlistDialog(true)}>
+          <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled} onClick={() => {
+            setShowWishlistDialog(true);
+            setDropdownOpen(false);
+          }}>
             <Heart className="w-4 h-4 mr-2" />
             <span>Wishlist</span>
           </Button>
@@ -859,6 +863,7 @@ export const MenuDropdown = ({
               <Timer className="w-2 h-2 absolute -top-0.5 -right-0.5 text-primary cursor-pointer hover:text-primary/80 transition-colors" onClick={e => {
               e.stopPropagation();
               setShowAutoLockConfig(true);
+              setDropdownOpen(false);
             }} />
             </div>
             <span>{autoLockDisabled ? "Auto-Lock Desativado" : "Auto-Lock Ativo"}</span>
@@ -868,7 +873,7 @@ export const MenuDropdown = ({
 
 
         <DropdownMenuItem asChild className="p-0">
-          <PaletteConfigDialog homeMode={homeMode} professionalMode={professionalMode} ecommerceMode={ecommerceMode} fireMode={fireMode} colorToggles={colorToggles} gradientStates={gradientStates} lightGradientStates={lightGradientStates} onHomeModeToggle={handleHomeModeToggle} onProfessionalModeToggle={handleProfessionalModeToggle} onEcommerceModeToggle={handleEcommerceModeToggle} onFireModeToggle={handleFireModeToggle} onColorToggle={handleColorToggle} onGradientToggle={handleGradientToggle} onLightGradientToggle={handleLightGradientToggle} onGradientIntensityChange={handleIntensityChange} onLightGradientIntensityChange={handleLightIntensityChange} disabled={disabled} />
+          <PaletteConfigDialog homeMode={homeMode} professionalMode={professionalMode} ecommerceMode={ecommerceMode} fireMode={fireMode} colorToggles={colorToggles} gradientStates={gradientStates} lightGradientStates={lightGradientStates} onHomeModeToggle={handleHomeModeToggle} onProfessionalModeToggle={handleProfessionalModeToggle} onEcommerceModeToggle={handleEcommerceModeToggle} onFireModeToggle={handleFireModeToggle} onColorToggle={handleColorToggle} onGradientToggle={handleGradientToggle} onLightGradientToggle={handleLightGradientToggle} onGradientIntensityChange={handleIntensityChange} onLightGradientIntensityChange={handleLightIntensityChange} disabled={disabled} onDialogOpen={() => setDropdownOpen(false)} />
         </DropdownMenuItem>
 
       </DropdownMenuContent>
