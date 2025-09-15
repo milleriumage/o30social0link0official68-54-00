@@ -619,6 +619,98 @@ export type Database = {
         }
         Relationships: []
       }
+      subscription_plan_media: {
+        Row: {
+          added_at: string
+          id: string
+          media_id: string
+          media_type: string
+          plan_id: string
+        }
+        Insert: {
+          added_at?: string
+          id?: string
+          media_id: string
+          media_type: string
+          plan_id: string
+        }
+        Update: {
+          added_at?: string
+          id?: string
+          media_id?: string
+          media_type?: string
+          plan_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscription_plan_media_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscription_plans: {
+        Row: {
+          created_at: string
+          creator_id: string
+          credits_per_day: number
+          current_photos: number | null
+          current_videos: number | null
+          description: string | null
+          duration_days: number
+          id: string
+          max_photos: number | null
+          max_videos: number | null
+          motivational_message: string | null
+          name: string | null
+          plan_type: string
+          price: number | null
+          status: string
+          total_credits: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          credits_per_day?: number
+          current_photos?: number | null
+          current_videos?: number | null
+          description?: string | null
+          duration_days?: number
+          id?: string
+          max_photos?: number | null
+          max_videos?: number | null
+          motivational_message?: string | null
+          name?: string | null
+          plan_type: string
+          price?: number | null
+          status?: string
+          total_credits?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          credits_per_day?: number
+          current_photos?: number | null
+          current_videos?: number | null
+          description?: string | null
+          duration_days?: number
+          id?: string
+          max_photos?: number | null
+          max_videos?: number | null
+          motivational_message?: string | null
+          name?: string | null
+          plan_type?: string
+          price?: number | null
+          status?: string
+          total_credits?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           auto_lock_disabled: boolean | null
@@ -780,6 +872,56 @@ export type Database = {
           visual_config?: Json | null
         }
         Relationships: []
+      }
+      user_subscriptions: {
+        Row: {
+          created_at: string
+          creator_id: string
+          credits_remaining: number
+          end_date: string
+          id: string
+          last_credit_grant: string | null
+          plan_id: string
+          start_date: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          creator_id: string
+          credits_remaining?: number
+          end_date: string
+          id?: string
+          last_credit_grant?: string | null
+          plan_id: string
+          start_date?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          creator_id?: string
+          credits_remaining?: number
+          end_date?: string
+          id?: string
+          last_credit_grant?: string | null
+          plan_id?: string
+          start_date?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_subscriptions_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "subscription_plans"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_unlocks: {
         Row: {
