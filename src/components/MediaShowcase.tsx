@@ -838,7 +838,10 @@ export const MediaShowcase = React.memo(({
             {/* Seguindo */}
             <div className="flex flex-col items-center cursor-pointer" onClick={async () => {
               setFollowingDialogOpen(true);
-              await loadFollowing();
+              // Forçar recarregamento dos dados atualizados
+              setTimeout(async () => {
+                await loadFollowing();
+              }, 100);
             }}>
               <span className="text-lg font-bold text-foreground">{followingCount}</span>
               <span className="text-sm text-muted-foreground">Seguindo</span>

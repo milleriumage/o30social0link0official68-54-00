@@ -195,35 +195,45 @@ export const useFollowers = (creatorId?: string) => {
 
       if (error) throw error;
 
-      // Para cada seguidor, buscar o perfil na tabela profiles
+      // Para cada seguidor, buscar o perfil atualizado
       const followingWithProfiles = await Promise.all(
         (followingData || []).map(async (follow) => {
-          // Buscar perfil do usuário logado
-          const { data: profile } = await supabase
+          console.log('Looking for profile of creator_id:', follow.creator_id);
+          
+          // Primeiro buscar perfil do usuário logado
+          const { data: profile, error: profileError } = await supabase
             .from('profiles')
             .select('display_name, avatar_url')
             .eq('user_id', follow.creator_id)
-            .single();
+            .maybeSingle();
+
+          console.log('Profile found:', profile, 'Error:', profileError);
 
           // Se não encontrou perfil de usuário, buscar na tabela guest_profiles
           let guestProfile = null;
           if (!profile) {
-            const { data: guest } = await supabase
+            const { data: guest, error: guestError } = await supabase
               .from('guest_profiles')
               .select('display_name, avatar_url')
               .eq('session_id', follow.creator_id)
-              .single();
+              .maybeSingle();
+            
+            console.log('Guest profile found:', guest, 'Error:', guestError);
             guestProfile = guest;
           }
+
+          const finalProfile = {
+            display_name: profile?.display_name || guestProfile?.display_name || 'Usuário',
+            avatar_url: profile?.avatar_url || guestProfile?.avatar_url || null
+          };
+
+          console.log('Final profile for', follow.creator_id, ':', finalProfile);
 
           return {
             id: follow.id,
             creator_id: follow.creator_id,
             created_at: follow.created_at,
-            creator_profile: {
-              display_name: profile?.display_name || guestProfile?.display_name || 'Usuário',
-              avatar_url: profile?.avatar_url || guestProfile?.avatar_url || null
-            }
+            creator_profile: finalProfile
           };
         })
       );
