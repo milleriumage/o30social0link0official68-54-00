@@ -828,13 +828,38 @@ export const MenuDropdown = ({
       }
     }));
   };
-  return <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+  // Fechar menu ao abrir outros dialogs
+  useEffect(() => {
+    const handleDialogOpen = () => {
+      setDropdownOpen(false);
+    };
+
+    // Escutar eventos de abertura de dialogs
+    document.addEventListener('dialog-opened', handleDialogOpen);
+    
+    return () => {
+      document.removeEventListener('dialog-opened', handleDialogOpen);
+    };
+  }, []);
+
+  return <DropdownMenu 
+    open={dropdownOpen} 
+    onOpenChange={setDropdownOpen}
+    modal={false}
+  >
       <DropdownMenuTrigger asChild>
         <Button size="sm" variant="outline" className="bg-background hover:bg-secondary border-border" disabled={disabled} title="Menu de opções">
           <Menu className="w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-48 bg-popover backdrop-blur-md border-border z-[100] relative">
+      <DropdownMenuContent 
+        align="end" 
+        className="w-48 bg-popover backdrop-blur-md border-border z-[100] relative"
+        onCloseAutoFocus={(e) => e.preventDefault()}
+        onEscapeKeyDown={() => setDropdownOpen(false)}
+        onPointerDownOutside={() => setDropdownOpen(false)}
+        onInteractOutside={() => setDropdownOpen(false)}
+      >
         <Button
           variant="ghost"
           size="sm"
