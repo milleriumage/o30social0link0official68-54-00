@@ -54,43 +54,64 @@ export const FollowersDialog: React.FC<FollowersDialogProps> = ({
             </div>
           ) : (
             <div className="space-y-2">
-              {followers.map((follower) => (
-                <div
-                  key={follower.id}
-                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                >
-                  <Avatar className="w-10 h-10">
-                    <AvatarImage 
-                      src={follower.follower_profile?.avatar_url || undefined} 
-                      alt={follower.follower_profile?.display_name || 'Usuário'} 
-                    />
-                    <AvatarFallback className="bg-primary/10 text-primary">
-                      {(follower.follower_profile?.display_name || 'U').charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+              {followers.map((follower) => {
+                // Verificar se é um usuário logado (tem user_id válido de usuário real)
+                const isLoggedUser = follower.follower_profile?.user_id && 
+                  follower.follower_profile.user_id.length === 36 && // UUID válido
+                  !follower.follower_profile.user_id.startsWith('guest_');
+                
+                // Verificar se o perfil é privado (por enquanto assumindo que não há essa configuração ainda)
+                const isPrivateProfile = false; // TODO: Implementar verificação de perfil privado
+                
+                // Mostrar botão "Ver Perfil" apenas se:
+                // 1. O visualizador está logado (!isGuest && user)
+                // 2. O seguidor é um usuário logado (isLoggedUser)
+                // 3. O perfil não é privado (!isPrivateProfile)
+                const showViewProfileButton = !isGuest && user && isLoggedUser && !isPrivateProfile;
 
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">
-                      {follower.follower_profile?.display_name || 'Usuário'}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Seguindo desde {new Date(follower.created_at).toLocaleDateString('pt-BR')}
-                    </p>
+                return (
+                  <div
+                    key={follower.id}
+                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                  >
+                    <Avatar className="w-10 h-10">
+                      <AvatarImage 
+                        src={follower.follower_profile?.avatar_url || undefined} 
+                        alt={follower.follower_profile?.display_name || 'Usuário'} 
+                      />
+                      <AvatarFallback className="bg-primary/10 text-primary">
+                        {(follower.follower_profile?.display_name || 'U').charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm truncate">
+                        {follower.follower_profile?.display_name || 'Usuário'}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Seguindo desde {new Date(follower.created_at).toLocaleDateString('pt-BR')}
+                      </p>
+                      {!isLoggedUser && (
+                        <p className="text-xs text-muted-foreground/70 italic">
+                          Visitante
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Só mostra botão Ver Perfil conforme as condições */}
+                    {showViewProfileButton && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleFollowerClick(follower.follower_id)}
+                        className="shrink-0"
+                      >
+                        Ver Perfil
+                      </Button>
+                    )}
                   </div>
-
-                  {/* Só mostra botão Ver Perfil se usuário estiver logado */}
-                  {!isGuest && user && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleFollowerClick(follower.follower_id)}
-                      className="shrink-0"
-                    >
-                      Ver Perfil
-                    </Button>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

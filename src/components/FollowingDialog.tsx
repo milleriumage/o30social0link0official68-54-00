@@ -63,43 +63,64 @@ export const FollowingDialog: React.FC<FollowingDialogProps> = ({
             </div>
           ) : (
             <div className="space-y-2">
-              {following.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                >
-                  <Avatar className="w-10 h-10">
-                    <AvatarImage 
-                      src={item.creator_profile?.avatar_url || undefined} 
-                      alt={item.creator_profile?.display_name || 'Criador'} 
-                    />
-                    <AvatarFallback className="bg-primary/10 text-primary">
-                      {(item.creator_profile?.display_name || 'C').charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+              {following.map((item) => {
+                // Verificar se é um usuário logado (tem creator_id válido de usuário real)
+                const isLoggedUser = item.creator_id && 
+                  item.creator_id.length === 36 && // UUID válido
+                  !item.creator_id.startsWith('guest_');
+                
+                // Verificar se o perfil é privado (por enquanto assumindo que não há essa configuração ainda)
+                const isPrivateProfile = false; // TODO: Implementar verificação de perfil privado
+                
+                // Mostrar botão "Ver Perfil" apenas se:
+                // 1. O visualizador está logado (!isGuest && user)
+                // 2. O criador é um usuário logado (isLoggedUser)
+                // 3. O perfil não é privado (!isPrivateProfile)
+                const showViewProfileButton = !isGuest && user && isLoggedUser && !isPrivateProfile;
 
-                  <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">
-                      {item.creator_profile?.display_name || 'Criador'}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      Seguindo desde {new Date(item.created_at).toLocaleDateString('pt-BR')}
-                    </p>
+                return (
+                  <div
+                    key={item.id}
+                    className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted/50 transition-colors"
+                  >
+                    <Avatar className="w-10 h-10">
+                      <AvatarImage 
+                        src={item.creator_profile?.avatar_url || undefined} 
+                        alt={item.creator_profile?.display_name || 'Criador'} 
+                      />
+                      <AvatarFallback className="bg-primary/10 text-primary">
+                        {(item.creator_profile?.display_name || 'C').charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm truncate">
+                        {item.creator_profile?.display_name || 'Criador'}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        Seguindo desde {new Date(item.created_at).toLocaleDateString('pt-BR')}
+                      </p>
+                      {!isLoggedUser && (
+                        <p className="text-xs text-muted-foreground/70 italic">
+                          Visitante
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Só mostra botão Ver Perfil conforme as condições */}
+                    {showViewProfileButton && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleFollowingClick(item.creator_id)}
+                        className="shrink-0"
+                      >
+                        Ver Perfil
+                      </Button>
+                    )}
                   </div>
-
-                  {/* Só mostra botão Ver Perfil se usuário estiver logado */}
-                  {!isGuest && user && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleFollowingClick(item.creator_id)}
-                      className="shrink-0"
-                    >
-                      Ver Perfil
-                    </Button>
-                  )}
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
