@@ -304,7 +304,7 @@ export const EnhancedChat = ({
                       ? 'items-start' : 'items-end'
                   }`}>
                     {/* Creator Name (only for creator messages and when enabled) */}
-                    {msg.username !== 'Visitante' && config.showCreatorName && <div className="flex items-center gap-1 px-2">
+                    {msg.username !== 'Visitante' && !msg.username?.startsWith('Guest') && config.showCreatorName && <div className="flex items-center gap-1 px-2">
                         <Crown className="w-3 h-3 text-yellow-500" />
                         <span className="text-xs text-muted-foreground font-medium">
                           {config.userName || "Criador"}
@@ -318,13 +318,13 @@ export const EnhancedChat = ({
                         {/* Avatar */}
                       <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 relative group">
                         {/* Crown icon for creator */}
-                        {msg.username !== 'Visitante' && <Crown className="absolute -top-1 -right-1 w-4 h-4 text-yellow-500 z-10" />}
+                        {msg.username !== 'Visitante' && !msg.username?.startsWith('Guest') && <Crown className="absolute -top-1 -right-1 w-4 h-4 text-yellow-500 z-10" />}
                         <img 
                           src={
                             msg.username?.startsWith('Guest') || msg.username === 'Visitante'
-                              ? guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`
+                              ? (localStorage.getItem('visitorAvatar') || guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`)
                               : config.userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=creator`
-                          } 
+                          }
                           alt={msg.username?.startsWith('Guest') || msg.username === 'Visitante' ? 'Guest' : 'Criador'} 
                           className="w-full h-full object-cover" 
                           onError={e => {
