@@ -104,10 +104,6 @@ export const useFollowers = (creatorId?: string) => {
       return;
     }
 
-    if (user.id === creatorId) {
-      toast.error('Você não pode seguir a si mesmo');
-      return;
-    }
 
     try {
       if (isFollowing) {
