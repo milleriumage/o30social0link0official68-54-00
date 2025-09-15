@@ -112,13 +112,13 @@ export const useFollowers = (creatorId?: string) => {
 
     setIsLoading(true);
     try {
-      // Primeiro buscar seguidores com perfis de usuários logados
+      // Buscar seguidores com perfis de usuários logados
       const { data, error } = await supabase
         .rpc('get_followers_with_profiles', { creator_uuid: creatorId });
 
       if (error) throw error;
 
-      // Buscar também seguidores visitantes diretamente da tabela followers
+      // Buscar também seguidores visitantes da tabela followers
       const { data: allFollowers, error: followersError } = await supabase
         .from('followers')
         .select('follower_id, created_at')
@@ -126,41 +126,40 @@ export const useFollowers = (creatorId?: string) => {
 
       if (followersError) throw followersError;
 
-      // Combinar dados dos perfis com visitantes
+      // Buscar perfis de visitantes da nova tabela guest_profiles
+      const { data: guestProfiles, error: guestError } = await supabase
+        .from('guest_profiles')
+        .select('session_id, display_name, avatar_url');
+
+      if (guestError) throw guestError;
+
+      // Combinar dados
       const followersData = (allFollowers || []).map(follower => {
-        // Verificar se já existe no resultado da RPC (usuário logado)
-        const existingProfile = (data || []).find(p => p.follower_id === follower.follower_id);
+        // Verificar se é usuário logado
+        const userProfile = (data || []).find(p => p.follower_id === follower.follower_id);
         
-        if (existingProfile) {
+        if (userProfile) {
           return {
             id: `${creatorId}-${follower.follower_id}`,
             follower_id: follower.follower_id,
             created_at: follower.created_at,
             follower_profile: {
-              display_name: existingProfile.display_name,
-              avatar_url: existingProfile.avatar_url,
+              display_name: userProfile.display_name,
+              avatar_url: userProfile.avatar_url,
               user_id: follower.follower_id
             }
           };
         } else {
-          // Visitante - tentar recuperar dados do localStorage se disponível
-          const guestProfileKey = `dreamlink_guest_profile_${follower.follower_id}`;
-          const guestProfile = localStorage.getItem(guestProfileKey);
-          let guestData = null;
-          
-          try {
-            guestData = guestProfile ? JSON.parse(guestProfile) : null;
-          } catch (e) {
-            console.error('Error parsing guest profile:', e);
-          }
+          // Verificar se é visitante na tabela guest_profiles
+          const guestProfile = (guestProfiles || []).find(g => g.session_id === follower.follower_id);
           
           return {
             id: `${creatorId}-${follower.follower_id}`,
             follower_id: follower.follower_id,
             created_at: follower.created_at,
             follower_profile: {
-              display_name: guestData?.displayName || 'Visitante',
-              avatar_url: guestData?.avatarUrl || null,
+              display_name: guestProfile?.display_name || 'Visitante',
+              avatar_url: guestProfile?.avatar_url || null,
               user_id: follower.follower_id
             }
           };
@@ -245,16 +244,15 @@ export const useFollowers = (creatorId?: string) => {
 
         if (error) throw error;
 
-        // Se é um visitante, salvar dados do perfil para que o criador possa ver
+        // Se é um visitante, salvar dados do perfil na nova tabela
         if (!user?.id && guestData.sessionId) {
-          const guestProfileKey = `dreamlink_guest_profile_${guestData.sessionId}`;
-          const guestProfile = {
-            displayName: guestData.displayName || 'Visitante',
-            avatarUrl: guestData.avatarUrl || null,
-            sessionId: guestData.sessionId,
-            lastUpdate: Date.now()
-          };
-          localStorage.setItem(guestProfileKey, JSON.stringify(guestProfile));
+          await supabase
+            .from('guest_profiles')
+            .upsert({
+              session_id: guestData.sessionId,
+              display_name: guestData.displayName || 'Visitante',
+              avatar_url: guestData.avatarUrl || null
+            });
         }
 
         setIsFollowing(true);

@@ -167,6 +167,36 @@ export type Database = {
         }
         Relationships: []
       }
+      guest_profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          expires_at: string
+          id: string
+          session_id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          expires_at?: string
+          id?: string
+          session_id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          expires_at?: string
+          id?: string
+          session_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       media_interactions: {
         Row: {
           created_at: string
@@ -1167,6 +1197,10 @@ export type Database = {
         Returns: boolean
       }
       clean_expired_blocks: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      clean_expired_guest_profiles: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }

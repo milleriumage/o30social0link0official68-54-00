@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useGoogleAuth } from './useGoogleAuth';
 import { validateCredits, validateGuestData, safeJSONParse } from '@/utils/dataValidation';
+import { supabase } from '@/integrations/supabase/client';
 
 interface GuestNotification {
   id: string;
@@ -138,12 +139,29 @@ export const useGuestData = () => {
     }));
   };
 
-  const updateGuestProfile = (updates: Partial<Pick<GuestData, 'displayName' | 'avatarUrl'>>) => {
-    setGuestData(prev => ({
-      ...prev,
-      ...updates
-    }));
-  };
+  const updateGuestProfile = useCallback(async (updates: Partial<Pick<GuestData, 'displayName' | 'avatarUrl'>>) => {
+    setGuestData(prev => {
+      const updated = { ...prev, ...updates };
+      
+      // Sincronizar com a tabela guest_profiles no Supabase
+      if (prev.sessionId) {
+        supabase
+          .from('guest_profiles')
+          .upsert({
+            session_id: prev.sessionId,
+            display_name: updated.displayName || null,
+            avatar_url: updated.avatarUrl || null
+          })
+          .then(({ error }) => {
+            if (error) {
+              console.error('Error syncing guest profile to Supabase:', error);
+            }
+          });
+      }
+      
+      return updated;
+    });
+  }, []);
 
   const clearGuestData = () => {
     const initialData = { 
