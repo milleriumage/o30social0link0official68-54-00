@@ -821,26 +821,26 @@ export const MediaShowcase = React.memo(({
       <div className="flex items-center justify-between">
         <SocialMediaIcons socialNetworks={socialNetworks} onUpdateSocial={updateSocialNetwork} onAddSocial={addSocialNetwork} onDeleteSocial={deleteSocialNetwork} passwordProtected={passwordProtected} onPasswordVerify={onPasswordVerify} creatorId={creatorId} />
         
-        {/* Left - Followers Stats */}
-        <div className="flex items-center gap-6">
-          <FollowersCounter creatorId={creatorId} showForCreator={true} />
-        </div>
-        
-        {/* Center - Follow & Subscribe Actions */}
-        <div className="flex-1 flex items-center justify-center gap-3">
-          <FollowButton 
-            isFollowing={isFollowing} 
-            onToggleFollow={toggleFollow}
-            isLoading={isFollowing === undefined}
-          />
-          <Button
-            onClick={() => setShowPremiumDialog(true)}
-            size="sm"
-            variant="default"
-            className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium"
-          >
-            Assinar Conteúdo
-          </Button>
+        {/* Center - All Elements */}
+        <div className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <FollowersCounter creatorId={creatorId} showForCreator={true} />
+            <div className="flex items-center gap-3">
+              <FollowButton 
+                isFollowing={isFollowing} 
+                onToggleFollow={toggleFollow}
+                isLoading={isFollowing === undefined}
+              />
+              <Button
+                onClick={() => setShowPremiumDialog(true)}
+                size="sm"
+                variant="default"
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium"
+              >
+                Assinar Conteúdo
+              </Button>
+            </div>
+          </div>
         </div>
         
         <div className="flex items-center gap-2">
