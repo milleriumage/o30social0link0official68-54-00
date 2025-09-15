@@ -49,6 +49,28 @@ export const useFollowers = (creatorId?: string) => {
     };
 
     loadFollowData();
+
+    // Set up real-time subscription for followers changes
+    const channel = supabase
+      .channel('followers-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'followers',
+          filter: `creator_id=eq.${creatorId}`
+        },
+        () => {
+          // Reload follow data when followers change
+          loadFollowData();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [creatorId]);
 
   // Carregar lista completa de seguidores
@@ -118,6 +140,8 @@ export const useFollowers = (creatorId?: string) => {
 
         setIsFollowing(false);
         setFollowersCount(prev => Math.max(0, prev - 1));
+        // Reload followers list to remove the unfollowed user
+        await loadFollowers();
         toast.success('Você parou de seguir este criador');
       } else {
         // Seguir
@@ -132,6 +156,8 @@ export const useFollowers = (creatorId?: string) => {
 
         setIsFollowing(true);
         setFollowersCount(prev => prev + 1);
+        // Reload followers list to show the new follower
+        await loadFollowers();
         toast.success('Agora você está seguindo este criador!');
       }
     } catch (error) {
