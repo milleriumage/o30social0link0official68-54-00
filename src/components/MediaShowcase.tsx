@@ -835,19 +835,20 @@ export const MediaShowcase = React.memo(({
         {/* Center - Statistics */}
         <div className="flex-1 flex items-center justify-center">
           <div className="flex items-center gap-8">
-            {/* Seguindo */}
-            <div className="flex flex-col items-center cursor-pointer" onClick={async () => {
-              setFollowingDialogOpen(true);
-              // Forçar recarregamento dos dados atualizados
-              setTimeout(async () => {
-                await loadFollowing();
-              }, 100);
-            }}>
-              <span className="text-lg font-bold text-foreground">{followingCount}</span>
-              <span className="text-sm text-muted-foreground">Seguindo</span>
-            </div>
+            {/* Seguindo - apenas para o próprio criador */}
+            {isCreator && (
+              <div className="flex flex-col items-center cursor-pointer" onClick={async () => {
+                setFollowingDialogOpen(true);
+                setTimeout(async () => {
+                  await loadFollowing();
+                }, 100);
+              }}>
+                <span className="text-lg font-bold text-foreground">{followingCount}</span>
+                <span className="text-sm text-muted-foreground">Seguindo</span>
+              </div>
+            )}
             
-            {/* Seguidores */}
+            {/* Seguidores - sempre visível */}
             <div className="flex flex-col items-center cursor-pointer" onClick={async () => {
               setDialogOpen(true);
               await loadFollowers();
@@ -856,7 +857,7 @@ export const MediaShowcase = React.memo(({
               <span className="text-sm text-muted-foreground">Seguidores</span>
             </div>
             
-            {/* Curtidas */}
+            {/* Curtidas - sempre visível */}
             <div className="flex flex-col items-center">
               <span className="text-lg font-bold text-foreground">{mediaLikesTotal}</span>
               <span className="text-sm text-muted-foreground">Curtidas</span>
@@ -889,13 +890,15 @@ export const MediaShowcase = React.memo(({
       backgroundColor: vitrineConfig.backgroundColor === "transparent" ? "transparent" : vitrineConfig.backgroundColor
     }}>
         <div className="flex justify-between items-center mb-4">
-          {/* Center - Follow & Subscribe Buttons */}
+          {/* Center - Follow & Subscribe Buttons - apenas para visitantes */}
           <div className="flex-1 flex items-center justify-center gap-3">
-            <FollowButton 
-              isFollowing={isFollowing} 
-              onToggleFollow={toggleFollow}
-              isLoading={isFollowing === undefined}
-            />
+            {!isCreator && (
+              <FollowButton 
+                isFollowing={isFollowing} 
+                onToggleFollow={toggleFollow}
+                isLoading={isFollowing === undefined}
+              />
+            )}
             <Button
               onClick={() => setShowPremiumDialog(true)}
               size="sm"
