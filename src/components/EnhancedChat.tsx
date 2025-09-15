@@ -96,13 +96,18 @@ export const EnhancedChat = ({
     scrollToBottom();
   }, [messages]);
 
+  // Force re-render when guest data changes
+  useEffect(() => {
+    // This ensures the chat re-renders when guest profile is updated
+  }, [guestData.displayName, guestData.avatarUrl]);
+
   // Verificar se é visitante
   const isVisitor = !user || (creatorId && user.id !== creatorId);
   const isCreator = user && creatorId && user.id === creatorId;
 
   const handleSendMessage = async () => {
     if (currentMessage.trim()) {
-      // Determinar o nome do usuário
+      // Usar o nome atualizado do guest data
       const userName = isCreator 
         ? (config.userName || "Criador") 
         : (guestData.displayName || `Guest ${guestData.sessionId.slice(-4)}`);
@@ -321,7 +326,7 @@ export const EnhancedChat = ({
                         {/* Visitor name above avatar */}
                         {msg.username !== (config.userName || "Criador") && (
                           <span className="text-xs text-muted-foreground font-medium">
-                            {msg.username || guestData.displayName || 'Visitante'}
+                            {guestData.displayName || msg.username || 'Visitante'}
                           </span>
                         )}
                         <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 relative group">

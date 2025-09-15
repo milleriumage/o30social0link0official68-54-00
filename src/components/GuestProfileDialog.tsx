@@ -26,9 +26,15 @@ const guestAvatars = [
 
 export const GuestProfileDialog: React.FC<GuestProfileDialogProps> = ({ isOpen, onClose }) => {
   const { guestData, updateGuestProfile } = useGuestData();
-  const [displayName, setDisplayName] = useState(guestData.displayName || '');
-  const [selectedAvatar, setSelectedAvatar] = useState(guestData.avatarUrl || '');
+  const [displayName, setDisplayName] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+
+  // Sync with guestData when dialog opens or data changes
+  React.useEffect(() => {
+    setDisplayName(guestData.displayName || '');
+    setSelectedAvatar(guestData.avatarUrl || '');
+  }, [guestData.displayName, guestData.avatarUrl, isOpen]);
 
   const handleSave = () => {
     const trimmedName = displayName.trim();
@@ -44,6 +50,7 @@ export const GuestProfileDialog: React.FC<GuestProfileDialogProps> = ({ isOpen, 
     });
 
     setIsEditing(false);
+    onClose(); // Fechar o diálogo após salvar
     toast.success('✅ Perfil atualizado!');
   };
 
