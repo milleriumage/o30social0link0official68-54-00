@@ -62,7 +62,8 @@ export const useDataIsolation = () => {
         key.startsWith('credits_') ||
         key.startsWith('guest_') ||
         key.startsWith('wishlist_guest_') || // Limpar wishlists guest antigas
-        key.includes('cache')
+        key.includes('cache') ||
+        key === 'visitorAvatar' // Limpar avatar antigo do visitante
       )) {
         keysToRemove.push(key);
       }

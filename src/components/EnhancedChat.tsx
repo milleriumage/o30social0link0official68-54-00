@@ -191,15 +191,16 @@ export const EnhancedChat = ({
         reader.onload = async (e) => {
           const newAvatar = e.target?.result as string;
           
-          if (isCreator) {
-            // Salvar avatar do criador no banco de dados
-            await saveConfig({ userAvatar: newAvatar });
-            toast.success('✅ Avatar do criador salvo!');
-          } else {
-            // Salvar avatar do visitante no localStorage
-            localStorage.setItem('visitorAvatar', newAvatar);
-            toast.success('✅ Avatar do visitante atualizado!');
-          }
+            if (isCreator) {
+              // Salvar avatar do criador no banco de dados
+              await saveConfig({ userAvatar: newAvatar });
+              toast.success('✅ Avatar do criador salvo!');
+            } else {
+              // Usar o hook useGuestData para salvar avatar do visitante
+              const { updateGuestProfile } = useGuestData();
+              updateGuestProfile({ avatarUrl: newAvatar });
+              toast.success('✅ Avatar do visitante atualizado!');
+            }
           
           setShowProfileImageDialog(false);
         };
@@ -322,7 +323,7 @@ export const EnhancedChat = ({
                         <img 
                           src={
                             msg.username?.startsWith('Guest') || msg.username === 'Visitante'
-                              ? (localStorage.getItem('visitorAvatar') || guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`)
+                              ? (guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`)
                               : config.userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=creator`
                           }
                           alt={msg.username?.startsWith('Guest') || msg.username === 'Visitante' ? 'Guest' : 'Criador'} 

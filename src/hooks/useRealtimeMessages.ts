@@ -18,8 +18,10 @@ export const useRealtimeMessages = (creatorId?: string) => {
   const { config } = useChatConfiguration();
 
   useEffect(() => {
-    // Limpar mensagens quando o usuário mudar
-    setMessages([]);
+    // Só limpar mensagens se realmente mudou o contexto (não apenas carregou)
+    if (user?.id || creatorId) {
+      setMessages([]);
+    }
     
     // Fetch initial messages
     const fetchMessages = async () => {
