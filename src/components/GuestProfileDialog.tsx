@@ -49,6 +49,11 @@ export const GuestProfileDialog: React.FC<GuestProfileDialogProps> = ({ isOpen, 
       avatarUrl: selectedAvatar || undefined
     });
 
+    // Notificar app para atualização instantânea
+    window.dispatchEvent(new CustomEvent('guest-profile-updated', {
+      detail: { displayName: trimmedName || undefined, avatarUrl: selectedAvatar || undefined }
+    }));
+
     setIsEditing(false);
     onClose(); // Fechar o diálogo após salvar
     toast.success('✅ Perfil atualizado!');

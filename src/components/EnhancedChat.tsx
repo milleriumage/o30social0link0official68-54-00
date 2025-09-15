@@ -80,6 +80,30 @@ export const EnhancedChat = ({
   const { isCreator: userIsCreator, canEdit } = useCreatorPermissions(creatorId);
   const { guestData, updateGuestProfile } = useGuestData();
   
+  const [guestProfile, setGuestProfile] = useState({
+    displayName: guestData.displayName,
+    avatarUrl: guestData.avatarUrl,
+  });
+
+  useEffect(() => {
+    setGuestProfile({
+      displayName: guestData.displayName,
+      avatarUrl: guestData.avatarUrl,
+    });
+  }, [guestData.displayName, guestData.avatarUrl]);
+
+  useEffect(() => {
+    const handler = (e: any) => {
+      const detail = e?.detail || {};
+      setGuestProfile(prev => ({
+        displayName: detail.displayName ?? prev.displayName ?? guestData.displayName,
+        avatarUrl: detail.avatarUrl ?? prev.avatarUrl ?? guestData.avatarUrl,
+      }));
+    };
+    window.addEventListener('guest-profile-updated', handler);
+    return () => window.removeEventListener('guest-profile-updated', handler);
+  }, []);
+  
   const fileInputRef = useRef<HTMLInputElement>(null);
   const profileImageInputRef = useRef<HTMLInputElement>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
@@ -110,7 +134,7 @@ export const EnhancedChat = ({
       // Usar o nome atualizado do guest data
       const userName = isCreator 
         ? (config.userName || "Criador") 
-        : (guestData.displayName || `Guest ${guestData.sessionId.slice(-4)}`);
+        : (guestProfile.displayName || `Guest ${guestData.sessionId.slice(-4)}`);
       
       await onSendMessage(userName, currentMessage, config.chatColor, `💬 ${userName}: ${currentMessage}`);
       setCurrentMessage("");
@@ -204,6 +228,8 @@ export const EnhancedChat = ({
             } else {
               // Usar o hook useGuestData para salvar avatar do visitante
               updateGuestProfile({ avatarUrl: newAvatar });
+              setGuestProfile(prev => ({ ...prev, avatarUrl: newAvatar }));
+              window.dispatchEvent(new CustomEvent('guest-profile-updated', { detail: { avatarUrl: newAvatar } }));
               toast.success('✅ Avatar do visitante atualizado!');
             }
           
@@ -326,7 +352,7 @@ export const EnhancedChat = ({
                         {/* Visitor name above avatar */}
                         {msg.username !== (config.userName || "Criador") && (
                           <span className="text-xs text-muted-foreground font-medium">
-                            {guestData.displayName || msg.username || 'Visitante'}
+                            {guestProfile.displayName || msg.username || 'Visitante'}
                           </span>
                         )}
                         <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 relative group">
@@ -335,7 +361,7 @@ export const EnhancedChat = ({
                           <img 
                             src={
                               msg.username !== (config.userName || "Criador")
-                                ? (guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`)
+                                ? (guestProfile.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`)
                                 : (config.userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=creator`)
                             }
                             alt={msg.username !== (config.userName || "Criador") ? 'Visitante' : 'Criador'} 
@@ -474,6 +500,8 @@ export const EnhancedChat = ({
                     await saveConfig({ userName: newName });
                   } else {
                     updateGuestProfile({ displayName: newName });
+                    setGuestProfile(prev => ({ ...prev, displayName: newName }));
+                    window.dispatchEvent(new CustomEvent('guest-profile-updated', { detail: { displayName: newName } }));
                   }
                 }}
                 placeholder={isCreator ? "Nome do criador" : "Seu nome"}
@@ -486,7 +514,7 @@ export const EnhancedChat = ({
               <img src={
                 isCreator 
                   ? config.userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=creator`
-                  : guestData.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`
+                  : guestProfile.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=visitor`
               } alt="Avatar atual" className="w-full h-full object-cover" />
             </div>
 
@@ -504,6 +532,8 @@ export const EnhancedChat = ({
                 } else {
                   // Usar o hook useGuestData para salvar avatar do visitante
                   updateGuestProfile({ avatarUrl: newAvatar });
+                  setGuestProfile(prev => ({ ...prev, avatarUrl: newAvatar }));
+                  window.dispatchEvent(new CustomEvent('guest-profile-updated', { detail: { avatarUrl: newAvatar } }));
                   toast.success('✅ Avatar do visitante atualizado!');
                 }
                 
