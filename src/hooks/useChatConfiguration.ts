@@ -21,7 +21,7 @@ const defaultConfig: ChatConfig = {
   chatColor: "#4A90E2",
   glassMorphism: false,
   fleffyMode: false,
-  showCreatorName: false,
+  showCreatorName: true,
   hideHistoryFromVisitors: false,
   chatSize: 50,
   chatBackgroundColor: "transparent"
