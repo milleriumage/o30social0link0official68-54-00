@@ -868,16 +868,16 @@ export const MenuDropdown = ({
         >
           <X className="h-3 w-3" />
         </Button>
-        <DropdownMenuItem asChild className="p-0">
+        <DropdownMenuItem asChild className="p-0" onSelect={() => setTimeout(() => setDropdownOpen(false), 0)}>
           <SettingsDialog onImageUpload={onImageUpload} onVideoUpload={onVideoUpload} onSaveState={onSaveState} onLoadState={onLoadState} disabled={disabled} />
         </DropdownMenuItem>
         
 
-        <DropdownMenuItem asChild className="p-0">
+        <DropdownMenuItem asChild className="p-0" onSelect={() => setTimeout(() => setDropdownOpen(false), 0)}>
           <PaymentPortalSelector disabled={disabled} />
         </DropdownMenuItem>
         
-        <DropdownMenuItem asChild className="p-0">
+        <DropdownMenuItem asChild className="p-0" onSelect={() => setTimeout(() => setDropdownOpen(false), 0)}>
           <Button size="sm" variant="ghost" className="w-full justify-start bg-background hover:bg-secondary border-0 text-foreground p-2 h-auto rounded-none" disabled={disabled} onClick={() => setShowWishlistDialog(true)}>
             <Heart className="w-4 h-4 mr-2" />
             <span>Wishlist</span>
