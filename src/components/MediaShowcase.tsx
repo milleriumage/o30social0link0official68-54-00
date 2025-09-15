@@ -890,7 +890,7 @@ export const MediaShowcase = React.memo(({
       backgroundColor: vitrineConfig.backgroundColor === "transparent" ? "transparent" : vitrineConfig.backgroundColor
     }}>
         <div className="flex justify-between items-center mb-4">
-          {/* Center - Follow & Subscribe Buttons - apenas para visitantes */}
+          {/* Center - Follow & Subscribe Buttons - para todos exceto o próprio criador */}
           <div className="flex-1 flex items-center justify-center gap-3">
             {!isCreator && (
               <FollowButton 

@@ -274,10 +274,7 @@ export const useFollowers = (creatorId?: string) => {
         setIsFollowing(false);
         setFollowersCount(prev => Math.max(0, prev - 1));
         
-        // Se o seguidor atual estava seguindo outro criador, atualizar contagem de "seguindo" também
-        if (user?.id === creatorId) {
-          setFollowingCount(prev => Math.max(0, prev - 1));
-        }
+        toast.success('Você parou de seguir este criador');
         
         toast.success('Você parou de seguir este criador');
       } else {
@@ -304,11 +301,6 @@ export const useFollowers = (creatorId?: string) => {
 
         setIsFollowing(true);
         setFollowersCount(prev => prev + 1);
-        
-        // Se o seguidor atual é um criador seguindo outro, atualizar contagem de "seguindo" também
-        if (user?.id === creatorId) {
-          setFollowingCount(prev => prev + 1);
-        }
         
         toast.success('Agora você está seguindo este criador!');
       }
