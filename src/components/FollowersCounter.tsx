@@ -21,7 +21,7 @@ export const FollowersCounter: React.FC<FollowersCounterProps> = ({
     await loadFollowers();
   };
 
-  // Se não há seguidores e não é para mostrar para o criador, não exibir nada
+  // Sempre mostra se tem seguidores ou se é para mostrar para o criador
   if (followersCount === 0 && !showForCreator) {
     return null;
   }

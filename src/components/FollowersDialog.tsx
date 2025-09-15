@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Follower } from '@/hooks/useFollowers';
 import { Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useOptimizedAuth } from '@/hooks/useOptimizedAuth';
 
 interface FollowersDialogProps {
   open: boolean;
@@ -22,6 +23,7 @@ export const FollowersDialog: React.FC<FollowersDialogProps> = ({
   followersCount
 }) => {
   const navigate = useNavigate();
+  const { user, isGuest } = useOptimizedAuth();
 
   const handleFollowerClick = (followerId: string) => {
     // Fechar dialog e navegar para página do seguidor
@@ -76,14 +78,17 @@ export const FollowersDialog: React.FC<FollowersDialogProps> = ({
                     </p>
                   </div>
 
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => handleFollowerClick(follower.follower_id)}
-                    className="shrink-0"
-                  >
-                    Ver Perfil
-                  </Button>
+                  {/* Só mostra botão Ver Perfil se usuário estiver logado */}
+                  {!isGuest && user && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => handleFollowerClick(follower.follower_id)}
+                      className="shrink-0"
+                    >
+                      Ver Perfil
+                    </Button>
+                  )}
                 </div>
               ))}
             </div>
